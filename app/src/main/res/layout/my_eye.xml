@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/qb_px_60">-->
+
+        <!--<ImageView-->
+        <!--android:id="@+id/me_back"-->
+        <!--android:layout_width="@dimen/qb_px_23"-->
+        <!--android:layout_height="@dimen/qb_px_23"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_marginLeft="@dimen/qb_px_25"-->
+        <!--android:src="@mipmap/back" />-->
+
+
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--android:text="视力记录"-->
+        <!--android:textColor="@color/grey_5a"-->
+        <!--android:textSize="22sp" />-->
+
+        <!--</RelativeLayout>-->
+
+        <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/qb_px_1"-->
+        <!--android:layout_marginTop="@dimen/qb_px_60"-->
+        <!--android:background="#cccccc" />-->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/me_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/qb_px_60"
+            android:background="@color/blue"
+            android:minHeight="?attr/actionBarSize"
+            app:navigationIcon="@mipmap/back">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="视力记录"
+                android:textColor="@color/black"
+                android:textSize="22sp" />
+        </androidx.appcompat.widget.Toolbar>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/qb_px_12"
+            android:layout_marginTop="@dimen/qb_px_82"
+            android:text="视力记录表 (度/天)"
+            android:textColor="@color/grey_5a"
+            android:textSize="18sp" />
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/me_lines"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/qb_px_210"
+            android:layout_marginLeft="@dimen/qb_px_13"
+            android:layout_marginTop="@dimen/qb_px_125"
+            android:layout_marginRight="@dimen/qb_px_13" />
+
+
+        <!--<LinearLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginTop="@dimen/qb_px_320"-->
+        <!--android:orientation="horizontal">-->
+
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="左眼视力"-->
+        <!--android:textColor="#606060"-->
+        <!--android:textSize="@dimen/qb_px_14" />-->
+
+        <!--<View-->
+        <!--android:layout_width="@dimen/qb_px_21"-->
+        <!--android:layout_height="@dimen/qb_px_4"-->
+        <!--android:layout_gravity="center_vertical"-->
+        <!--android:layout_marginLeft="@dimen/qb_px_3"-->
+        <!--android:background="#3385ff" />-->
+
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="@dimen/qb_px_25"-->
+        <!--android:text="右眼视力"-->
+        <!--android:textColor="#606060"-->
+        <!--android:textSize="@dimen/qb_px_14" />-->
+
+
+        <!--<View-->
+        <!--android:layout_width="@dimen/qb_px_21"-->
+        <!--android:layout_height="@dimen/qb_px_4"-->
+        <!--android:layout_gravity="center_vertical"-->
+        <!--android:layout_marginLeft="@dimen/qb_px_3"-->
+        <!--android:background="#FF9929" />-->
+        <!--</LinearLayout>-->
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/qb_px_8"
+            android:layout_marginTop="@dimen/qb_px_360"
+            android:background="#cccccc" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/qb_px_25"
+            android:layout_marginTop="@dimen/qb_px_380"
+            android:text="今日视力"
+            android:textColor="@color/grey_5a"
+            android:textSize="@dimen/qb_px_19" />
+
+        <RelativeLayout
+            android:layout_width="@dimen/qb_px_153"
+            android:layout_height="@dimen/qb_px_57"
+            android:layout_marginLeft="@dimen/qb_px_25"
+            android:layout_marginTop="@dimen/qb_px_430"
+            android:background="@drawable/blue_c">
+
+            <EditText
+                android:id="@+id/me_left"
+                android:layout_width="@dimen/qb_px_130"
+                android:layout_height="@dimen/qb_px_50"
+                android:layout_centerInParent="true"
+                android:background="@null"
+                android:gravity="center"
+                android:hint="左眼视力"
+                android:inputType="numberDecimal"
+                android:maxLength="4" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="@dimen/qb_px_153"
+            android:layout_height="@dimen/qb_px_57"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/qb_px_430"
+            android:layout_marginRight="@dimen/qb_px_25"
+            android:background="@drawable/blue_c">
+
+            <EditText
+                android:id="@+id/me_right"
+                android:layout_width="@dimen/qb_px_130"
+                android:layout_height="@dimen/qb_px_50"
+                android:layout_centerInParent="true"
+                android:background="@null"
+                android:gravity="center"
+                android:hint="右眼视力"
+                android:inputType="numberDecimal"
+                android:maxLength="4" />
+
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/me_sub"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/qb_px_54"
+            android:layout_marginLeft="@dimen/qb_px_61"
+            android:layout_marginTop="@dimen/qb_px_534"
+            android:layout_marginRight="@dimen/qb_px_61"
+            android:background="@drawable/btn_blue_selector"
+            android:gravity="center"
+            android:text="提交记录"
+            android:textColor="@color/white"
+            android:textSize="21sp" />
+
+
+    </RelativeLayout>
+
+
+</layout>

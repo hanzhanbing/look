@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/qb_px_230"
+                android:background="@drawable/blue_bac" />
+
+            <cn.looksafe.client.utils.CarouselViewPager
+                android:id="@+id/fh_cvp"
+                android:layout_width="match_parent"
+                android:layout_height="166dp"
+                android:layout_marginLeft="@dimen/qb_px_10"
+                android:layout_marginTop="@dimen/qb_px_17"
+                android:layout_marginRight="@dimen/qb_px_10" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/qb_px_87"
+                android:layout_marginLeft="@dimen/qb_px_10"
+                android:layout_marginTop="@dimen/qb_px_196"
+                android:layout_marginRight="@dimen/qb_px_10"
+                android:background="@drawable/white_c"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/fh_xuexi"
+                    android:layout_width="@dimen/qb_px_46"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/qb_px_11"
+                    android:layout_marginTop="@dimen/qb_px_9"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/qb_px_46"
+                        android:layout_height="@dimen/qb_px_46"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@mipmap/xuexi" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="0.6dp"
+                        android:text="快乐学习"
+                        android:textColor="@color/grey_5a"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/fh_qs"
+                    android:layout_width="@dimen/qb_px_46"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/qb_px_22"
+                    android:layout_marginTop="@dimen/qb_px_9"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/qb_px_46"
+                        android:layout_height="@dimen/qb_px_46"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@mipmap/qingsong" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="0.6dp"
+                        android:text="轻松一刻"
+                        android:textColor="@color/grey_5a"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/fh_sx"
+                    android:layout_width="@dimen/qb_px_46"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/qb_px_22"
+                    android:layout_marginTop="@dimen/qb_px_9"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/qb_px_46"
+                        android:layout_height="@dimen/qb_px_46"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@mipmap/mianfei" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="0.6dp"
+                        android:text="公益视训"
+                        android:textColor="@color/grey_5a"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/fh_gy"
+                    android:layout_width="@dimen/qb_px_46"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/qb_px_22"
+                    android:layout_marginTop="@dimen/qb_px_9"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/qb_px_46"
+                        android:layout_height="@dimen/qb_px_46"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@mipmap/gongyi" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="0.6dp"
+                        android:text="教学广场"
+                        android:textColor="@color/grey_5a"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/fh_vip"
+                    android:layout_width="@dimen/qb_px_46"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/qb_px_22"
+                    android:layout_marginTop="@dimen/qb_px_9"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/qb_px_46"
+                        android:layout_height="@dimen/qb_px_46"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@mipmap/huiyuan" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="0.6dp"
+                        android:text="会员中心"
+                        android:textColor="@color/grey_5a"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/qb_px_20"
+                android:layout_marginTop="@dimen/qb_px_298"
+                android:text="热门推荐"
+                android:textColor="@color/grey_5a"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/fh_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="@dimen/qb_px_298"
+                android:layout_marginRight="@dimen/qb_px_15"
+                android:text="查看更多 >"
+                android:textColor="#BBBBBB"
+                android:textSize="11sp" />
+
+            <GridView
+                android:id="@+id/fh_grid"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/qb_px_330"
+                android:layout_marginLeft="@dimen/qb_px_10"
+                android:layout_marginTop="@dimen/qb_px_322"
+                android:layout_marginRight="@dimen/qb_px_10"
+                android:horizontalSpacing="@dimen/qb_px_8"
+                android:numColumns="2"
+                android:scrollbars="none"
+                android:verticalSpacing="@dimen/qb_px_10" />
+
+
+        </RelativeLayout>
+
+
+    </ScrollView>
+</layout>

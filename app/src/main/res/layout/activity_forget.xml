@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="normalModel"
+            type="cn.looksafe.client.models.NormalModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--<ImageView-->
+        <!--android:id="@+id/af_back"-->
+        <!--android:layout_width="@dimen/qb_px_25"-->
+        <!--android:layout_height="@dimen/qb_px_25"-->
+        <!--android:layout_marginLeft="@dimen/qb_px_46"-->
+        <!--android:layout_marginTop="@dimen/qb_px_30"-->
+        <!--android:src="@mipmap/back" />-->
+
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginTop="@dimen/qb_px_32"-->
+        <!--android:text="忘记密码"-->
+        <!--android:textColor="@color/grey_5a"-->
+        <!--android:textSize="16sp" />-->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/af_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/qb_px_60"
+            android:background="@color/blue"
+            android:minHeight="?attr/actionBarSize"
+            app:navigationIcon="@mipmap/back">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="忘记密码"
+                android:textColor="@color/toolbar_text_color"
+                android:textSize="22sp" />
+        </androidx.appcompat.widget.Toolbar>
+
+        <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/qb_px_1"-->
+            <!--android:layout_marginTop="@dimen/qb_px_67"-->
+            <!--android:background="@color/grey_line" />-->
+
+        <EditText
+            android:id="@+id/af_name"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/qb_px_30"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/qb_px_47"
+            android:layout_marginTop="@dimen/qb_px_92"
+            android:layout_marginRight="@dimen/qb_px_47"
+            android:background="@null"
+            android:hint="请输入手机号"
+            android:inputType="number"
+            android:maxLength="11"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/qb_px_1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/qb_px_47"
+            android:layout_marginTop="@dimen/qb_px_121"
+            android:layout_marginRight="@dimen/qb_px_47"
+            android:background="@color/grey_line" />
+
+        <EditText
+            android:id="@+id/af_code"
+            android:layout_width="@dimen/qb_px_95"
+            android:layout_height="@dimen/qb_px_30"
+            android:layout_marginLeft="@dimen/qb_px_47"
+            android:layout_marginTop="@dimen/qb_px_135"
+            android:layout_marginRight="@dimen/qb_px_47"
+            android:background="@null"
+            android:hint="请输入验证码"
+            android:inputType="number"
+            android:maxLength="6"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/qb_px_1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/qb_px_47"
+            android:layout_marginTop="@dimen/qb_px_165"
+            android:layout_marginRight="@dimen/qb_px_47"
+            android:background="@color/grey_line" />
+
+        <TextView
+            android:id="@+id/af_getcode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/qb_px_140"
+            android:layout_marginRight="@dimen/qb_px_47"
+            android:text="@{normalModel.tip1}"
+            android:textColor="#3385FF"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/af_pwd"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/qb_px_30"
+            android:layout_marginLeft="@dimen/qb_px_47"
+            android:layout_marginTop="@dimen/qb_px_178"
+            android:layout_marginRight="@dimen/qb_px_47"
+            android:background="@null"
+            android:digits="@string/pwd_style"
+            android:hint="请输入新密码(6-12位)"
+            android:maxLength="12"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/qb_px_1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/qb_px_47"
+            android:layout_marginTop="@dimen/qb_px_208"
+            android:layout_marginRight="@dimen/qb_px_47"
+            android:background="@color/grey_line" />
+
+        <TextView
+            android:id="@+id/af_reset"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/qb_px_37"
+            android:layout_marginLeft="@dimen/qb_px_47"
+            android:layout_marginTop="@dimen/qb_px_281"
+            android:layout_marginRight="@dimen/qb_px_47"
+            android:background="@drawable/btn_blue_selector"
+            android:gravity="center"
+            android:text="确认修改"
+            android:textColor="@color/white"
+            android:textSize="@dimen/qb_px_16" />
+
+        <RelativeLayout
+            android:id="@+id/af_pro"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/transparent_light"
+            android:visibility="@{normalModel.showProgress?View.VISIBLE:View.GONE}">
+
+            <ProgressBar
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerInParent="true" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</layout>

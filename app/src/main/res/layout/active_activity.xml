@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="normalModel"
+            type="cn.looksafe.client.models.NormalModel" />
+    </data>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/qb_px_386"
+            android:background="@drawable/blue_bac">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/qb_px_82"
+                android:text="限时领取"
+                android:textColor="@color/white"
+                android:textSize="@dimen/qb_px_24" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/qb_px_129"
+                android:text="新人专享超低价"
+                android:textColor="@color/white"
+                android:textSize="@dimen/qb_px_30"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/qb_px_185"
+                android:text="VIP会员"
+                android:textColor="@color/white"
+                android:textSize="@dimen/qb_px_24" />
+
+
+        </RelativeLayout>
+
+
+        <EditText
+            android:id="@+id/aa_code"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/qb_px_30"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/qb_px_47"
+            android:layout_marginTop="@dimen/qb_px_447"
+            android:layout_marginRight="@dimen/qb_px_47"
+            android:background="@null"
+            android:hint="请输入激活码"
+            android:maxLength="100"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/aa_scan"
+            android:layout_width="@dimen/qb_px_29"
+            android:layout_height="@dimen/qb_px_29"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/qb_px_447"
+            android:layout_marginRight="@dimen/qb_px_47"
+            android:src="@mipmap/scan_icon" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/qb_px_1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/qb_px_47"
+            android:layout_marginTop="@dimen/qb_px_480"
+            android:layout_marginRight="@dimen/qb_px_47"
+            android:background="@color/grey_line" />
+
+
+        <TextView
+            android:id="@+id/aa_login"
+            android:layout_width="@dimen/qb_px_269"
+            android:layout_height="@dimen/qb_px_41"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/qb_px_511"
+            android:background="@drawable/btn_blue_selector"
+            android:gravity="center"
+            android:text="开启新视界"
+            android:textColor="@color/white"
+            android:textSize="@dimen/qb_px_19" />
+        <RelativeLayout
+            android:id="@+id/aa_pro"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/transparent_light"
+            android:visibility="@{normalModel.showProgress?View.VISIBLE:View.GONE}">
+
+            <ProgressBar
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerInParent="true" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</layout>

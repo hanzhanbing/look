@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/qb_px_60">-->
+
+        <!--<ImageView-->
+        <!--android:id="@+id/amp_back"-->
+        <!--android:layout_width="@dimen/qb_px_23"-->
+        <!--android:layout_height="@dimen/qb_px_23"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_marginLeft="@dimen/qb_px_25"-->
+        <!--android:src="@mipmap/back" />-->
+
+
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--android:text="修改密码"-->
+        <!--android:textColor="@color/grey_5a"-->
+        <!--android:textSize="22sp" />-->
+
+        <!--</RelativeLayout>-->
+
+        <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/qb_px_1"-->
+        <!--android:layout_marginTop="@dimen/qb_px_60"-->
+        <!--android:background="#cccccc" />-->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/amp_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/qb_px_60"
+            android:background="@color/blue"
+            android:minHeight="?attr/actionBarSize"
+            app:navigationIcon="@mipmap/back">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="修改密码"
+                android:textColor="@color/black"
+                android:textSize="22sp" />
+        </androidx.appcompat.widget.Toolbar>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/qb_px_61">
+
+
+            <EditText
+                android:id="@+id/amp_old"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/qb_px_30"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="@dimen/qb_px_47"
+                android:layout_marginTop="@dimen/qb_px_33"
+                android:layout_marginRight="@dimen/qb_px_47"
+                android:background="@null"
+                android:digits="@string/pwd_style"
+                android:hint="旧密码"
+                android:inputType="textPassword"
+                android:maxLength="11"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/qb_px_1"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="@dimen/qb_px_47"
+                android:layout_marginTop="@dimen/qb_px_62"
+                android:layout_marginRight="@dimen/qb_px_47"
+                android:background="@color/grey_line" />
+
+
+            <EditText
+                android:id="@+id/amp_new"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/qb_px_30"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="@dimen/qb_px_47"
+                android:layout_marginTop="@dimen/qb_px_102"
+                android:layout_marginRight="@dimen/qb_px_47"
+                android:background="@null"
+                android:digits="@string/pwd_style"
+                android:hint="新密码(6-10位)"
+                android:inputType="textPassword"
+                android:maxLength="11"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/qb_px_1"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="@dimen/qb_px_47"
+                android:layout_marginTop="@dimen/qb_px_131"
+                android:layout_marginRight="@dimen/qb_px_47"
+                android:background="@color/grey_line" />
+
+            <TextView
+                android:id="@+id/amp_sub"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/qb_px_37"
+                android:layout_marginLeft="@dimen/qb_px_47"
+                android:layout_marginTop="@dimen/qb_px_201"
+                android:layout_marginRight="@dimen/qb_px_47"
+                android:background="@drawable/btn_blue_selector"
+                android:gravity="center"
+                android:text="确认修改"
+                android:textColor="@color/white"
+                android:textSize="@dimen/qb_px_16" />
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+</layout>

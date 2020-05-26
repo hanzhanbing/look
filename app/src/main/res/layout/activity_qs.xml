@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F8F8FA">
+
+        <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/qb_px_60"-->
+        <!--android:background="@color/white">-->
+
+        <!--<ImageView-->
+        <!--android:id="@+id/aq_back"-->
+        <!--android:layout_width="@dimen/qb_px_23"-->
+        <!--android:layout_height="@dimen/qb_px_23"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_marginLeft="@dimen/qb_px_25"-->
+        <!--android:src="@mipmap/back" />-->
+
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--android:text="轻松一刻"-->
+        <!--android:textColor="@color/grey_5a"-->
+        <!--android:textSize="22sp"-->
+        <!--android:textStyle="bold" />-->
+
+
+        <!--</RelativeLayout>-->
+
+
+        <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/qb_px_1"-->
+        <!--android:layout_marginTop="@dimen/qb_px_60"-->
+        <!--android:background="#cccccc" />-->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/aq_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/qb_px_60"
+            android:background="@color/blue"
+            android:minHeight="?attr/actionBarSize"
+            app:navigationIcon="@mipmap/back">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="轻松一刻"
+                android:textColor="@color/black"
+                android:textSize="22sp" />
+        </androidx.appcompat.widget.Toolbar>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/qb_px_77"
+            android:layout_marginTop="@dimen/qb_px_61"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/aq_dm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/qb_px_28"
+                    android:layout_height="@dimen/qb_px_28"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/qb_px_14"
+                    android:src="@mipmap/dongman" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:layout_marginBottom="@dimen/qb_px_10"
+                    android:text="动漫" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/aq_ys"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/qb_px_28"
+                    android:layout_height="@dimen/qb_px_28"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/qb_px_14"
+                    android:src="@mipmap/yingshi" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:layout_marginBottom="@dimen/qb_px_10"
+                    android:text="影视" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/aq_jlp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/qb_px_28"
+                    android:layout_height="@dimen/qb_px_28"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/qb_px_14"
+                    android:src="@mipmap/jilup" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:layout_marginBottom="@dimen/qb_px_10"
+                    android:text="纪录片" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/aq_zy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/qb_px_28"
+                    android:layout_height="@dimen/qb_px_28"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/qb_px_14"
+                    android:src="@mipmap/zongyi" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:layout_marginBottom="@dimen/qb_px_10"
+                    android:text="综艺" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/aq_zs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/qb_px_28"
+                    android:layout_height="@dimen/qb_px_28"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/qb_px_14"
+                    android:src="@mipmap/zhishi" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:layout_marginBottom="@dimen/qb_px_10"
+                    android:text="知识" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <GridView
+            android:id="@+id/aq_grid"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/qb_px_146"
+            android:background="@color/white"
+            android:horizontalSpacing="@dimen/qb_px_11"
+            android:numColumns="2"
+            android:scrollbars="none" />
+
+    </RelativeLayout>
+
+
+</layout>
