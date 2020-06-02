@@ -7,6 +7,7 @@ import com.look.core.http.ApiResponse;
 import com.look.core.repository.NetworkOnlyResource;
 import com.look.core.vo.Resource;
 
+import cn.looksafe.client.beans.LoopImgHttp;
 import cn.looksafe.client.beans.VideosBean;
 import retrofit2.http.Field;
 
@@ -75,6 +76,16 @@ public class VideoRepository extends ApiRepository {
             @Override
             protected LiveData<ApiResponse<VideosBean>> createCall() {
                 return apiInterface.getHotVideo(phone);
+            }
+        }.asLiveData();
+    }
+
+    public LiveData<Resource<LoopImgHttp>> getLoopImgs(String loginname){
+        return new NetworkOnlyResource<LoopImgHttp>(){
+            @NonNull
+            @Override
+            protected LiveData<ApiResponse<LoopImgHttp>> createCall() {
+                return apiInterface.getLoopImgs(loginname);
             }
         }.asLiveData();
     }

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 
 import com.look.core.http.ApiResponse;
+import com.look.core.http.BaseResponse;
 import com.look.core.repository.NetworkOnlyResource;
 import com.look.core.viewmodel.BaseViewModel;
 import com.look.core.vo.Resource;
@@ -28,8 +29,9 @@ public class EyeRecordViewModel extends BaseViewModel {
         return mUserRepository.getEyesRecord(loginName);
     }
 
-    public LiveData<Resource<Boolean>> addEyesRecord(String loginName, String left, String right) {
+    public LiveData<Resource<BaseResponse>> addEyesRecord(String loginName, String left, String right) {
         return mUserRepository.addEyesRecord(loginName, left, right);
     }
+
 
 }

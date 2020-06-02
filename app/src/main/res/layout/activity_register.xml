@@ -17,7 +17,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/qb_px_96"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             >
 
@@ -53,6 +53,7 @@
                     android:hint="手机号"
                     android:textColor="@color/_606D7A"
                     android:textSize="16sp"
+                    android:inputType="phone"
                     android:gravity="center_vertical"
                     android:paddingStart="@dimen/qb_px_12"
                     android:layout_marginTop="@dimen/qb_px_24"
@@ -70,6 +71,7 @@
                     android:hint="设置密码"
                     android:textColor="@color/_606D7A"
                     android:textSize="16sp"
+                    android:inputType="textPassword"
                     android:gravity="center_vertical"
                     android:paddingStart="@dimen/qb_px_12"
                     android:layout_marginTop="@dimen/qb_px_15"
@@ -85,6 +87,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/qb_px_44"
                     android:hint="确认密码"
+                    android:inputType="textPassword"
                     android:textColor="@color/_606D7A"
                     android:textSize="16sp"
                     android:gravity="center_vertical"
@@ -127,7 +130,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
-                        android:hint="发送验证码"
+                        android:text="发送验证码"
                         android:layout_marginEnd="@dimen/qb_px_12"
                         android:textColor="@color/_606D7A"
                         android:textSize="16sp"

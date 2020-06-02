@@ -1,17 +1,22 @@
 package cn.looksafe.client.api;
 
+import androidx.annotation.FractionRes;
 import androidx.lifecycle.LiveData;
 
 import com.look.core.http.ApiResponse;
+import com.look.core.http.BaseResponse;
 import com.look.core.http.HttpResponse;
 
 import cn.looksafe.client.beans.EyeLogHttp;
 import cn.looksafe.client.beans.HttpBean;
+import cn.looksafe.client.beans.LoopImgHttp;
 import cn.looksafe.client.beans.PointHttp;
+import cn.looksafe.client.beans.UserInfo;
 import cn.looksafe.client.beans.VersionHttp;
 import cn.looksafe.client.beans.VideosBean;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 /**
@@ -41,11 +46,22 @@ public interface LookApi {
      */
     @FormUrlEncoded
     @POST("getSmsCodeRegisterApp")
-    LiveData<ApiResponse<Void>> getSmsCode(@Field("loginname") String phone);
+    LiveData<ApiResponse<BaseResponse>> getSmsCode(@Field("loginname") String phone);
+
+
+    /**
+     * 老用户获取验证码
+     * @param phone
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("getSmsCodeUserApp")
+    LiveData<ApiResponse<BaseResponse>> getCode(@Field("loginname") String phone);
 
 
     /**
      * 首页推荐
+     *
      * @return
      */
     @FormUrlEncoded
@@ -54,6 +70,7 @@ public interface LookApi {
 
     /**
      * 快乐学习
+     *
      * @param phone
      * @return
      */
@@ -64,6 +81,7 @@ public interface LookApi {
 
     /**
      * 轻松一刻
+     *
      * @param loginName
      * @return
      */
@@ -74,6 +92,7 @@ public interface LookApi {
 
     /**
      * 教学广场
+     *
      * @param loginName
      * @return
      */
@@ -83,6 +102,7 @@ public interface LookApi {
 
     /**
      * 公益广场
+     *
      * @param loginName
      * @return
      */
@@ -93,6 +113,7 @@ public interface LookApi {
 
     /**
      * 获取视频详情
+     *
      * @param loginName
      * @param vid
      * @return
@@ -105,6 +126,7 @@ public interface LookApi {
 
     /**
      * 获取视力记录
+     *
      * @param loginName
      * @return
      */
@@ -115,6 +137,7 @@ public interface LookApi {
 
     /**
      * 增加记录
+     *
      * @param loginName
      * @param left
      * @param right
@@ -122,13 +145,14 @@ public interface LookApi {
      */
     @FormUrlEncoded
     @POST("upEyeLogsApp")
-    LiveData<ApiResponse<Boolean>> addEyesRecord(@Field("loginname") String loginName,
-                                                    @Field("lefte") String left,
-                                                    @Field("righte") String right);
+    LiveData<ApiResponse<BaseResponse>> addEyesRecord(@Field("loginname") String loginName,
+                                                      @Field("lefte") String left,
+                                                      @Field("righte") String right);
 
 
     /**
      * 获取版本
+     *
      * @param loginName
      * @return
      */
@@ -139,6 +163,7 @@ public interface LookApi {
 
     /**
      * 发现
+     *
      * @param loginName
      * @return
      */
@@ -147,7 +172,62 @@ public interface LookApi {
     LiveData<ApiResponse<PointHttp>> getPoints(@Field("loginname") String loginName);
 
 
+    /**
+     * 反馈
+     *
+     * @param loginName
+     * @param content
+     * @return
+     */
     @FormUrlEncoded
     @POST("suggestApp")
-    LiveData<ApiResponse<Void>> suggest(@Field("loginname") String loginName,@Field("content") String content);
+    LiveData<ApiResponse<BaseResponse>> suggest(@Field("loginname") String loginName, @Field("content") String content);
+
+
+    /**
+     * 密码修改
+     * @param loginname
+     * @param prePwd
+     * @param newPwd
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("resetPwdApp")
+    LiveData<ApiResponse<BaseResponse>> resetPwd(@Field("loginname") String loginname,
+                                         @Field("prePwd") String prePwd,
+                                         @Field("newPwd") String newPwd);
+
+
+    /**
+     * 获取轮播图
+     * @param loginname
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("getLoopImgsApp")
+    LiveData<ApiResponse<LoopImgHttp>> getLoopImgs(@Field("loginname") String loginname);
+
+
+    /**
+     * 获取用户信息
+     * @param param
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("getUserInfoApp")
+    LiveData<ApiResponse<UserInfo>> getUserInfo(@Field("param") String param);
+
+
+    /**
+     * 注册
+     * @param phone
+     * @param pwd
+     * @param code
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("loginRegisterApp")
+    LiveData<ApiResponse<BaseResponse>> register(@Field("loginname") String phone,
+                                                 @Field("pwd") String pwd,
+                                                 @Field("smscode") String code);
 }

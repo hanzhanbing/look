@@ -118,4 +118,7 @@ dependencies {
 
     api 'pl.droidsonroids.gif:android-gif-drawable:1.2.19'
 
+    api 'com.youth.banner:banner:1.4.10'
+    api 'com.liulishuo.filedownloader:library:1.3.9'
+
 }

@@ -188,7 +188,7 @@
             android:layout_height="@dimen/qb_px_50"
             android:text="退出登录"
             android:textColor="#FFFFFFFF"
-            android:textSize="12sp"
+            android:textSize="16sp"
             android:layout_marginTop="@dimen/qb_px_48"
             android:gravity="center"
             android:layout_marginStart="@dimen/qb_px_16"

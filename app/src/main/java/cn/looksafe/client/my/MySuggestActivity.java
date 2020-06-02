@@ -4,6 +4,7 @@ import android.text.TextUtils;
 
 import androidx.lifecycle.ViewModelProviders;
 
+import com.look.core.http.BaseResponse;
 import com.look.core.manager.SpManager;
 import com.look.core.ui.BaseActivity;
 import com.look.core.vo.ResourceListener;
@@ -34,16 +35,16 @@ public class MySuggestActivity extends BaseActivity<ActivityFeedbackBinding> {
                 return;
             }
             mViewModel.suggest(SpManager.getInstance(mContext).getSP("phone"),content)
-                    .observe(MySuggestActivity.this,resource->resource.work(new ResourceListener<Void>() {
+                    .observe(MySuggestActivity.this,resource->resource.work(new ResourceListener<BaseResponse>() {
                         @Override
-                        public void onSuccess(Void data) {
+                        public void onSuccess(BaseResponse data) {
                             toast("提交成功");
                             finish();
                         }
 
                         @Override
                         public void onError(String msg) {
-
+                            toast(msg);
                         }
                     }));
         }

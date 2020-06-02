@@ -8,6 +8,7 @@ import androidx.multidex.MultiDexApplication;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.baidu.mapapi.CoordType;
 import com.baidu.mapapi.SDKInitializer;
+import com.liulishuo.filedownloader.FileDownloader;
 import com.look.core.CoreSource;
 import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -51,8 +52,10 @@ public class MyApplication extends MultiDexApplication {
         SDKInitializer.setCoordType(CoordType.BD09LL);
         //
         CoreSource.getInstance().init(this);
+        FileDownloader.init(getApplicationContext());
         initARouter();
         closeAndroidPDialog();
+
     }
 
     private void initARouter() {

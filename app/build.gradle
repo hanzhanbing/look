@@ -22,6 +22,10 @@ android {
                 arguments = [AROUTER_MODULE_NAME: project.getName()]
             }
         }
+        ndk {
+            abiFilters 'armeabi-v7a','armeabi'
+        }
+
         multiDexEnabled true
 
     }
@@ -96,4 +100,5 @@ dependencies {
     implementation 'com.shuyu:gsyVideoPlayer-x64:7.1.3'
     implementation 'com.shuyu:gsyVideoPlayer-x86:7.1.3'
     api 'com.ruffian.library:RWidgetHelper-AndroidX:0.0.2'
+    api 'com.github.goweii:AnyLayer:3.4.1-androidx'
 }

@@ -24,18 +24,18 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginTop="@dimen/dp_4"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/qb_px_12"
-                    android:src="@mipmap/ic_user_avatar"
                     android:focusable="true"
-                    android:focusableInTouchMode="true"/>
+                    android:focusableInTouchMode="true"
+                    android:src="@mipmap/ic_user_avatar" />
 
                 <com.ruffian.library.widget.RLinearLayout
                     android:layout_width="0dp"
@@ -57,11 +57,11 @@
                     <EditText
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/qb_px_6"
                         android:layout_weight="1"
                         android:background="@null"
                         android:hint="搜索你感兴趣的视频"
                         android:textColor="@color/_C7C7C7"
-                        android:layout_marginStart="@dimen/qb_px_6"
                         android:textSize="12sp" />
 
                 </com.ruffian.library.widget.RLinearLayout>
@@ -82,6 +82,18 @@
             android:layout_marginBottom="@dimen/qb_px_20"
             app:layout_constraintBottom_toBottomOf="@id/header_layout" />
 
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/qb_px_30"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/line">
+
+
+        </androidx.viewpager.widget.ViewPager>
+
         <com.ruffian.library.widget.RFrameLayout
             android:id="@+id/tablayout_layout"
             android:layout_width="match_parent"
@@ -96,27 +108,15 @@
                 android:id="@+id/tablayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:tabBackground="@color/white"
                 android:layout_marginStart="@dimen/qb_px_16"
                 android:layout_marginEnd="@dimen/qb_px_16"
+                app:tabBackground="@color/white"
                 app:tabGravity="fill"
                 app:tabIndicatorHeight="0dp"
                 app:tabMode="scrollable"
                 app:tabSelectedTextColor="@color/_FDB232"
                 app:tabTextColor="@color/_A8A8A8" />
         </com.ruffian.library.widget.RFrameLayout>
-
-
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/viewpager"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tablayout_layout">
-
-
-        </androidx.viewpager.widget.ViewPager>
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

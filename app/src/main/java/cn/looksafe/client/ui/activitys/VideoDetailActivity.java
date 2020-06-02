@@ -6,6 +6,7 @@ import android.view.View;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.look.core.manager.GlideManager;
 import com.look.core.manager.SpManager;
@@ -21,6 +22,9 @@ import cn.looksafe.client.R;
 import cn.looksafe.client.beans.SectionBean;
 import cn.looksafe.client.beans.VideosBean;
 import cn.looksafe.client.databinding.ActivityVideoDetailBinding;
+import cn.looksafe.client.manage.DialogManager;
+import cn.looksafe.client.my.SysActivity;
+import cn.looksafe.client.tools.Tools;
 import cn.looksafe.client.ui.adapter.PartAdapter;
 import cn.looksafe.client.viewmodel.VideoViewModel;
 
@@ -53,6 +57,7 @@ public class VideoDetailActivity extends BaseActivity<ActivityVideoDetailBinding
     }
 
     private void initView() {
+        mBinding.setPresenter(new Presenter());
         initRecycler();
     }
 
@@ -116,14 +121,24 @@ public class VideoDetailActivity extends BaseActivity<ActivityVideoDetailBinding
     }
 
     private void palyVideo(int isReal, String url) {
-        Intent intent;
-        if (isReal == 0) {
-            intent = new Intent(VideoDetailActivity.this, UnityPlayerActivity.class);
+        if (SpManager.getInstance(mContext).getBooleanSp("vip")) {
+            Intent intent;
+            if (isReal == 0) {
+                intent = new Intent(VideoDetailActivity.this, UnityPlayerActivity.class);
+            } else {
+                intent = new Intent(VideoDetailActivity.this, GSYVideoActivity.class);
+            }
+            intent.putExtra("url", url);
+            startActivity(intent);
         } else {
-            intent = new Intent(VideoDetailActivity.this, GSYVideoActivity.class);
+            DialogManager.getInstance().showTipDialog(VideoDetailActivity.this, "温馨提示", "该视频为vip视频，请前往购买", "前往", "取消", new DialogManager.Listener() {
+                @Override
+                public void onClickListener() {
+                    ARouter.getInstance().build("/user/vip").navigation();
+                }
+            });
         }
-        intent.putExtra("url", url);
-        startActivity(intent);
+
     }
 
     public class Presenter {

@@ -8,6 +8,7 @@ import com.look.core.repository.NetworkOnlyResource;
 import com.look.core.viewmodel.BaseViewModel;
 import com.look.core.vo.Resource;
 
+import cn.looksafe.client.beans.LoopImgHttp;
 import cn.looksafe.client.beans.VideosBean;
 import cn.looksafe.client.repository.VideoRepository;
 
@@ -49,6 +50,10 @@ public class VideoViewModel extends BaseViewModel {
 
     public LiveData<Resource<VideosBean>> getVideoById(String loginName, int vid) {
         return mVideoRepository.getVideoById(loginName,vid);
+    }
+
+    public LiveData<Resource<LoopImgHttp>> getLoopImgs(String loginname){
+        return mVideoRepository.getLoopImgs(loginname);
     }
 
 }

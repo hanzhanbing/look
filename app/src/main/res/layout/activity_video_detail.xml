@@ -21,14 +21,16 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/qb_px_240"
-            android:layout_marginTop="@dimen/qb_px_16"
+            android:layout_marginTop="@dimen/qb_px_8"
             android:onClick="@{()->presenter.play()}"
            >
 
             <ImageView
                 android:id="@+id/video_img"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                />
 
 
             <ImageView
@@ -48,7 +50,6 @@
                 android:id="@+id/vip"
                 android:layout_width="@dimen/qb_px_51"
                 android:layout_height="@dimen/qb_px_26"
-                android:layout_marginLeft="@dimen/qb_px_26"
                 android:src="@mipmap/vip"
                 android:visibility="gone" />
 
@@ -78,12 +79,13 @@
                 android:layout_height="wrap_content"
                 android:text="类型名称"
                 android:textColor="@color/grey_a5"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:visibility="gone"
+                />
 
             <ImageView
                 android:layout_width="@dimen/qb_px_16"
                 android:layout_height="@dimen/qb_px_16"
-                android:layout_marginStart="@dimen/qb_px_48"
                 android:src="@mipmap/play_small" />
 
             <TextView

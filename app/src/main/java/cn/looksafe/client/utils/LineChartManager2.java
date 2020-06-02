@@ -148,6 +148,7 @@ public class LineChartManager2 {
         mLegend.setFormSize(6f); //字体
         mLegend.setTextColor(Color.GRAY); //颜色
         lineChart.setVisibleXRange(0, 4);   //x轴可显示的坐标范围
+        lineChart.setVisibleYRangeMaximum(6f,YAxis.AxisDependency.LEFT);
         XAxis xAxis = lineChart.getXAxis();  //x轴的标示
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM); //x轴位置
         xAxis.setTextColor(Color.GRAY);    //字体的颜色

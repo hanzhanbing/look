@@ -16,6 +16,7 @@ import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.model.LatLng;
+import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.android.material.tabs.TabLayout;
 import com.look.core.manager.SpManager;
@@ -96,7 +97,7 @@ public class FindFragment extends BaseFragment<FragmentFindBinding> implements B
 
                     @Override
                     public void onError(String msg) {
-
+                        ToastUtils.showShort(msg);
                     }
                 }));
     }

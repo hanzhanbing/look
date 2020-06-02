@@ -6,6 +6,11 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 
+import com.look.core.R;
+import com.look.core.util.StatusBarUtils;
+
+import qiu.niorgai.StatusBarCompat;
+
 
 /**
  * Created by huyg on 2020-02-13.
@@ -21,6 +26,7 @@ public abstract class SimpleActivity<DB extends ViewDataBinding> extends Toolbar
         super.onCreate(savedInstanceState);
         this.savedInstanceState = savedInstanceState;
         mBinding = DataBindingUtil.setContentView(this, getLayoutId());
+
         init();
     }
 

@@ -1,18 +1,22 @@
 package cn.looksafe.client.my;
 
-import android.content.DialogInterface;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
-import android.provider.Settings;
+import android.os.Environment;
 import android.text.TextUtils;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.FileProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.blankj.utilcode.util.ToastUtils;
+import com.liulishuo.filedownloader.BaseDownloadTask;
+import com.liulishuo.filedownloader.FileDownloadListener;
+import com.liulishuo.filedownloader.FileDownloader;
 import com.look.core.manager.SpManager;
 import com.look.core.ui.BaseActivity;
 import com.look.core.vo.ResourceListener;
@@ -22,20 +26,23 @@ import java.io.File;
 import cn.looksafe.client.R;
 import cn.looksafe.client.beans.VersionHttp;
 import cn.looksafe.client.databinding.ActivitySettingBinding;
-import cn.looksafe.client.tools.HttpTools;
+import cn.looksafe.client.manage.DialogManager;
 import cn.looksafe.client.tools.Tools;
 import cn.looksafe.client.ui.activitys.ProtocalActivity;
-import cn.looksafe.client.utils.HttpCallBack;
 import cn.looksafe.client.viewmodel.SettingViewModel;
 
 @Route(path = "/setting/setting")
-public class SysActivity extends BaseActivity<ActivitySettingBinding> implements HttpCallBack {
+public class SysActivity extends BaseActivity<ActivitySettingBinding> {
     private boolean getVersion;//是否已获取到服务器最新版本信息
     private int versionCode;
     private String versionName;
     private String upUrl;//升级url
     private int vcodeServer;//最新版本号
     private SettingViewModel mViewModel;
+    private static final int REQ_UPDATE = 999;
+
+    public static final String ACCOUNT_DIR = Environment.getExternalStorageDirectory().getAbsolutePath();
+    public static final String APK_PATH = "/apk_cache";
 
     @Override
     protected int getLayoutId() {
@@ -60,12 +67,21 @@ public class SysActivity extends BaseActivity<ActivitySettingBinding> implements
                         vcodeServer = data.vcode;
                         upUrl = data.vurl;
                         if (versionCode >= vcodeServer) return;
-                        commonDialog("升级提示", "升级到最新版?", 1);
+                        DialogManager.getInstance().showTipDialog(SysActivity.this, "升级提示", "升级到最新版?", "确定", "取消", new DialogManager.Listener() {
+                            @Override
+                            public void onClickListener() {
+                                if (TextUtils.isEmpty(upUrl)) {
+                                    Toast.makeText(mContext, "下载地址有误", Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+                                updateApp(upUrl);
+                            }
+                        });
                     }
 
                     @Override
                     public void onError(String msg) {
-
+                        toast(msg);
                     }
                 }));
     }
@@ -75,27 +91,26 @@ public class SysActivity extends BaseActivity<ActivitySettingBinding> implements
         super.onResume();
     }
 
-    @Override
-    public void requestSuccess(int code, Object object, Object object2) {
-
-    }
-
-    @Override
-    public void requestFailure(int code, Object object) {
-
-    }
 
     public class Presenter {
         public void exit() {
             SpManager.getInstance(mContext).removeSP("token");
+            ARouter.getInstance().build("/user/login").navigation();
         }
 
         public void resetPwd() {
-
+            ARouter.getInstance().build("/user/modifyPwd").navigation();
         }
 
         public void cleanCache() {
-            commonDialog("清除提示", "清除缓存?", 2);
+            DialogManager.getInstance().showTipDialog(SysActivity.this, "温馨提示", "清除缓存?", "清除", "取消", new DialogManager.Listener() {
+                @Override
+                public void onClickListener() {
+                    Tools.cleanAllCache(mContext);
+                    mBinding.cache.setText(Tools.getCacheSize());//缓存大小
+                    toast("清除成功");
+                }
+            });
         }
 
         public void reportSug() {
@@ -104,7 +119,6 @@ public class SysActivity extends BaseActivity<ActivitySettingBinding> implements
 
         public void checkVersion() {
             getVersion();
-
         }
 
         public void goProtocal() {
@@ -112,83 +126,83 @@ public class SysActivity extends BaseActivity<ActivitySettingBinding> implements
         }
     }
 
-    private void commonDialog(String title, String con, final int type) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(SysActivity.this);
-        builder.setTitle(title);
-        builder.setIcon(R.mipmap.app_logo);
-        builder.setMessage(con);
-        // 为对话框设置取消按钮
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface arg0, int arg1) {
-                // TODO Auto-generated method stub
-            }
-        });
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface arg0, int arg1) {
-                // TODO Auto-generated method stub
-                switch (type) {
-                    case 1://进行升级
-                        if (TextUtils.isEmpty(upUrl)) {
-                            Toast.makeText(mContext, "下载地址有误", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                        HttpTools.downApk(upUrl, Tools.getNameFromURL(upUrl), mContext, null, SysActivity.this);
-                        break;
-                    case 2://清除缓存
-                        Tools.cleanAllCache(mContext);
-                        Toast.makeText(mContext, "清除成功", Toast.LENGTH_SHORT).show();
-                        break;
-                }
-            }
-        });
-        builder.create().show();
-
-    }
-
-    private void installApk(String downloadApkPath) {
-        File apkFile = new File(downloadApkPath);
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        if (null != apkFile) {
-            try {
-                //兼容7.0
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                    Uri contentUri = FileProvider.getUriForFile(mContext, mContext.getPackageName() + ".fileProvider", apkFile);
-                    intent.setDataAndType(contentUri, "application/vnd.android.package-archive");
-                    //兼容8.0
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        boolean hasInstallPermission = mContext.getPackageManager().canRequestPackageInstalls();
-                        if (!hasInstallPermission) {
-                            startInstallPermissionSettingActivity();
-                            return;
-                        }
-                    }
-                } else {
-                    intent.setDataAndType(Uri.fromFile(apkFile), "application/vnd.android.package-archive");
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                }
-                if (mContext.getPackageManager().queryIntentActivities(intent, 0).size() > 0) {
-                    mContext.startActivity(intent);
-                }
-            } catch (Throwable e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private void startInstallPermissionSettingActivity() {
-        //注意这个是8.0新API
-        Intent intent = new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        mContext.startActivity(intent);
-    }
 
     @Override
     public void setActionBar() {
         mTitle.setText("系统设置");
+    }
+
+    private void updateApp(String url) {
+        File f = new File(ACCOUNT_DIR + APK_PATH);
+        if (!f.exists()) {
+            f.mkdirs();
+        }
+        File downloadFile = new File(f.getAbsoluteFile() + "/" + System.currentTimeMillis() + "temp1.apk");
+        final ProgressDialog progressDialog = new ProgressDialog(SysActivity.this);
+        progressDialog.setTitle("下载更新");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        progressDialog.setProgress(0);
+        progressDialog.setMax(100);
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+        FileDownloader.getImpl().create(url)
+                .setPath(downloadFile.getAbsolutePath(), false)
+                .setListener(new FileDownloadListener() {
+                    @Override
+                    protected void pending(BaseDownloadTask task, int soFarBytes, int totalBytes) {
+                        progressDialog.setMessage("连接中...");
+                    }
+
+                    @Override
+                    protected void connected(BaseDownloadTask task, String etag, boolean isContinue, int soFarBytes, int totalBytes) {
+                    }
+
+                    @Override
+                    protected void progress(BaseDownloadTask task, int soFarBytes, int totalBytes) {
+                        progressDialog.setProgress((int) (((float) soFarBytes / totalBytes) * 100));
+
+                    }
+
+                    @Override
+                    protected void blockComplete(BaseDownloadTask task) {
+                    }
+
+                    @Override
+                    protected void retry(final BaseDownloadTask task, final Throwable ex, final int retryingTimes, final int soFarBytes) {
+                    }
+
+                    @Override
+                    protected void completed(BaseDownloadTask task) {
+                        progressDialog.setProgress(100);
+                        progressDialog.dismiss();
+                        if (downloadFile.exists()) {
+                            Intent intent = new Intent(Intent.ACTION_INSTALL_PACKAGE);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                Uri uri = FileProvider.getUriForFile(SysActivity.this, "cn.looksafe.client.fileprovider", downloadFile);
+                                intent.setDataAndType(uri, "application/vnd.android.package-archive");
+                            } else {
+                                intent.setDataAndType(Uri.parse("file://" + downloadFile.getAbsolutePath()), "application/vnd.android.package-archive");
+                            }
+                            SysActivity.this.startActivityForResult(intent, REQ_UPDATE);
+                        }
+                    }
+
+                    @Override
+                    protected void paused(BaseDownloadTask task, int soFarBytes, int totalBytes) {
+                    }
+
+                    @Override
+                    protected void error(BaseDownloadTask task, Throwable e) {
+                        progressDialog.dismiss();
+                        ToastUtils.showShort("更新出错");
+                    }
+
+                    @Override
+                    protected void warn(BaseDownloadTask task) {
+                    }
+                }).start();
     }
 }

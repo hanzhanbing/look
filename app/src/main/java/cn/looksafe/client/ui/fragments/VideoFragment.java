@@ -8,20 +8,25 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.ConvertUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.look.core.manager.SpManager;
 import com.look.core.ui.BaseFragment;
 import com.look.core.vo.ResourceListener;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.youth.banner.listener.OnBannerListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.looksafe.client.R;
+import cn.looksafe.client.beans.LoopImgHttp;
 import cn.looksafe.client.beans.VideosBean;
 import cn.looksafe.client.databinding.FragmentVideoBinding;
 import cn.looksafe.client.ui.adapter.VideoAdapter;
 import cn.looksafe.client.ui.adapter.divider.DividerGridItemDecoration;
+import cn.looksafe.client.utils.GlideImageLoader;
 import cn.looksafe.client.viewmodel.VideoViewModel;
 
 /**
@@ -34,6 +39,7 @@ public class VideoFragment extends BaseFragment<FragmentVideoBinding> implements
     private int type;
     private VideoViewModel mViewModel;
     private List<VideosBean.MainVideosListBean> mDatas;
+    private List<String> mLoopImgs;
 
     public static VideoFragment newInstance(int type) {
         VideoFragment videoFragment = new VideoFragment();
@@ -53,6 +59,34 @@ public class VideoFragment extends BaseFragment<FragmentVideoBinding> implements
         mViewModel = ViewModelProviders.of(this).get(VideoViewModel.class);
         initIntent();
         initView();
+        initData();
+    }
+
+    private void initData() {
+        if (type == 0) {
+            mViewModel.getLoopImgs(SpManager.getInstance(mContext).getSP("phone"))
+                    .observe(this, resource -> resource.work(new ResourceListener<LoopImgHttp>() {
+                        @Override
+                        public void onSuccess(LoopImgHttp data) {
+                            if (data.list != null && data.list.size() > 0) {
+                                mBinding.banner.setVisibility(View.VISIBLE);
+                                mLoopImgs = new ArrayList<>();
+                                for (LoopImgHttp.LoopImg loopImg : data.list) {
+                                    mLoopImgs.add(loopImg.imgurl);
+                                }
+                                mBinding.banner.setImages(mLoopImgs);
+                                mBinding.banner.start();
+                            } else {
+                                mBinding.banner.setVisibility(View.GONE);
+                            }
+                        }
+
+                        @Override
+                        public void onError(String msg) {
+                            ToastUtils.showShort(msg);
+                        }
+                    }));
+        }
     }
 
     private void initIntent() {
@@ -62,6 +96,24 @@ public class VideoFragment extends BaseFragment<FragmentVideoBinding> implements
     private void initView() {
         initRefresh();
         initRecycler();
+        initBanner();
+    }
+
+
+    private void initBanner() {
+        if (type == 0) {
+            mBinding.banner.setVisibility(View.VISIBLE);
+            mBinding.banner.setOnBannerListener(new OnBannerListener() {
+                @Override
+                public void OnBannerClick(int position) {
+
+                }
+            });
+            mBinding.banner.setImageLoader(new GlideImageLoader());
+        } else {
+            mBinding.banner.setVisibility(View.GONE);
+        }
+
     }
 
     private void initRecycler() {
@@ -100,7 +152,7 @@ public class VideoFragment extends BaseFragment<FragmentVideoBinding> implements
         });
     }
 
-    private void getHotVideo(){
+    private void getHotVideo() {
         mViewModel.getHotVideo(SpManager.getInstance(mContext).getSP("phone"))
                 .observe(this, resource -> resource.work(new ResourceListener<VideosBean>() {
                     @Override
@@ -111,6 +163,7 @@ public class VideoFragment extends BaseFragment<FragmentVideoBinding> implements
 
                     @Override
                     public void onError(String msg) {
+                        ToastUtils.showShort(msg);
                         mBinding.refresh.finishRefresh();
                     }
                 }));
@@ -127,6 +180,7 @@ public class VideoFragment extends BaseFragment<FragmentVideoBinding> implements
 
                     @Override
                     public void onError(String msg) {
+                        ToastUtils.showShort(msg);
                         mBinding.refresh.finishRefresh();
                     }
                 }));
@@ -143,6 +197,7 @@ public class VideoFragment extends BaseFragment<FragmentVideoBinding> implements
 
                     @Override
                     public void onError(String msg) {
+                        ToastUtils.showShort(msg);
                         mBinding.refresh.finishRefresh();
                     }
                 }));
@@ -160,6 +215,7 @@ public class VideoFragment extends BaseFragment<FragmentVideoBinding> implements
 
                     @Override
                     public void onError(String msg) {
+                        ToastUtils.showShort(msg);
                         mBinding.refresh.finishRefresh();
                     }
                 }));
@@ -176,6 +232,7 @@ public class VideoFragment extends BaseFragment<FragmentVideoBinding> implements
 
                     @Override
                     public void onError(String msg) {
+                        ToastUtils.showShort(msg);
                         mBinding.refresh.finishRefresh();
                     }
                 }));

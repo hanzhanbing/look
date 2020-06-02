@@ -2,6 +2,7 @@ package cn.looksafe.client.viewmodel;
 
 import androidx.lifecycle.LiveData;
 
+import com.look.core.http.BaseResponse;
 import com.look.core.viewmodel.BaseViewModel;
 import com.look.core.vo.Resource;
 
@@ -20,7 +21,7 @@ public class SuggestViewModel extends BaseViewModel {
 
 
 
-    public LiveData<Resource<Void>> suggest(String loginName, String content) {
+    public LiveData<Resource<BaseResponse>> suggest(String loginName, String content) {
         return mUserRepository.suggest(loginName,content);
     }
 }

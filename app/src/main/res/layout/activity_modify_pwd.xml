@@ -2,130 +2,130 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <RelativeLayout
+    <data>
+        <variable
+            name="presenter"
+            type="cn.looksafe.client.ui.activitys.ModifyPwdActivity.Presenter" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/_FDB232"
+        >
 
-        <!--<RelativeLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="@dimen/qb_px_60">-->
-
-        <!--<ImageView-->
-        <!--android:id="@+id/amp_back"-->
-        <!--android:layout_width="@dimen/qb_px_23"-->
-        <!--android:layout_height="@dimen/qb_px_23"-->
-        <!--android:layout_centerVertical="true"-->
-        <!--android:layout_marginLeft="@dimen/qb_px_25"-->
-        <!--android:src="@mipmap/back" />-->
-
-
-        <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_centerInParent="true"-->
-        <!--android:text="修改密码"-->
-        <!--android:textColor="@color/grey_5a"-->
-        <!--android:textSize="22sp" />-->
-
-        <!--</RelativeLayout>-->
-
-        <!--<View-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="@dimen/qb_px_1"-->
-        <!--android:layout_marginTop="@dimen/qb_px_60"-->
-        <!--android:background="#cccccc" />-->
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/amp_toolbar"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/qb_px_60"
-            android:background="@color/blue"
-            android:minHeight="?attr/actionBarSize"
-            app:navigationIcon="@mipmap/back">
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            >
 
-            <TextView
+
+
+            <com.ruffian.library.widget.RLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="@dimen/qb_px_28"
+                android:layout_marginEnd="@dimen/qb_px_28"
+                app:layout_constraintTop_toBottomOf="@id/line"
+                app:corner_radius="@dimen/qb_px_16"
+                app:background_normal="@color/white"
+                >
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="修改密码"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="@color/_1A1A1A"
+                    android:textSize="24sp"
+                    android:layout_marginTop="@dimen/qb_px_34"
+                    android:fontFamily="sans-serif-medium"
+                    />
+
+
+                <com.ruffian.library.widget.REditText
+                    android:id="@+id/old_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/qb_px_44"
+                    android:hint="请输入旧密码"
+                    android:textColor="@color/_606D7A"
+                    android:textSize="16sp"
+                    android:inputType="textPassword"
+                    android:gravity="center_vertical"
+                    android:paddingStart="@dimen/qb_px_12"
+                    android:layout_marginTop="@dimen/qb_px_15"
+                    android:layout_marginStart="@dimen/qb_px_24"
+                    android:layout_marginEnd="@dimen/qb_px_24"
+                    app:corner_radius="8dp"
+                    app:border_color_normal="@color/_DCDCDC"
+                    app:border_width_normal="0.5dp"
+                    />
+
+                <com.ruffian.library.widget.REditText
+                    android:id="@+id/password"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/qb_px_44"
+                    android:hint="请输入新密码"
+                    android:textColor="@color/_606D7A"
+                    android:textSize="16sp"
+                    android:gravity="center_vertical"
+                    android:inputType="textPassword"
+                    android:paddingStart="@dimen/qb_px_12"
+                    android:layout_marginTop="@dimen/qb_px_15"
+                    android:layout_marginStart="@dimen/qb_px_24"
+                    android:layout_marginEnd="@dimen/qb_px_24"
+                    app:corner_radius="8dp"
+                    app:border_color_normal="@color/_DCDCDC"
+                    app:border_width_normal="0.5dp"
+                    />
+
+
+
+                <com.ruffian.library.widget.RTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/qb_px_44"
+                    android:text="确定修改"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:gravity="center"
+                    android:layout_marginStart="@dimen/qb_px_24"
+                    android:layout_marginEnd="@dimen/qb_px_24"
+                    android:layout_marginTop="@dimen/qb_px_24"
+                    android:layout_marginBottom="@dimen/qb_px_28"
+                    app:background_normal="@color/_FDB232"
+                    app:corner_radius="@dimen/qb_px_8"
+                    android:onClick="@{()->presenter.modifyPwd()}"
+                    />
+
+            </com.ruffian.library.widget.RLinearLayout>
+
+
+
+            <ImageView
+                android:id="@+id/img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="修改密码"
-                android:textColor="@color/black"
-                android:textSize="22sp" />
-        </androidx.appcompat.widget.Toolbar>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/qb_px_61">
-
-
-            <EditText
-                android:id="@+id/amp_old"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/qb_px_30"
-                android:layout_centerHorizontal="true"
-                android:layout_marginLeft="@dimen/qb_px_47"
-                android:layout_marginTop="@dimen/qb_px_33"
-                android:layout_marginRight="@dimen/qb_px_47"
-                android:background="@null"
-                android:digits="@string/pwd_style"
-                android:hint="旧密码"
-                android:inputType="textPassword"
-                android:maxLength="11"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
+                android:src="@mipmap/ic_reset_password"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
 
             <View
+                android:id="@+id/line"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/qb_px_1"
-                android:layout_centerHorizontal="true"
-                android:layout_marginLeft="@dimen/qb_px_47"
-                android:layout_marginTop="@dimen/qb_px_62"
-                android:layout_marginRight="@dimen/qb_px_47"
-                android:background="@color/grey_line" />
+                android:layout_height="1dp"
+                app:layout_constraintBottom_toBottomOf="@id/img"
+                android:layout_marginBottom="@dimen/qb_px_30"
+                />
 
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <EditText
-                android:id="@+id/amp_new"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/qb_px_30"
-                android:layout_centerHorizontal="true"
-                android:layout_marginLeft="@dimen/qb_px_47"
-                android:layout_marginTop="@dimen/qb_px_102"
-                android:layout_marginRight="@dimen/qb_px_47"
-                android:background="@null"
-                android:digits="@string/pwd_style"
-                android:hint="新密码(6-10位)"
-                android:inputType="textPassword"
-                android:maxLength="11"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/qb_px_1"
-                android:layout_centerHorizontal="true"
-                android:layout_marginLeft="@dimen/qb_px_47"
-                android:layout_marginTop="@dimen/qb_px_131"
-                android:layout_marginRight="@dimen/qb_px_47"
-                android:background="@color/grey_line" />
-
-            <TextView
-                android:id="@+id/amp_sub"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/qb_px_37"
-                android:layout_marginLeft="@dimen/qb_px_47"
-                android:layout_marginTop="@dimen/qb_px_201"
-                android:layout_marginRight="@dimen/qb_px_47"
-                android:background="@drawable/btn_blue_selector"
-                android:gravity="center"
-                android:text="确认修改"
-                android:textColor="@color/white"
-                android:textSize="@dimen/qb_px_16" />
-
-
-        </RelativeLayout>
-
-
-    </RelativeLayout>
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

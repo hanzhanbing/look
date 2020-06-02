@@ -127,7 +127,7 @@ public class VipActivity extends BaseActivity<ActivityVipBinding> implements Htt
 
     @Override
     public void requestFailure(int code, Object object) {
-        toast("支付失败");
+        //toast("支付失败");
         vipMenuModel.setShowProgress(false);
     }
 
@@ -140,9 +140,6 @@ public class VipActivity extends BaseActivity<ActivityVipBinding> implements Htt
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-//            case R.id.av_back:
-//                finish();
-//                break;
             case R.id.av_menu1_rel:
                 selectMenu(1);
                 break;

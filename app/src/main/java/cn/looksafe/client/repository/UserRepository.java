@@ -4,12 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 
 import com.look.core.http.ApiResponse;
+import com.look.core.http.BaseResponse;
 import com.look.core.repository.NetworkOnlyResource;
 import com.look.core.vo.Resource;
 
 import cn.looksafe.client.beans.EyeLogHttp;
 import cn.looksafe.client.beans.HttpBean;
 import cn.looksafe.client.beans.PointHttp;
+import cn.looksafe.client.beans.UserInfo;
 import cn.looksafe.client.beans.VersionHttp;
 import retrofit2.http.Field;
 
@@ -41,11 +43,11 @@ public class UserRepository extends ApiRepository {
         }.asLiveData();
     }
 
-    public LiveData<Resource<Boolean>> addEyesRecord(String loginName, String left, String right) {
-        return new NetworkOnlyResource<Boolean>() {
+    public LiveData<Resource<BaseResponse>> addEyesRecord(String loginName, String left, String right) {
+        return new NetworkOnlyResource<BaseResponse>() {
             @NonNull
             @Override
-            protected LiveData<ApiResponse<Boolean>> createCall() {
+            protected LiveData<ApiResponse<BaseResponse>> createCall() {
                 return apiInterface.addEyesRecord(loginName, left, right);
             }
         }.asLiveData();
@@ -71,12 +73,63 @@ public class UserRepository extends ApiRepository {
         }.asLiveData();
     }
 
-    public LiveData<Resource<Void>> suggest(String loginName, String content) {
-        return new NetworkOnlyResource<Void>() {
+    public LiveData<Resource<BaseResponse>> suggest(String loginName, String content) {
+        return new NetworkOnlyResource<BaseResponse>() {
             @NonNull
             @Override
-            protected LiveData<ApiResponse<Void>> createCall() {
+            protected LiveData<ApiResponse<BaseResponse>> createCall() {
                 return apiInterface.suggest(loginName, content);
+            }
+        }.asLiveData();
+    }
+
+    public LiveData<Resource<BaseResponse>> resetPwd(String loginname, String prePwd, String newPwd) {
+        return new NetworkOnlyResource<BaseResponse>() {
+            @NonNull
+            @Override
+            protected LiveData<ApiResponse<BaseResponse>> createCall() {
+                return apiInterface.resetPwd(loginname, prePwd, newPwd);
+            }
+        }.asLiveData();
+    }
+
+    public LiveData<Resource<UserInfo>> getUserInfo() {
+        return new NetworkOnlyResource<UserInfo>() {
+            @NonNull
+            @Override
+            protected LiveData<ApiResponse<UserInfo>> createCall() {
+                return apiInterface.getUserInfo("");
+            }
+        }.asLiveData();
+    }
+
+
+    public LiveData<Resource<BaseResponse>> getSmsCode(String phone) {
+        return new NetworkOnlyResource<BaseResponse>() {
+            @NonNull
+            @Override
+            protected LiveData<ApiResponse<BaseResponse>> createCall() {
+                return apiInterface.getSmsCode(phone);
+            }
+        }.asLiveData();
+    }
+
+    public LiveData<Resource<BaseResponse>> register(String phone, String pwd, String code) {
+        return new NetworkOnlyResource<BaseResponse>() {
+            @NonNull
+            @Override
+            protected LiveData<ApiResponse<BaseResponse>> createCall() {
+                return apiInterface.register(phone, pwd, code);
+            }
+        }.asLiveData();
+    }
+
+    public LiveData<Resource<BaseResponse>> getCode(String phone) {
+        return new NetworkOnlyResource<BaseResponse>() {
+            @NonNull
+            @Override
+            protected LiveData<ApiResponse<BaseResponse>> createCall() {
+                return apiInterface.getCode(phone);
             }
         }.asLiveData();
     }

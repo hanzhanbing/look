@@ -10,171 +10,189 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        >
-        <com.ruffian.library.widget.RLinearLayout
-            android:id="@+id/header_layout"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/qb_px_130"
-            android:orientation="horizontal"
-            app:background_normal="@color/_FDB232"
-            app:corner_radius_bottom_left="60dp"
-            app:corner_radius_bottom_right="60dp"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="match_parent"
+            android:background="@color/white">
 
-
-            <LinearLayout
+            <com.ruffian.library.widget.RLinearLayout
+                android:id="@+id/header_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/qb_px_130"
                 android:orientation="horizontal"
-                android:layout_marginStart="@dimen/dp_40"
-                android:layout_marginTop="@dimen/qb_px_16">
+                app:background_normal="@color/_FDB232"
+                app:corner_radius_bottom_left="60dp"
+                app:corner_radius_bottom_right="60dp"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_user_avatar"/>
 
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="@dimen/qb_px_16">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="杨戬"
-                        android:textColor="#FF22242A"
-                        android:textSize="@dimen/qb_px_14"
-                        />
+                    android:layout_marginStart="@dimen/dp_40"
+                    android:layout_marginTop="@dimen/qb_px_16"
+                    android:orientation="horizontal">
 
-                    <TextView
+                    <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="13899997777"
-                        android:textColor="#FF8D92A3"
-                        android:textSize="@dimen/qb_px_12"
-                        android:layout_marginTop="@dimen/dp_4"
-                        />
+                        android:src="@mipmap/ic_user_avatar" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="@dimen/qb_px_16"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/nick_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#FF22242A"
+                            android:textSize="@dimen/qb_px_14" />
+
+                        <TextView
+                            android:id="@+id/real_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_4"
+                            android:textColor="#FF8D92A3"
+                            android:textSize="@dimen/qb_px_12" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
-            </LinearLayout>
-
-        </com.ruffian.library.widget.RLinearLayout>
-
-        <View
-            android:id="@+id/line"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginBottom="@dimen/qb_px_50"
-            app:layout_constraintBottom_toBottomOf="@id/header_layout" />
-
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/vip_layout"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/qb_px_74"
-            android:background="@mipmap/ic_mine_user_no_vip"
-            app:layout_constraintTop_toTopOf="@id/line"
-            android:onClick="@{()->presenter.goVip()}"
-            >
-
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        <com.ruffian.library.widget.RLinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:background_normal="@color/white"
-            android:layout_marginStart="@dimen/qb_px_16"
-            android:layout_marginEnd="@dimen/qb_px_16"
-            android:layout_marginTop="@dimen/qb_px_24"
-            app:corner_radius="5dp"
-            app:shadow_color="#66c6c6c6"
-            app:shadow_radius="5dp"
-            app:layout_constraintTop_toBottomOf="@id/vip_layout">
-
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/qb_px_62"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginStart="@dimen/qb_px_16"
-                android:onClick="@{()->presenter.goRecord()}"
-                >
-
-
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_vision_record"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="视力记录"
-                    android:textColor="#FF22242A"
-                    android:textSize="14sp"
-                    android:layout_marginStart="@dimen/qb_px_16"
-                    />
-            </LinearLayout>
-
+            </com.ruffian.library.widget.RLinearLayout>
 
             <View
+                android:id="@+id/line"
                 android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_marginStart="@dimen/qb_px_16"
-                android:layout_marginEnd="@dimen/qb_px_16"
-                android:background="@color/_f2f2f2"
-                />
+                android:layout_height="1dp"
+                android:layout_marginBottom="@dimen/qb_px_50"
+                app:layout_constraintBottom_toBottomOf="@id/header_layout" />
 
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/vip_layout"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/qb_px_62"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginStart="@dimen/qb_px_16"
-                android:onClick="@{()->presenter.goSetting()}"
-                >
+                android:layout_height="@dimen/qb_px_74"
+                android:layout_marginStart="@dimen/qb_px_20"
+                android:layout_marginEnd="@dimen/qb_px_20"
+                android:background="@drawable/ic_vip"
+                android:onClick="@{()->presenter.goVip()}"
+                app:layout_constraintTop_toTopOf="@id/line">
 
-
-
-                <ImageView
+                <TextView
+                    android:id="@+id/vip_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_setting"
+                    android:textColor="#FFDCDCDC"
+                    android:textSize="9sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="@dimen/qb_px_12"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     />
 
                 <TextView
+                    android:id="@+id/vip_control"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="系统设置"
-                    android:textColor="#FF22242A"
-                    android:textSize="14sp"
-                    android:layout_marginStart="@dimen/qb_px_16"
+                    android:textColor="#FFFADB8B"
+                    android:textSize="10sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="@dimen/qb_px_18"
+                    android:layout_marginBottom="@dimen/qb_px_10"
                     />
-            </LinearLayout>
 
 
-
-        </com.ruffian.library.widget.RLinearLayout>
-
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.ruffian.library.widget.RLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/qb_px_16"
+                android:layout_marginTop="@dimen/qb_px_24"
+                android:layout_marginEnd="@dimen/qb_px_16"
+                android:orientation="vertical"
+                app:background_normal="@color/white"
+                app:corner_radius="5dp"
+                app:layout_constraintTop_toBottomOf="@id/vip_layout"
+                app:shadow_color="#66c6c6c6"
+                app:shadow_radius="5dp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/qb_px_62"
+                    android:layout_marginStart="@dimen/qb_px_16"
+                    android:gravity="center_vertical"
+                    android:onClick="@{()->presenter.goRecord()}"
+                    android:orientation="horizontal">
+
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/ic_vision_record" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/qb_px_16"
+                        android:layout_weight="1"
+                        android:text="视力记录"
+                        android:textColor="#FF22242A"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginStart="@dimen/qb_px_16"
+                    android:layout_marginEnd="@dimen/qb_px_16"
+                    android:background="@color/_f2f2f2" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/qb_px_62"
+                    android:layout_marginStart="@dimen/qb_px_16"
+                    android:gravity="center_vertical"
+                    android:onClick="@{()->presenter.goSetting()}"
+                    android:orientation="horizontal">
+
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/ic_setting" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/qb_px_16"
+                        android:layout_weight="1"
+                        android:text="系统设置"
+                        android:textColor="#FF22242A"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+
+            </com.ruffian.library.widget.RLinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 </layout>

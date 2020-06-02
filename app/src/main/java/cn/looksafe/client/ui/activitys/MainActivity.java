@@ -90,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     }
 
     private void initViewPager() {
+        mViewpager.setOffscreenPageLimit(4);
         mViewpager.setAdapter(new FragmentStatePagerAdapter(getSupportFragmentManager()) {
             @Override
             public Fragment getItem(int position) {
@@ -176,7 +177,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             case KeyEvent.KEYCODE_BACK://返回
                 if (System.currentTimeMillis() - backtime < 2000) {
                     finish();
-                } else backtime = System.currentTimeMillis();
+                } else {
+                    backtime = System.currentTimeMillis();
+                }
                 break;
         }
         return false;

@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 //import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Toast;
 
@@ -30,6 +31,7 @@ import cn.looksafe.client.utils.HttpStatus;
 public class ActiveActivity extends BaseActivity {
     ActiveActivityBinding binding;
     private NormalModel normalModel = new NormalModel();
+    private long backtime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,5 +134,19 @@ public class ActiveActivity extends BaseActivity {
         }
     }
 
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_BACK://返回
+                if (System.currentTimeMillis() - backtime < 2000) {
+                    finish();
+                } else {
+                    backtime = System.currentTimeMillis();
+                }
+                break;
+        }
+        return false;
+    }
 
 }

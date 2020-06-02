@@ -30,14 +30,21 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> {
         return R.layout.activity_login;
     }
 
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        mBinding.password.setText("");
+    }
+
     @Override
     protected void init() {
         mBinding.setPresenter(new Presenter());
         mViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
         initBar();
         initSp();
-
     }
+
 
     private void initBar() {
         StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color._FDB232));
@@ -48,6 +55,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> {
         String phone = SpManager.getInstance(mContext).getSP("phone");
         if (!TextUtils.isEmpty(phone)) {
             mBinding.name.setText(phone);
+            mBinding.name.setSelection(phone.length());
         }
     }
 
@@ -89,12 +97,12 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> {
             public void onSuccess(HttpBean data) {
                 SpManager.getInstance(mContext).putSP("token", data.getToken());
                 SpManager.getInstance(mContext).putSP("phone", mBinding.name.getText().toString());
+                SpManager.getInstance(mContext).putSP("vip",data.isIsvip());
                 if (data.isIsactive()) { //被激活过
                     startActivity(new Intent(mContext, MainActivity.class));
                 } else {
                     startActivity(new Intent(mContext, ActiveActivity.class));
                 }
-                finish();
             }
 
             @Override
