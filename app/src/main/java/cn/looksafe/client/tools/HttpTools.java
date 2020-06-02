@@ -89,13 +89,13 @@ public class HttpTools {
                     }
                     Log.i("xxx", json);
                     HttpBean httpBean = gson.fromJson(json, HttpBean.class);
-                    if (httpBean.code != 0) {
+                    if (httpBean.getCode() != 0) {
                         if (httpCallBack != null)
-                            httpCallBack.requestFailure(HttpStatus.HTTP_ERROR, httpBean.msg);
+                            httpCallBack.requestFailure(HttpStatus.HTTP_ERROR, httpBean.getMsg());
                         return;
                     }
-                    if (!TextUtils.isEmpty(httpBean.token))
-                        Contents.getInstance().setToken(httpBean.token);
+                    if (!TextUtils.isEmpty(httpBean.getToken()))
+                        Contents.getInstance().setToken(httpBean.getToken());
                     switch (type) {
                         case HTTP_LOGIN:
                             Contents.getInstance().setUserinfo(httpBean);
@@ -183,7 +183,7 @@ public class HttpTools {
                         case HTTP_PLUS_PLAY:
                             break;
                         case HTTP_GET_VIP_DATE:
-                            Contents.getInstance().getUserinfo().vipexp = httpBean.vipexp;
+                            Contents.getInstance().getUserinfo().setVipexp(httpBean.getVipexp());
                             httpCallBack.requestSuccess(HttpStatus.HTTP_GET_VIP_DATE_SUC, httpBean, null);
                             break;
                         case HTTP_GET_MY_ORDERS:

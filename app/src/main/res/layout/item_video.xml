@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.ruffian.library.widget.RLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    app:corner_radius="@dimen/qb_px_20"
+    app:background_normal="@color/white"
+    >
+
+
+    <com.ruffian.library.widget.RImageView
+        android:id="@+id/item_video_img"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/qb_px_94"
+        android:scaleType="fitXY"
+        app:corner_radius_top_left="@dimen/qb_px_20"
+        app:corner_radius_top_right="@dimen/qb_px_20"
+        />
+
+    <TextView
+        android:id="@+id/item_video_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="向往的生活"
+        android:textColor="@color/_1B1200"
+        android:textSize="14sp"
+        android:layout_marginTop="@dimen/qb_px_8"
+        android:layout_marginStart="@dimen/qb_px_16"
+        />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/qb_px_2"
+        android:layout_marginStart="@dimen/qb_px_16"
+        android:layout_marginBottom="@dimen/qb_px_20">
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_clock"
+            android:layout_gravity="center_vertical"
+            />
+
+        <TextView
+            android:id="@+id/item_video_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5分钟"
+            android:textColor="@color/_A8A8A8"
+            android:textSize="12sp"
+            android:layout_marginStart="@dimen/qb_px_6"
+            />
+    </LinearLayout>
+
+
+</com.ruffian.library.widget.RLinearLayout>

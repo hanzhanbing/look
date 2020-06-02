@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="presenter"
+            type="cn.looksafe.client.my.MySuggestActivity.Presenter" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <EditText
+            android:id="@+id/edit"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/qb_px_400"
+            android:layout_margin="@dimen/qb_px_16"
+            android:gravity="left|top"
+            android:textColor="@color/black"
+            android:background="@color/white"
+            android:textSize="19sp"
+            android:padding="8dp"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <com.ruffian.library.widget.RTextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/qb_px_48"
+            android:layout_marginStart="@dimen/qb_px_24"
+            android:layout_marginTop="@dimen/qb_px_48"
+            android:layout_marginEnd="@dimen/qb_px_24"
+            android:background="@color/blue"
+            android:gravity="center"
+            android:text="提交"
+            android:textColor="@color/white"
+            android:textSize="23sp"
+            app:background_normal="@color/_FDB232"
+            app:corner_radius="@dimen/qb_px_50"
+            app:layout_constraintTop_toBottomOf="@id/edit"
+            android:onClick="@{()->presenter.submit()}"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

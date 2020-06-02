@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nv_home"
+        android:title="视频"
+        android:icon="@mipmap/ic_nv_home"
+        />
+
+    <item
+        android:id="@+id/nv_plan"
+        android:title="视训营"
+        android:icon="@mipmap/ic_nv_plan_default"
+        />
+
+    <item
+        android:id="@+id/nv_find"
+        android:title="发现"
+        android:icon="@mipmap/ic_nv_find_default"
+        />
+
+    <item
+        android:id="@+id/nv_mine"
+        android:title="我的"
+        android:icon="@mipmap/ic_nv_mine_default"
+        />
+
+</menu>

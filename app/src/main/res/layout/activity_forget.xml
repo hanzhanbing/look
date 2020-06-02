@@ -3,163 +3,182 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
-        <import type="android.view.View" />
-
         <variable
-            name="normalModel"
-            type="cn.looksafe.client.models.NormalModel" />
+            name="presenter"
+            type="cn.looksafe.client.ui.activitys.ForgetActivity.Presenter" />
     </data>
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/_FDB232"
+        >
 
-        <!--<ImageView-->
-        <!--android:id="@+id/af_back"-->
-        <!--android:layout_width="@dimen/qb_px_25"-->
-        <!--android:layout_height="@dimen/qb_px_25"-->
-        <!--android:layout_marginLeft="@dimen/qb_px_46"-->
-        <!--android:layout_marginTop="@dimen/qb_px_30"-->
-        <!--android:src="@mipmap/back" />-->
-
-        <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:layout_marginTop="@dimen/qb_px_32"-->
-        <!--android:text="忘记密码"-->
-        <!--android:textColor="@color/grey_5a"-->
-        <!--android:textSize="16sp" />-->
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/af_toolbar"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/qb_px_60"
-            android:background="@color/blue"
-            android:minHeight="?attr/actionBarSize"
-            app:navigationIcon="@mipmap/back">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/qb_px_80"
+            app:layout_constraintBottom_toBottomOf="parent"
+            >
 
-            <TextView
+
+
+            <com.ruffian.library.widget.RLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="@dimen/qb_px_28"
+                android:layout_marginEnd="@dimen/qb_px_28"
+                app:layout_constraintTop_toBottomOf="@id/line"
+                app:corner_radius="@dimen/qb_px_16"
+                app:background_normal="@color/white"
+                >
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="重置密码"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="@color/_1A1A1A"
+                    android:textSize="24sp"
+                    android:layout_marginTop="@dimen/qb_px_34"
+                    android:fontFamily="sans-serif-medium"
+                    />
+
+                <com.ruffian.library.widget.REditText
+                    android:id="@+id/phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/qb_px_44"
+                    android:hint="手机号"
+                    android:textColor="@color/_606D7A"
+                    android:textSize="16sp"
+                    android:gravity="center_vertical"
+                    android:paddingStart="@dimen/qb_px_12"
+                    android:layout_marginTop="@dimen/qb_px_16"
+                    android:layout_marginStart="@dimen/qb_px_24"
+                    android:layout_marginEnd="@dimen/qb_px_24"
+                    app:corner_radius="8dp"
+                    app:border_color_normal="@color/_DCDCDC"
+                    app:border_width_normal="0.5dp"
+                    />
+
+                <com.ruffian.library.widget.REditText
+                    android:id="@+id/password"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/qb_px_44"
+                    android:hint="设置新密码"
+                    android:textColor="@color/_606D7A"
+                    android:textSize="16sp"
+                    android:gravity="center_vertical"
+                    android:paddingStart="@dimen/qb_px_12"
+                    android:layout_marginTop="@dimen/qb_px_15"
+                    android:layout_marginStart="@dimen/qb_px_24"
+                    android:layout_marginEnd="@dimen/qb_px_24"
+                    app:corner_radius="8dp"
+                    app:border_color_normal="@color/_DCDCDC"
+                    app:border_width_normal="0.5dp"
+                    />
+
+                <com.ruffian.library.widget.REditText
+                    android:id="@+id/pwd_again"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/qb_px_44"
+                    android:hint="确认新密码"
+                    android:textColor="@color/_606D7A"
+                    android:textSize="16sp"
+                    android:gravity="center_vertical"
+                    android:paddingStart="@dimen/qb_px_12"
+                    android:layout_marginTop="@dimen/qb_px_15"
+                    android:layout_marginStart="@dimen/qb_px_24"
+                    android:layout_marginEnd="@dimen/qb_px_24"
+                    app:corner_radius="8dp"
+                    app:border_color_normal="@color/_DCDCDC"
+                    app:border_width_normal="0.5dp"
+                    />
+
+                <com.ruffian.library.widget.RLinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/qb_px_44"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="@dimen/qb_px_24"
+                    android:layout_marginEnd="@dimen/qb_px_24"
+                    app:corner_radius="8dp"
+                    android:layout_marginTop="@dimen/qb_px_15"
+                    app:border_color_normal="@color/_DCDCDC"
+                    app:border_width_normal="0.5dp"
+                    >
+                    <EditText
+                        android:id="@+id/code"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingStart="@dimen/qb_px_12"
+                        android:hint="验证码"
+                        android:textColor="@color/_606D7A"
+                        android:textSize="16sp"
+                        android:background="@null"
+                        />
+
+
+                    <TextView
+                        android:id="@+id/send_code"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:hint="发送验证码"
+                        android:layout_marginEnd="@dimen/qb_px_12"
+                        android:textColor="@color/_606D7A"
+                        android:textSize="16sp"
+                        android:onClick="@{()->presenter.sendCode()}"
+                        />
+
+
+                </com.ruffian.library.widget.RLinearLayout>
+
+
+                <com.ruffian.library.widget.RTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/qb_px_44"
+                    android:text="确定重置"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:gravity="center"
+                    android:layout_marginStart="@dimen/qb_px_24"
+                    android:layout_marginEnd="@dimen/qb_px_24"
+                    android:layout_marginTop="@dimen/qb_px_24"
+                    android:layout_marginBottom="@dimen/qb_px_28"
+                    app:background_normal="@color/_FDB232"
+                    app:corner_radius="@dimen/qb_px_8"
+                    android:onClick="@{()->presenter.resetPwd()}"
+                    />
+
+            </com.ruffian.library.widget.RLinearLayout>
+
+
+
+            <ImageView
+                android:id="@+id/img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="忘记密码"
-                android:textColor="@color/toolbar_text_color"
-                android:textSize="22sp" />
-        </androidx.appcompat.widget.Toolbar>
+                android:src="@mipmap/ic_reset_password"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
 
-        <!--<View-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="@dimen/qb_px_1"-->
-            <!--android:layout_marginTop="@dimen/qb_px_67"-->
-            <!--android:background="@color/grey_line" />-->
+            <View
+                android:id="@+id/line"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                app:layout_constraintBottom_toBottomOf="@id/img"
+                android:layout_marginBottom="@dimen/qb_px_30"
+                />
 
-        <EditText
-            android:id="@+id/af_name"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/qb_px_30"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="@dimen/qb_px_47"
-            android:layout_marginTop="@dimen/qb_px_92"
-            android:layout_marginRight="@dimen/qb_px_47"
-            android:background="@null"
-            android:hint="请输入手机号"
-            android:inputType="number"
-            android:maxLength="11"
-            android:textColor="@color/black"
-            android:textSize="14sp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/qb_px_1"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="@dimen/qb_px_47"
-            android:layout_marginTop="@dimen/qb_px_121"
-            android:layout_marginRight="@dimen/qb_px_47"
-            android:background="@color/grey_line" />
-
-        <EditText
-            android:id="@+id/af_code"
-            android:layout_width="@dimen/qb_px_95"
-            android:layout_height="@dimen/qb_px_30"
-            android:layout_marginLeft="@dimen/qb_px_47"
-            android:layout_marginTop="@dimen/qb_px_135"
-            android:layout_marginRight="@dimen/qb_px_47"
-            android:background="@null"
-            android:hint="请输入验证码"
-            android:inputType="number"
-            android:maxLength="6"
-            android:textColor="@color/black"
-            android:textSize="14sp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/qb_px_1"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="@dimen/qb_px_47"
-            android:layout_marginTop="@dimen/qb_px_165"
-            android:layout_marginRight="@dimen/qb_px_47"
-            android:background="@color/grey_line" />
-
-        <TextView
-            android:id="@+id/af_getcode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="@dimen/qb_px_140"
-            android:layout_marginRight="@dimen/qb_px_47"
-            android:text="@{normalModel.tip1}"
-            android:textColor="#3385FF"
-            android:textSize="14sp" />
-
-        <EditText
-            android:id="@+id/af_pwd"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/qb_px_30"
-            android:layout_marginLeft="@dimen/qb_px_47"
-            android:layout_marginTop="@dimen/qb_px_178"
-            android:layout_marginRight="@dimen/qb_px_47"
-            android:background="@null"
-            android:digits="@string/pwd_style"
-            android:hint="请输入新密码(6-12位)"
-            android:maxLength="12"
-            android:textColor="@color/black"
-            android:textSize="14sp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/qb_px_1"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="@dimen/qb_px_47"
-            android:layout_marginTop="@dimen/qb_px_208"
-            android:layout_marginRight="@dimen/qb_px_47"
-            android:background="@color/grey_line" />
-
-        <TextView
-            android:id="@+id/af_reset"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/qb_px_37"
-            android:layout_marginLeft="@dimen/qb_px_47"
-            android:layout_marginTop="@dimen/qb_px_281"
-            android:layout_marginRight="@dimen/qb_px_47"
-            android:background="@drawable/btn_blue_selector"
-            android:gravity="center"
-            android:text="确认修改"
-            android:textColor="@color/white"
-            android:textSize="@dimen/qb_px_16" />
-
-        <RelativeLayout
-            android:id="@+id/af_pro"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/transparent_light"
-            android:visibility="@{normalModel.showProgress?View.VISIBLE:View.GONE}">
-
-            <ProgressBar
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_centerInParent="true" />
-        </RelativeLayout>
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

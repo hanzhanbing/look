@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="presenter"
+            type="cn.looksafe.client.my.SysActivity.Presenter" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/qb_px_16"
+            android:paddingEnd="@dimen/qb_px_16"
+            android:onClick="@{()->presenter.resetPwd()}"
+            >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="修改密码"
+                android:textColor="#FF3B566E"
+                android:textSize="14sp" />
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/gengduo"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/_f2f2f2"
+            android:layout_marginStart="@dimen/qb_px_16"
+            android:layout_marginEnd="@dimen/qb_px_16"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/qb_px_16"
+            android:paddingEnd="@dimen/qb_px_16"
+            android:onClick="@{()->presenter.cleanCache()}"
+            >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="清除缓存"
+                android:textColor="#FF3B566E"
+                android:textSize="14sp" />
+
+
+            <TextView
+                android:id="@+id/cache"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0B"
+                android:textColor="#FF6F8BA4"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/_f2f2f2"
+            android:layout_marginStart="@dimen/qb_px_16"
+            android:layout_marginEnd="@dimen/qb_px_16"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/qb_px_16"
+            android:paddingEnd="@dimen/qb_px_16"
+            android:onClick="@{()->presenter.reportSug()}"
+            >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="意见反馈"
+                android:textColor="#FF3B566E"
+                android:textSize="14sp" />
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/gengduo"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/_f2f2f2"
+            android:layout_marginStart="@dimen/qb_px_16"
+            android:layout_marginEnd="@dimen/qb_px_16"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/qb_px_16"
+            android:paddingEnd="@dimen/qb_px_16"
+            android:onClick="@{()->presenter.goProtocal()}"
+            >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="用户协议与隐私政策"
+                android:textColor="#FF3B566E"
+                android:textSize="14sp" />
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/gengduo"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/_f2f2f2"
+            android:layout_marginStart="@dimen/qb_px_16"
+            android:layout_marginEnd="@dimen/qb_px_16"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/qb_px_16"
+            android:paddingEnd="@dimen/qb_px_16"
+            android:onClick="@{()->presenter.checkVersion()}"
+            >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="软件版本"
+                android:textColor="#FF3B566E"
+                android:textSize="14sp" />
+
+
+            <TextView
+                android:id="@+id/version"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#FF6F8BA4"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/_f2f2f2"
+            android:layout_marginStart="@dimen/qb_px_16"
+            android:layout_marginEnd="@dimen/qb_px_16"
+            />
+
+
+        <com.ruffian.library.widget.RTextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/qb_px_50"
+            android:text="退出登录"
+            android:textColor="#FFFFFFFF"
+            android:textSize="12sp"
+            android:layout_marginTop="@dimen/qb_px_48"
+            android:gravity="center"
+            android:layout_marginStart="@dimen/qb_px_16"
+            android:layout_marginEnd="@dimen/qb_px_16"
+            app:corner_radius="@dimen/qb_px_60"
+            app:background_normal="#FD522F"
+            android:onClick="@{()->presenter.exit()}"
+            />
+
+    </LinearLayout>
+</layout>

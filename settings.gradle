@@ -1,1 +1,1 @@
-include ':app', ':unityLibrary'
+include ':app', ':unityLibrary', ':core'

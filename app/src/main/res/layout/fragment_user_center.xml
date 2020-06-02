@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="presenter"
+            type="cn.looksafe.client.ui.fragments.UserCenterFragment.Presenter" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        >
+        <com.ruffian.library.widget.RLinearLayout
+            android:id="@+id/header_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/qb_px_130"
+            android:orientation="horizontal"
+            app:background_normal="@color/_FDB232"
+            app:corner_radius_bottom_left="60dp"
+            app:corner_radius_bottom_right="60dp"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="@dimen/dp_40"
+                android:layout_marginTop="@dimen/qb_px_16">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_user_avatar"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/qb_px_16">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="杨戬"
+                        android:textColor="#FF22242A"
+                        android:textSize="@dimen/qb_px_14"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="13899997777"
+                        android:textColor="#FF8D92A3"
+                        android:textSize="@dimen/qb_px_12"
+                        android:layout_marginTop="@dimen/dp_4"
+                        />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.ruffian.library.widget.RLinearLayout>
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="@dimen/qb_px_50"
+            app:layout_constraintBottom_toBottomOf="@id/header_layout" />
+
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/vip_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/qb_px_74"
+            android:background="@mipmap/ic_mine_user_no_vip"
+            app:layout_constraintTop_toTopOf="@id/line"
+            android:onClick="@{()->presenter.goVip()}"
+            >
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <com.ruffian.library.widget.RLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:background_normal="@color/white"
+            android:layout_marginStart="@dimen/qb_px_16"
+            android:layout_marginEnd="@dimen/qb_px_16"
+            android:layout_marginTop="@dimen/qb_px_24"
+            app:corner_radius="5dp"
+            app:shadow_color="#66c6c6c6"
+            app:shadow_radius="5dp"
+            app:layout_constraintTop_toBottomOf="@id/vip_layout">
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/qb_px_62"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginStart="@dimen/qb_px_16"
+                android:onClick="@{()->presenter.goRecord()}"
+                >
+
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_vision_record"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="视力记录"
+                    android:textColor="#FF22242A"
+                    android:textSize="14sp"
+                    android:layout_marginStart="@dimen/qb_px_16"
+                    />
+            </LinearLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginStart="@dimen/qb_px_16"
+                android:layout_marginEnd="@dimen/qb_px_16"
+                android:background="@color/_f2f2f2"
+                />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/qb_px_62"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginStart="@dimen/qb_px_16"
+                android:onClick="@{()->presenter.goSetting()}"
+                >
+
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_setting"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="系统设置"
+                    android:textColor="#FF22242A"
+                    android:textSize="14sp"
+                    android:layout_marginStart="@dimen/qb_px_16"
+                    />
+            </LinearLayout>
+
+
+
+        </com.ruffian.library.widget.RLinearLayout>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

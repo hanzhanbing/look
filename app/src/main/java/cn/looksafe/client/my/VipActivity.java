@@ -1,18 +1,18 @@
 package cn.looksafe.client.my;
 
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.widget.Toast;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.look.core.ui.BaseActivity;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import java.util.ArrayList;
 
-import androidx.databinding.DataBindingUtil;
 import cn.looksafe.client.R;
 import cn.looksafe.client.beans.VipMenuHttp;
 import cn.looksafe.client.beans.WxpayInitBean;
@@ -22,11 +22,11 @@ import cn.looksafe.client.tools.AppConfig;
 import cn.looksafe.client.tools.Contents;
 import cn.looksafe.client.tools.HttpTools;
 import cn.looksafe.client.tools.Tools;
-import cn.looksafe.client.utils.BaseActivity;
+import cn.looksafe.client.utils.HttpCallBack;
 import cn.looksafe.client.utils.HttpStatus;
 
-public class VipActivity extends BaseActivity {
-    ActivityVipBinding binding;
+@Route(path = "/user/vip")
+public class VipActivity extends BaseActivity<ActivityVipBinding> implements HttpCallBack, View.OnClickListener {
     private int selectType = -1;
     private VipMenuModel vipMenuModel = new VipMenuModel();
     private ArrayList<VipMenuHttp.Menu> priceList = new ArrayList<>();
@@ -36,35 +36,21 @@ public class VipActivity extends BaseActivity {
     public static final int HD_PAY_CANCLE = 1;//支付取消
     public static final int HD_PAY_FAILURE = 2;//支付失败
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_vip);
-        binding.setMenuModel(vipMenuModel);
-//        binding.avBack.setOnClickListener(this);
-        init();
+    protected int getLayoutId() {
+        return R.layout.activity_vip;
     }
 
-    private void init() {
-        binding.avSub.setOnClickListener(this);
-        binding.avMenu1Rel.setOnClickListener(this);
-        binding.avMenu2Rel.setOnClickListener(this);
-        binding.avMenu3Rel.setOnClickListener(this);
-        binding.avPro.setOnClickListener(null);
-        binding.avpSubPay.setOnClickListener(this);
-        vipMenuModel.setVipdate("会员有效期至" + Tools.date8toStr(Contents.getInstance().getUserinfo().vipexp));
-        binding.avToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-        binding.avpToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                vipMenuModel.setShowPaySelectUi(false);
-            }
-        });
+    @Override
+    protected void init() {
+        mBinding.setMenuModel(vipMenuModel);
+        mBinding.avSub.setOnClickListener(this);
+        mBinding.avMenu1Rel.setOnClickListener(this);
+        mBinding.avMenu2Rel.setOnClickListener(this);
+        mBinding.avMenu3Rel.setOnClickListener(this);
+        mBinding.avPro.setOnClickListener(null);
+        mBinding.avpSubPay.setOnClickListener(this);
         api = WXAPIFactory.createWXAPI(mContext, null);
         mHandler = new Handler() {
             @Override
@@ -92,7 +78,6 @@ public class VipActivity extends BaseActivity {
 
     @Override
     public void requestSuccess(int code, Object object, Object object2) {
-        super.requestSuccess(code, object, object2);
         switch (code) {
             case HttpStatus.HTTP_GET_VIP_MENU_SUC:
                 VipMenuHttp vipMenuHttp = (VipMenuHttp) object;
@@ -132,17 +117,17 @@ public class VipActivity extends BaseActivity {
                 String md = "appid=" + req.appId + "&noncestr=" + req.nonceStr + "&package=" + req.packageValue + "&partnerid=" + req.partnerId + "&prepayid=" + req.prepayId + "&timestamp=" + req.timeStamp + "&key=" + AppConfig.wx_key;
                 req.sign = Tools.getWxMD5(md, 32);
                 api.sendReq(req);
+
                 break;
             case HttpStatus.HTTP_GET_VIP_DATE_SUC:
-                vipMenuModel.setVipdate("会员有效期至" + Tools.date8toStr(Contents.getInstance().getUserinfo().vipexp));
+                vipMenuModel.setVipdate("会员有效期至" + Tools.date8toStr(Contents.getInstance().getUserinfo().getVipexp()));
                 break;
         }
     }
 
     @Override
     public void requestFailure(int code, Object object) {
-        super.requestFailure(code, object);
-        toast("支付失败", AppConfig.TOAST_SHORT);
+        toast("支付失败");
         vipMenuModel.setShowProgress(false);
     }
 
@@ -154,7 +139,6 @@ public class VipActivity extends BaseActivity {
 
     @Override
     public void onClick(View v) {
-        super.onClick(v);
         switch (v.getId()) {
 //            case R.id.av_back:
 //                finish();
@@ -179,7 +163,7 @@ public class VipActivity extends BaseActivity {
 //                vipMenuModel.setShowPaySelectUi(false);
 //                break;
             case R.id.avp_sub_pay:
-                if (!binding.avpCkWx.isChecked()) {
+                if (!mBinding.avpCkWx.isChecked()) {
                     Toast.makeText(mContext, "请选择支付方式", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -205,21 +189,30 @@ public class VipActivity extends BaseActivity {
 
     private void selectMenu(int type) {
         selectType = type;
-        binding.avMenu1Rel.setSelected(false);
-        binding.avMenu2Rel.setSelected(false);
-        binding.avMenu3Rel.setSelected(false);
+        mBinding.avMenu1Rel.setSelected(false);
+        mBinding.avMenu2Rel.setSelected(false);
+        mBinding.avMenu3Rel.setSelected(false);
         switch (type) {
             case 1:
-                binding.avMenu1Rel.setSelected(true);
+                mBinding.avMenu1Rel.setSelected(true);
                 break;
             case 2:
-                binding.avMenu2Rel.setSelected(true);
+                mBinding.avMenu2Rel.setSelected(true);
                 break;
             case 3:
-                binding.avMenu3Rel.setSelected(true);
+                mBinding.avMenu3Rel.setSelected(true);
                 break;
         }
     }
 
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
 
+    }
+
+    @Override
+    public void setActionBar() {
+        super.setActionBar();
+        mTitle.setText("会员中心");
+    }
 }

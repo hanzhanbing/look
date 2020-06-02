@@ -4,131 +4,111 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Bundle;
 import android.provider.Settings;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.Toast;
-
-import java.io.File;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.FileProvider;
-import androidx.databinding.DataBindingUtil;
-import cn.looksafe.client.R;
-import cn.looksafe.client.activitys.ProtocalActivity;
-import cn.looksafe.client.beans.VersionHttp;
-import cn.looksafe.client.databinding.MeSysBinding;
-import cn.looksafe.client.models.NormalModel;
-import cn.looksafe.client.tools.AppConfig;
-import cn.looksafe.client.tools.Contents;
-import cn.looksafe.client.tools.HttpTools;
-import cn.looksafe.client.tools.SPutil;
-import cn.looksafe.client.tools.Tools;
-import cn.looksafe.client.utils.BaseActivity;
-import cn.looksafe.client.utils.HttpStatus;
+import androidx.lifecycle.ViewModelProviders;
 
-public class SysActivity extends BaseActivity {
-    MeSysBinding binding;
-    NormalModel normalModel = new NormalModel();
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.look.core.manager.SpManager;
+import com.look.core.ui.BaseActivity;
+import com.look.core.vo.ResourceListener;
+
+import java.io.File;
+
+import cn.looksafe.client.R;
+import cn.looksafe.client.beans.VersionHttp;
+import cn.looksafe.client.databinding.ActivitySettingBinding;
+import cn.looksafe.client.tools.HttpTools;
+import cn.looksafe.client.tools.Tools;
+import cn.looksafe.client.ui.activitys.ProtocalActivity;
+import cn.looksafe.client.utils.HttpCallBack;
+import cn.looksafe.client.viewmodel.SettingViewModel;
+
+@Route(path = "/setting/setting")
+public class SysActivity extends BaseActivity<ActivitySettingBinding> implements HttpCallBack {
     private boolean getVersion;//是否已获取到服务器最新版本信息
     private int versionCode;
     private String versionName;
     private String upUrl;//升级url
     private int vcodeServer;//最新版本号
+    private SettingViewModel mViewModel;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.me_sys);
-        binding.setNormalModel(normalModel);
-//        binding.msBack.setOnClickListener(this);
-        binding.msExit.setOnClickListener(this);
-        binding.msResetPwd.setOnClickListener(this);
-        binding.msCleanCache.setOnClickListener(this);
-        binding.msReportSug.setOnClickListener(this);
-        binding.msVersion.setOnClickListener(this);
-        binding.msXieyi.setOnClickListener(this);
-        binding.msPro.setOnClickListener(null);
+    protected int getLayoutId() {
+        return R.layout.activity_setting;
+    }
+
+    @Override
+    protected void init() {
         versionCode = Integer.parseInt(Tools.getAppVersionInfo(mContext).split(",")[1]);
         versionName = Tools.getAppVersionInfo(mContext).split(",")[0];
-        normalModel.setTip1("当前版本: " + versionName);
-        normalModel.setTip3(Tools.getCacheSize());//缓存大小
-        binding.msToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        mBinding.version.setText("当前版本: " + versionName);
+        mBinding.cache.setText(Tools.getCacheSize());//缓存大小
+        mBinding.setPresenter(new Presenter());
+        mViewModel = ViewModelProviders.of(this).get(SettingViewModel.class);
+    }
+
+    private void getVersion() {
+        mViewModel.checkVersion(SpManager.getInstance(mContext).getSP("phone"))
+                .observe(this, resource -> resource.work(new ResourceListener<VersionHttp>() {
+                    @Override
+                    public void onSuccess(VersionHttp data) {
+                        vcodeServer = data.vcode;
+                        upUrl = data.vurl;
+                        if (versionCode >= vcodeServer) return;
+                        commonDialog("升级提示", "升级到最新版?", 1);
+                    }
+
+                    @Override
+                    public void onError(String msg) {
+
+                    }
+                }));
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if (!getVersion) HttpTools.getVersion(mContext, SysActivity.this);
-    }
-
-    @Override
-    public void requestFailure(int code, Object object) {
-        super.requestFailure(code, object);
-        String tip = (String) object;
-        toast(tip, AppConfig.TOAST_SHORT);
-        normalModel.setShowProgress(false);
     }
 
     @Override
     public void requestSuccess(int code, Object object, Object object2) {
-        super.requestSuccess(code, object, object2);
-        switch (code) {
-            case HttpStatus.HTTP_GET_VERSION_SUC:
-                //进行版本对比
-                VersionHttp versionHttp = (VersionHttp) object;
-                vcodeServer = versionHttp.vcode;
-                String n = versionHttp.vname;
-                upUrl = versionHttp.vurl;
-                if (vcodeServer > versionCode) {
-                    normalModel.setShowRedPoint(true);
-                }
-                break;
-            case HttpStatus.HTTP_DOWN_APK_SUC:
-                String apkUri = (String) object;
-                normalModel.setShowProgress(false);
-                installApk(apkUri);
-                break;
-        }
+
     }
 
     @Override
-    public void onClick(View v) {
-        super.onClick(v);
-        switch (v.getId()) {
-//            case R.id.ms_back:
-//                finish();
-//                break;
-            case R.id.ms_exit:
-                //清空账号，退出
-                SPutil.getInstance(mContext).setLoginpwd("");
-                Contents.getInstance().exit();
-                break;
-            case R.id.ms_reset_pwd:
-                startActivity(new Intent(mContext, ModifyPwdActivity.class));
-                break;
-            case R.id.ms_clean_cache://清除缓存
-//                Toast.makeText(mContext, "清除成功", Toast.LENGTH_SHORT).show();
-                commonDialog("清除提示", "清除缓存?", 2);
-                break;
-            case R.id.ms_report_sug:
-                startActivity(new Intent(mContext, MySuggestActivity.class));
-                break;
-            case R.id.ms_version:
-                //是否进行升级
-                if (versionCode >= vcodeServer) return;
-                commonDialog("升级提示", "升级到最新版?", 1);
-                break;
-            case R.id.ms_xieyi:
-                startActivity(new Intent(mContext, ProtocalActivity.class));
-                break;
+    public void requestFailure(int code, Object object) {
 
+    }
+
+    public class Presenter {
+        public void exit() {
+            SpManager.getInstance(mContext).removeSP("token");
+        }
+
+        public void resetPwd() {
+
+        }
+
+        public void cleanCache() {
+            commonDialog("清除提示", "清除缓存?", 2);
+        }
+
+        public void reportSug() {
+            startActivity(new Intent(mContext, MySuggestActivity.class));
+        }
+
+        public void checkVersion() {
+            getVersion();
+
+        }
+
+        public void goProtocal() {
+            startActivity(new Intent(mContext, ProtocalActivity.class));
         }
     }
 
@@ -156,12 +136,10 @@ public class SysActivity extends BaseActivity {
                             Toast.makeText(mContext, "下载地址有误", Toast.LENGTH_SHORT).show();
                             return;
                         }
-                        normalModel.setShowProgress(true);
-                        HttpTools.downApk(upUrl, Tools.getNameFromURL(upUrl), mContext, normalModel, SysActivity.this);
+                        HttpTools.downApk(upUrl, Tools.getNameFromURL(upUrl), mContext, null, SysActivity.this);
                         break;
                     case 2://清除缓存
                         Tools.cleanAllCache(mContext);
-                        normalModel.setTip3("");
                         Toast.makeText(mContext, "清除成功", Toast.LENGTH_SHORT).show();
                         break;
                 }
@@ -207,5 +185,10 @@ public class SysActivity extends BaseActivity {
         Intent intent = new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         mContext.startActivity(intent);
+    }
+
+    @Override
+    public void setActionBar() {
+        mTitle.setText("系统设置");
     }
 }

@@ -43,17 +43,6 @@ public class Tools {
         return res;
     }
 
-    public static ArrayList<VideosBean.MainVideo> getTypeVideoList(ArrayList<VideosBean.MainVideo> srcList, int typeid) {
-        ArrayList<VideosBean.MainVideo> list = new ArrayList<>();
-        for (int i = 0; i < srcList.size(); i++) {
-            VideosBean.MainVideo mainVideo = srcList.get(i);
-            if (typeid == mainVideo.vtypeid || typeid == -1) {
-                list.add(mainVideo);
-            }
-        }
-        return list;
-    }
-
     //-----------------------------
     public static String getTimeFormat(String timeStr) {
         long time = Long.parseLong(timeStr);

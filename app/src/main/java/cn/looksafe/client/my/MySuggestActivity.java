@@ -1,63 +1,56 @@
 package cn.looksafe.client.my;
 
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Toast;
+import android.text.TextUtils;
 
-import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProviders;
+
+import com.look.core.manager.SpManager;
+import com.look.core.ui.BaseActivity;
+import com.look.core.vo.ResourceListener;
+
 import cn.looksafe.client.R;
-import cn.looksafe.client.databinding.MySugBinding;
-import cn.looksafe.client.tools.HttpTools;
-import cn.looksafe.client.utils.BaseActivity;
-import cn.looksafe.client.utils.HttpStatus;
+import cn.looksafe.client.databinding.ActivityFeedbackBinding;
+import cn.looksafe.client.viewmodel.SuggestViewModel;
 
-public class MySuggestActivity extends BaseActivity {
-    MySugBinding binding;
+public class MySuggestActivity extends BaseActivity<ActivityFeedbackBinding> {
+
+    private SuggestViewModel mViewModel;
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_feedback;
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.my_sug);
-//        binding.msBack.setOnClickListener(this);
-        binding.msSub.setOnClickListener(this);
-        binding.msToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
+    protected void init() {
+        mViewModel = ViewModelProviders.of(this).get(SuggestViewModel.class);
+        mBinding.setPresenter(new Presenter());
+    }
+
+    public class Presenter {
+        public void submit() {
+            String content = mBinding.edit.getText().toString();
+            if (TextUtils.isEmpty(content)){
+                toast("请输入内容");
+                return;
             }
-        });
-    }
+            mViewModel.suggest(SpManager.getInstance(mContext).getSP("phone"),content)
+                    .observe(MySuggestActivity.this,resource->resource.work(new ResourceListener<Void>() {
+                        @Override
+                        public void onSuccess(Void data) {
+                            toast("提交成功");
+                            finish();
+                        }
 
+                        @Override
+                        public void onError(String msg) {
 
-    @Override
-    public void onClick(View v) {
-        super.onClick(v);
-        switch (v.getId()) {
-//            case R.id.ms_back:
-//                finish();
-//                break;
-            case R.id.ms_sub:
-                String con = binding.msEdit.getText().toString().trim();
-                if (con.length() < 1) return;
-                HttpTools.suggest(mContext, MySuggestActivity.this, con);
-                break;
+                        }
+                    }));
         }
     }
 
     @Override
-    public void requestSuccess(int code, Object object, Object object2) {
-        super.requestSuccess(code, object, object2);
-        switch (code) {
-            case HttpStatus.HTTP_SUGGEST_SUC:
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(mContext, "提交成功", Toast.LENGTH_LONG).show();
-                        finish();
-                    }
-                });
-
-                break;
-        }
+    public void setActionBar() {
+        mTitle.setText("意见反馈");
     }
 }
