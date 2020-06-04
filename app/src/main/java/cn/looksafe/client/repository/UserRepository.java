@@ -5,15 +5,20 @@ import androidx.lifecycle.LiveData;
 
 import com.look.core.http.ApiResponse;
 import com.look.core.http.BaseResponse;
+import com.look.core.http.HttpResponse;
 import com.look.core.repository.NetworkOnlyResource;
 import com.look.core.vo.Resource;
 
 import cn.looksafe.client.beans.EyeLogHttp;
 import cn.looksafe.client.beans.HttpBean;
 import cn.looksafe.client.beans.PointHttp;
+import cn.looksafe.client.beans.UploadFile;
 import cn.looksafe.client.beans.UserInfo;
 import cn.looksafe.client.beans.VersionHttp;
+import io.reactivex.Observable;
+import okhttp3.MultipartBody;
 import retrofit2.http.Field;
+import retrofit2.http.Part;
 
 /**
  * Created by huyg on 2020-02-11.
@@ -93,12 +98,12 @@ public class UserRepository extends ApiRepository {
         }.asLiveData();
     }
 
-    public LiveData<Resource<UserInfo>> getUserInfo() {
+    public LiveData<Resource<UserInfo>> getUserInfo(String loginname) {
         return new NetworkOnlyResource<UserInfo>() {
             @NonNull
             @Override
             protected LiveData<ApiResponse<UserInfo>> createCall() {
-                return apiInterface.getUserInfo("");
+                return apiInterface.getUserInfo(loginname);
             }
         }.asLiveData();
     }
@@ -133,4 +138,27 @@ public class UserRepository extends ApiRepository {
             }
         }.asLiveData();
     }
+
+    public LiveData<Resource<BaseResponse>> modifyUserInfo(String loginname, String nickName,String headImg) {
+        return new NetworkOnlyResource<BaseResponse>() {
+
+            @NonNull
+            @Override
+            protected LiveData<ApiResponse<BaseResponse>> createCall() {
+                return apiInterface.modifyUserInfo(loginname, nickName,headImg);
+            }
+        }.asLiveData();
+    }
+
+    public LiveData<Resource<UploadFile>> upload(MultipartBody.Part file){
+        return new NetworkOnlyResource<UploadFile>(){
+
+            @NonNull
+            @Override
+            protected LiveData<ApiResponse<UploadFile>> createCall() {
+                return apiInterface.upload(file);
+            }
+        }.asLiveData();
+    }
+
 }

@@ -30,12 +30,14 @@
 
 
                 <ImageView
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/qb_px_12"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
-                    android:src="@mipmap/ic_user_avatar" />
+                    android:src="@mipmap/ic_user_avatar"
+                    />
 
                 <com.ruffian.library.widget.RLinearLayout
                     android:layout_width="0dp"
@@ -45,7 +47,8 @@
                     android:layout_weight="1"
                     android:orientation="horizontal"
                     app:background_normal="@color/white"
-                    app:corner_radius="60dp">
+                    app:corner_radius="60dp"
+                    >
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -70,7 +73,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/qb_px_12"
-                    android:src="@mipmap/ic_nofication" />
+                    android:src="@mipmap/ic_nofication"
+                    android:visibility="gone"/>
             </LinearLayout>
 
         </com.ruffian.library.widget.RLinearLayout>

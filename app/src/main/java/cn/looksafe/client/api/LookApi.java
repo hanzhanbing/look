@@ -11,13 +11,20 @@ import cn.looksafe.client.beans.EyeLogHttp;
 import cn.looksafe.client.beans.HttpBean;
 import cn.looksafe.client.beans.LoopImgHttp;
 import cn.looksafe.client.beans.PointHttp;
+import cn.looksafe.client.beans.UploadFile;
 import cn.looksafe.client.beans.UserInfo;
 import cn.looksafe.client.beans.VersionHttp;
 import cn.looksafe.client.beans.VideosBean;
+import io.reactivex.Observable;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
+import retrofit2.http.Url;
 
 /**
  * Created by huyg on 2020-05-27.
@@ -51,6 +58,7 @@ public interface LookApi {
 
     /**
      * 老用户获取验证码
+     *
      * @param phone
      * @return
      */
@@ -186,6 +194,7 @@ public interface LookApi {
 
     /**
      * 密码修改
+     *
      * @param loginname
      * @param prePwd
      * @param newPwd
@@ -194,12 +203,13 @@ public interface LookApi {
     @FormUrlEncoded
     @POST("resetPwdApp")
     LiveData<ApiResponse<BaseResponse>> resetPwd(@Field("loginname") String loginname,
-                                         @Field("prePwd") String prePwd,
-                                         @Field("newPwd") String newPwd);
+                                                 @Field("prePwd") String prePwd,
+                                                 @Field("newPwd") String newPwd);
 
 
     /**
      * 获取轮播图
+     *
      * @param loginname
      * @return
      */
@@ -210,16 +220,18 @@ public interface LookApi {
 
     /**
      * 获取用户信息
-     * @param param
+     *
+     * @param loginname
      * @return
      */
     @FormUrlEncoded
     @POST("getUserInfoApp")
-    LiveData<ApiResponse<UserInfo>> getUserInfo(@Field("param") String param);
+    LiveData<ApiResponse<UserInfo>> getUserInfo(@Field("loginname") String loginname);
 
 
     /**
      * 注册
+     *
      * @param phone
      * @param pwd
      * @param code
@@ -230,4 +242,37 @@ public interface LookApi {
     LiveData<ApiResponse<BaseResponse>> register(@Field("loginname") String phone,
                                                  @Field("pwd") String pwd,
                                                  @Field("smscode") String code);
+
+
+    /**
+     * 更新用户信息
+     * @param loginname
+     * @param nickName
+     * @param headImg
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("modifyUserInfoApp")
+    LiveData<ApiResponse<BaseResponse>> modifyUserInfo(@Field("loginname") String loginname,
+                                                       @Field("nickname") String nickName,
+                                                        @Field("headimg") String headImg);
+
+
+    /**
+     * 上传头像
+     * @param file
+     * @return
+     */
+    @Multipart
+    @POST("uploadFileApp")
+    LiveData<ApiResponse<UploadFile>> upload(@Part MultipartBody.Part file);
+
+
+    @FormUrlEncoded
+    @POST("playtimesApp")
+    LiveData<ApiResponse<BaseResponse>> addPlayTime(@Field("loginname") String loginname,
+                                                    @Field("vid") int vid);
+
+
+
 }

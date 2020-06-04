@@ -78,4 +78,5 @@ public class SplashActivity extends SimpleActivity<ActivitySplashBinding> {
     public void setActionBar() {
         mToolbar.setVisibility(View.GONE);
     }
+
 }

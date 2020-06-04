@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:orientation="horizontal"
+    android:background="@color/white">
+
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:orientation="vertical">
+
+
+        <View
+            android:id="@+id/item_top_view"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:background="@color/_D4DCE7" />
+
+
+        <ImageView
+            android:id="@+id/item_track_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_plan_ok"
+            android:layout_marginTop="@dimen/qb_px_2"
+            android:layout_marginBottom="@dimen/qb_px_2"/>
+
+        <View
+            android:id="@+id/item_bottom_view"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:background="@color/_D4DCE7" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="@dimen/qb_px_16">
+
+        <TextView
+            android:id="@+id/item_video_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FF344356"
+            android:textSize="20sp"
+            />
+
+        <TextView
+            android:id="@+id/item_video_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FF344356"
+            android:textSize="14sp"
+            android:layout_marginTop="@dimen/qb_px_2"
+            />
+
+    </LinearLayout>
+
+
+</LinearLayout>

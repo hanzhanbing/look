@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 
 import com.look.core.http.ApiResponse;
+import com.look.core.http.BaseResponse;
 import com.look.core.repository.NetworkOnlyResource;
 import com.look.core.vo.Resource;
 
@@ -80,12 +81,22 @@ public class VideoRepository extends ApiRepository {
         }.asLiveData();
     }
 
-    public LiveData<Resource<LoopImgHttp>> getLoopImgs(String loginname){
-        return new NetworkOnlyResource<LoopImgHttp>(){
+    public LiveData<Resource<LoopImgHttp>> getLoopImgs(String loginname) {
+        return new NetworkOnlyResource<LoopImgHttp>() {
             @NonNull
             @Override
             protected LiveData<ApiResponse<LoopImgHttp>> createCall() {
                 return apiInterface.getLoopImgs(loginname);
+            }
+        }.asLiveData();
+    }
+
+    public LiveData<Resource<BaseResponse>> addPlayTime(String loginname, int vid) {
+        return new NetworkOnlyResource<BaseResponse>() {
+            @NonNull
+            @Override
+            protected LiveData<ApiResponse<BaseResponse>> createCall() {
+                return apiInterface.addPlayTime(loginname, vid);
             }
         }.asLiveData();
     }

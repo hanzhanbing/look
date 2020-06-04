@@ -16,6 +16,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.look.core.manager.AppManager;
 import com.look.core.util.StatusBarUtils;
 
 import java.util.ArrayList;
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AppManager.getAppManager().addActivity(this);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color._FDB232));
         StatusBarUtils.setLightStatusBar(this, true, false);
@@ -176,7 +178,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         switch (keyCode) {
             case KeyEvent.KEYCODE_BACK://返回
                 if (System.currentTimeMillis() - backtime < 2000) {
+                    AppManager.getAppManager().finishAllActivity();
                     finish();
+                    System.exit(0);
                 } else {
                     backtime = System.currentTimeMillis();
                 }
@@ -185,4 +189,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         return false;
     }
 
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        AppManager.getAppManager().finishActivity(this);
+    }
 }

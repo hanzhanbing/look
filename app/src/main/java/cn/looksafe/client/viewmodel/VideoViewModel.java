@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 
 import com.look.core.http.ApiResponse;
+import com.look.core.http.BaseResponse;
 import com.look.core.repository.NetworkOnlyResource;
 import com.look.core.viewmodel.BaseViewModel;
 import com.look.core.vo.Resource;
@@ -56,4 +57,7 @@ public class VideoViewModel extends BaseViewModel {
         return mVideoRepository.getLoopImgs(loginname);
     }
 
+    public LiveData<Resource<BaseResponse>> addPlayTime(String loginname, int vid) {
+        return mVideoRepository.addPlayTime(loginname,vid);
+    }
 }

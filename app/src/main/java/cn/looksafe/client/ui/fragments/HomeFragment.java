@@ -19,7 +19,7 @@ import cn.looksafe.client.databinding.FragmentHomeBinding;
 public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
 
 
-    private String[] tabs = {"推荐","快乐学习", "轻松一刻", "公益视训","教学广场"};
+    private String[] tabs = {"推荐","公益视训","快乐学习", "轻松一刻" ,"教学广场"};
 
     private List<Fragment> mFragments;
     public static HomeFragment newInstance() {

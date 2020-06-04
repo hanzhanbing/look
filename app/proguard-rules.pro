@@ -101,12 +101,17 @@ public static ** valueOf(java.lang.String);
     @butterknife.* <methods>;
 }
 
-# Glide
--keep public class * implements com.bumptech.glide.module.GlideModule
--keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** {
-  **[] $VALUES;
-  public *;
-}
+
+# ARouter
+-keep public class com.alibaba.android.arouter.routes.**{*;}
+-keep public class com.alibaba.android.arouter.facade.**{*;}
+-keep class * implements com.alibaba.android.arouter.facade.template.ISyringe{*;}
+
+# If you use the byType method to obtain Service, add the following rules to protect the interface:
+-keep interface * implements com.alibaba.android.arouter.facade.template.IProvider
+
+# If single-type injection is used, that is, no interface is defined to implement IProvider, the following rules need to be added to protect the implementation
+# -keep class * implements com.alibaba.android.arouter.facade.template.IProvider
 
 
 # 保留我们自定义控件（继承自View）不被混淆
@@ -189,4 +194,44 @@ public static ** valueOf(java.lang.String);
 -keep class com.google.protobuf.nano.** {*;}
 -dontwarn com.tencent.bugly.**
 -keep public class com.tencent.bugly.**{*;}
+
+
+
+#retrofit2  混淆
+-dontwarn javax.annotation.**
+-dontwarn javax.inject.**
+# OkHttp3
+-dontwarn okhttp3.logging.**
+-keep class okhttp3.internal.**{*;}
+-dontwarn okio.**
+# Retrofit
+-dontwarn retrofit2.**
+-keep class retrofit2.** { *; }
+-keepattributes Signature
+-keepattributes Exceptions
+# RxJava RxAndroid
+-dontwarn sun.misc.**
+-keepclassmembers class rx.internal.util.unsafe.*ArrayQueue*Field* {
+    long producerIndex;
+    long consumerIndex;
+}
+-keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueProducerNodeRef {
+    rx.internal.util.atomic.LinkedQueueNode producerNode;
+}
+-keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueConsumerNodeRef {
+    rx.internal.util.atomic.LinkedQueueNode consumerNode;
+}
+
+# Gson
+-keep class com.google.gson.stream.** { *; }
+
+#百度地图
+-keep class com.baidu.** {*;}
+-keep class mapsdkvi.com.** {*;}
+-dontwarn com.baidu.**
+
+
+-keep com.look.core.bean.** {*;}
+-keep com.look.core.http.** {*;}
+-keep com.looksafe.client.beans.** {*;}
 

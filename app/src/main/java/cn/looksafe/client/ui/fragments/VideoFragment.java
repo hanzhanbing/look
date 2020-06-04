@@ -119,7 +119,7 @@ public class VideoFragment extends BaseFragment<FragmentVideoBinding> implements
     private void initRecycler() {
         mAdapter = new VideoAdapter(R.layout.item_video, mDatas);
         mBinding.recycler.setAdapter(mAdapter);
-        mBinding.recycler.addItemDecoration(new DividerGridItemDecoration(ConvertUtils.dp2px(16), getResources().getColor(R.color._f2f2f2)));
+        mBinding.recycler.addItemDecoration(new DividerGridItemDecoration(ConvertUtils.dp2px(8), getResources().getColor(R.color._f2f2f2)));
         mAdapter.setOnItemClickListener(this);
     }
 
@@ -130,22 +130,22 @@ public class VideoFragment extends BaseFragment<FragmentVideoBinding> implements
         mBinding.refresh.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-                //0:推荐;1:快乐学习;2:轻松一刻;3:公益视训;4:教学广场
+                //0:推荐;1.公益视训;2:快乐学习;3:轻松一刻;;4:教学广场
                 switch (type) {
                     case 0:
                         getHotVideo();
                         break;
                     case 1:
-                        getHappyLearnApp();
+                        getFreeApp();
                         break;
                     case 2:
-                        getRelaxApp();
+                        getHappyLearnApp();
                         break;
                     case 3:
-                        getLovelyApp();
+                        getRelaxApp();
                         break;
                     case 4:
-                        getFreeApp();
+                        getLovelyApp();
                         break;
                 }
             }
@@ -157,8 +157,8 @@ public class VideoFragment extends BaseFragment<FragmentVideoBinding> implements
                 .observe(this, resource -> resource.work(new ResourceListener<VideosBean>() {
                     @Override
                     public void onSuccess(VideosBean data) {
-                        mAdapter.setNewData(data.getMainVideosList());
                         mBinding.refresh.finishRefresh();
+                        mAdapter.setNewData(data.getMainVideosList());
                     }
 
                     @Override
@@ -174,8 +174,9 @@ public class VideoFragment extends BaseFragment<FragmentVideoBinding> implements
                 .observe(this, resource -> resource.work(new ResourceListener<VideosBean>() {
                     @Override
                     public void onSuccess(VideosBean data) {
-                        mAdapter.setNewData(data.getMainVideosList());
                         mBinding.refresh.finishRefresh();
+                        mAdapter.setNewData(data.getMainVideosList());
+
                     }
 
                     @Override
@@ -191,8 +192,9 @@ public class VideoFragment extends BaseFragment<FragmentVideoBinding> implements
                 .observe(this, resource -> resource.work(new ResourceListener<VideosBean>() {
                     @Override
                     public void onSuccess(VideosBean data) {
-                        mAdapter.setNewData(data.getMainVideosList());
                         mBinding.refresh.finishRefresh();
+                        mAdapter.setNewData(data.getMainVideosList());
+
                     }
 
                     @Override

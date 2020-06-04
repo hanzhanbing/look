@@ -32,6 +32,7 @@ public class UnityPlayerActivity extends Activity implements IUnityPlayerLifecyc
     private FrameLayout mRoot;
     private static final String TAG = "UnityPlayerActivity";
 
+
     // don't change the name of this variable; referenced from native code
     // Override this in your custom UnityPlayerActivity to tweak the command line arguments passed to the Unity Android Player
     // The command line arguments are passed as a string, separated by spaces
@@ -97,6 +98,7 @@ public class UnityPlayerActivity extends Activity implements IUnityPlayerLifecyc
 
     public void finishAc() {
         finish();
+        setResult(999);
         android.os.Process.killProcess(android.os.Process.myPid());
     }
 
@@ -125,6 +127,7 @@ public class UnityPlayerActivity extends Activity implements IUnityPlayerLifecyc
     // Quit Unity
     @Override
     protected void onDestroy() {
+
         mUnityPlayer.destroy();
         super.onDestroy();
     }

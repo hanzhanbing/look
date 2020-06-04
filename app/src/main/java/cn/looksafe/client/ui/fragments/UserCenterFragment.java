@@ -1,9 +1,12 @@
 package cn.looksafe.client.ui.fragments;
 
+import android.text.TextUtils;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.look.core.manager.GlideManager;
 import com.look.core.manager.SpManager;
 import com.look.core.ui.BaseFragment;
 import com.look.core.vo.ResourceListener;
@@ -43,6 +46,7 @@ public class UserCenterFragment extends BaseFragment<FragmentUserCenterBinding> 
 
     private void initView() {
         initRefresh();
+
     }
 
     private void initRefresh() {
@@ -50,6 +54,7 @@ public class UserCenterFragment extends BaseFragment<FragmentUserCenterBinding> 
         mBinding.refresh.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                mBinding.phone.setText(SpManager.getInstance(mContext).getSP("phone"));
                 getUserInfo();
             }
         });
@@ -57,20 +62,26 @@ public class UserCenterFragment extends BaseFragment<FragmentUserCenterBinding> 
 
 
     private void getUserInfo() {
-        mViewModel.getUserInfo().observe(this, resource -> resource.work(new ResourceListener<UserInfo>() {
+        mViewModel.getUserInfo(SpManager.getInstance(mContext).getSP("phone")).observe(this, resource -> resource.work(new ResourceListener<UserInfo>() {
             @Override
             public void onSuccess(UserInfo data) {
                 mBinding.refresh.finishRefresh();
-                mBinding.nickName.setText(data.getNickname());
-                mBinding.realName.setText(data.getRealname());
-                if (data.getIsvip() == 1) {//会员
-                    SpManager.getInstance(mContext).putSP("vip",true);
-                    mBinding.vipLayout.setBackgroundResource(R.drawable.ic_vip);
-                    mBinding.vipDate.setText(data.getVipexpdate()+"到期");
-                } else {//非会员
-                    SpManager.getInstance(mContext).putSP("vip",false);
-                    mBinding.vipLayout.setBackgroundResource(R.drawable.ic_no_vip);
-                    mBinding.vipDate.setText(data.getVipexpdate()+"开通会员立享精彩");
+
+                UserInfo.UserinfoBean userinfoBean = data.getUserinfo();
+                if (!TextUtils.isEmpty(userinfoBean.getNickname())) {
+                    mBinding.realName.setText(userinfoBean.getNickname());
+                }
+                GlideManager.getInstance().displayNetImageWithCircle(mContext, userinfoBean.getHeadimg(), mBinding.avatar, getResources().getDrawable(R.mipmap.ic_user_avatar));
+                if (userinfoBean!=null) {
+                    if (userinfoBean.getIsvip() == 1) {//会员
+                        SpManager.getInstance(mContext).putSP("vip", true);
+                        mBinding.vipBg.setImageResource(R.mipmap.ic_vip);
+                        mBinding.vipDate.setText(userinfoBean.getVipexpdate() + "到期");
+                    } else {//非会员
+                        SpManager.getInstance(mContext).putSP("vip", false);
+                        mBinding.vipBg.setImageResource(R.mipmap.ic_no_vip);
+                        mBinding.vipDate.setText("开通会员立享精彩");
+                    }
                 }
             }
 
@@ -104,6 +115,9 @@ public class UserCenterFragment extends BaseFragment<FragmentUserCenterBinding> 
             ARouter.getInstance().build("/user/vip").navigation();
         }
 
+        public void goUserInfo(){
+            ARouter.getInstance().build("/user/info").navigation();
+        }
 
     }
 }

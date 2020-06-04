@@ -39,7 +39,7 @@ import cn.looksafe.client.viewmodel.FindViewModel;
  */
 public class FindFragment extends BaseFragment<FragmentFindBinding> implements BaseQuickAdapter.OnItemClickListener, BaseQuickAdapter.OnItemChildClickListener {
 
-    private String[] tabs = {"全部", "服务店", "学校", "医院"};
+    private String[] tabs = {"全部", "服务点", "学校", "医院"};
     private FindViewModel mViewModel;
     private FindAdapter mAdapter;
     private BaiduMap mBaiduMap;
@@ -139,7 +139,7 @@ public class FindFragment extends BaseFragment<FragmentFindBinding> implements B
                         case "全部":
                             mAdapter.setNewData(mDatas);
                             break;
-                        case "服务店":
+                        case "服务点":
                             mAdapter.setNewData(mDatas1);
                             break;
                         case "学校":

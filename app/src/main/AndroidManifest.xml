@@ -56,7 +56,6 @@
 
         <activity android:name=".ui.activitys.LoginActivity"
             android:screenOrientation="portrait"
-            android:launchMode="singleTask"
             />
         <activity
             android:name=".ui.activitys.GSYVideoActivity"
@@ -79,7 +78,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activitys.MainActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask"
+            />
         <activity
             android:name=".ui.activitys.ModifyPwdActivity"
             android:screenOrientation="portrait" />
@@ -91,9 +92,6 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activitys.VideoDetailActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activitys.QsActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activitys.RegisterActivity"
@@ -111,6 +109,9 @@
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
             android:launchMode="singleTop"/>
+
+        <activity android:name=".ui.activitys.UserInfoActivity"
+            android:screenOrientation="portrait" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

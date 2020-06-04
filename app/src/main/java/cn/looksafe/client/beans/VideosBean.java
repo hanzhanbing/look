@@ -80,6 +80,7 @@ public class VideosBean {
         private int vtypeid;
         private String vtypename;
         private String vurl;
+        private int vtime;
         private List<SectionBean> sectionlist;
 
         public String getAdminname() {
@@ -184,6 +185,14 @@ public class VideosBean {
 
         public void setVurl(String vurl) {
             this.vurl = vurl;
+        }
+
+        public int getVtime() {
+            return vtime;
+        }
+
+        public void setVtime(int vtime) {
+            this.vtime = vtime;
         }
 
         public List<SectionBean> getSectionlist() {

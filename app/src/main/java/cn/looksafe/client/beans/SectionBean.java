@@ -25,10 +25,11 @@ public class SectionBean implements Comparable<SectionBean>{
     private String surl;
     private int vtime;
 
-    public SectionBean(int ordernum, int isreal, String surl) {
+    public SectionBean(int ordernum, int isreal, String surl,int vtime) {
         this.ordernum = ordernum;
         this.isreal = isreal;
         this.surl = surl;
+        this.vtime = vtime;
     }
 
     public String getAdminname() {

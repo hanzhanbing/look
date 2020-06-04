@@ -7,126 +7,172 @@ public class UserInfo {
 
 
     /**
-     * money : 0
-     * provincecode : 330000
-     * citycode : 330781
-     * addrcity : 浙江金华兰溪
-     * sex : 1
-     * addrdetail : 某某村
-     * nickname : 测试
-     * vipexpdate : 20210525
-     * age : 11
-     * email : 378@qq.com
-     * isvip : 1
-     * realname : 真名
+     * msg :
+     * code : 0
+     * userinfo : {"money":0,"provincecode":0,"vipexpdate":20210521,"isvip":1}
      */
 
-    private int money;
-    private int provincecode;
-    private int citycode;
-    private String addrcity;
-    private int sex;
-    private String addrdetail;
-    private String nickname;
-    private int vipexpdate;
-    private int age;
-    private String email;
-    private int isvip;
-    private String realname;
+    private String msg;
+    private int code;
+    private UserinfoBean userinfo;
 
-    public int getMoney() {
-        return money;
+    public String getMsg() {
+        return msg;
     }
 
-    public void setMoney(int money) {
-        this.money = money;
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 
-    public int getProvincecode() {
-        return provincecode;
+    public int getCode() {
+        return code;
     }
 
-    public void setProvincecode(int provincecode) {
-        this.provincecode = provincecode;
+    public void setCode(int code) {
+        this.code = code;
     }
 
-    public int getCitycode() {
-        return citycode;
+    public UserinfoBean getUserinfo() {
+        return userinfo;
     }
 
-    public void setCitycode(int citycode) {
-        this.citycode = citycode;
+    public void setUserinfo(UserinfoBean userinfo) {
+        this.userinfo = userinfo;
     }
 
-    public String getAddrcity() {
-        return addrcity;
-    }
+    public static class UserinfoBean {
 
-    public void setAddrcity(String addrcity) {
-        this.addrcity = addrcity;
-    }
+        /**
+         * money : 0
+         * provincecode : 330000
+         * citycode : 330781
+         * addrcity : 浙江金华兰溪
+         * sex : 1
+         * addrdetail : 某某村
+         * nickname : 测试
+         * vipexpdate : 20210525
+         * age : 11
+         * email : 378@qq.com
+         * isvip : 1
+         * realname : 真名
+         */
 
-    public int getSex() {
-        return sex;
-    }
+        private int money;
+        private int provincecode;
+        private int citycode;
+        private String addrcity;
+        private int sex;
+        private String addrdetail;
+        private String nickname;
+        private int vipexpdate;
+        private int age;
+        private String email;
+        private int isvip;
+        private String realname;
+        private String headimg;
 
-    public void setSex(int sex) {
-        this.sex = sex;
-    }
+        public int getMoney() {
+            return money;
+        }
 
-    public String getAddrdetail() {
-        return addrdetail;
-    }
+        public void setMoney(int money) {
+            this.money = money;
+        }
 
-    public void setAddrdetail(String addrdetail) {
-        this.addrdetail = addrdetail;
-    }
+        public int getProvincecode() {
+            return provincecode;
+        }
 
-    public String getNickname() {
-        return nickname;
-    }
+        public void setProvincecode(int provincecode) {
+            this.provincecode = provincecode;
+        }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
+        public int getCitycode() {
+            return citycode;
+        }
 
-    public int getVipexpdate() {
-        return vipexpdate;
-    }
+        public void setCitycode(int citycode) {
+            this.citycode = citycode;
+        }
 
-    public void setVipexpdate(int vipexpdate) {
-        this.vipexpdate = vipexpdate;
-    }
+        public String getAddrcity() {
+            return addrcity;
+        }
 
-    public int getAge() {
-        return age;
-    }
+        public void setAddrcity(String addrcity) {
+            this.addrcity = addrcity;
+        }
 
-    public void setAge(int age) {
-        this.age = age;
-    }
+        public int getSex() {
+            return sex;
+        }
 
-    public String getEmail() {
-        return email;
-    }
+        public void setSex(int sex) {
+            this.sex = sex;
+        }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+        public String getAddrdetail() {
+            return addrdetail;
+        }
 
-    public int getIsvip() {
-        return isvip;
-    }
+        public void setAddrdetail(String addrdetail) {
+            this.addrdetail = addrdetail;
+        }
 
-    public void setIsvip(int isvip) {
-        this.isvip = isvip;
-    }
+        public String getNickname() {
+            return nickname;
+        }
 
-    public String getRealname() {
-        return realname;
-    }
+        public void setNickname(String nickname) {
+            this.nickname = nickname;
+        }
 
-    public void setRealname(String realname) {
-        this.realname = realname;
+        public int getVipexpdate() {
+            return vipexpdate;
+        }
+
+        public void setVipexpdate(int vipexpdate) {
+            this.vipexpdate = vipexpdate;
+        }
+
+        public int getAge() {
+            return age;
+        }
+
+        public void setAge(int age) {
+            this.age = age;
+        }
+
+        public String getEmail() {
+            return email;
+        }
+
+        public void setEmail(String email) {
+            this.email = email;
+        }
+
+        public int getIsvip() {
+            return isvip;
+        }
+
+        public void setIsvip(int isvip) {
+            this.isvip = isvip;
+        }
+
+        public String getRealname() {
+            return realname;
+        }
+
+        public void setRealname(String realname) {
+            this.realname = realname;
+        }
+
+        public String getHeadimg() {
+            return headimg;
+        }
+
+        public void setHeadimg(String headimg) {
+            this.headimg = headimg;
+        }
     }
 }
