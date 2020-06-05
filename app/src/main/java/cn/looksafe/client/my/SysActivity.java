@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.core.content.FileProvider;
@@ -57,6 +58,7 @@ public class SysActivity extends BaseActivity<ActivitySettingBinding> {
         mBinding.cache.setText(Tools.getCacheSize());//缓存大小
         mBinding.setPresenter(new Presenter());
         mViewModel = ViewModelProviders.of(this).get(SettingViewModel.class);
+        getVersion();
     }
 
     private void getVersion() {
@@ -66,17 +68,11 @@ public class SysActivity extends BaseActivity<ActivitySettingBinding> {
                     public void onSuccess(VersionHttp data) {
                         vcodeServer = data.vcode;
                         upUrl = data.vurl;
-                        if (versionCode >= vcodeServer) return;
-                        DialogManager.getInstance().showTipDialog(SysActivity.this, "升级提示", "升级到最新版?", "确定", "取消", new DialogManager.Listener() {
-                            @Override
-                            public void onClickListener() {
-                                if (TextUtils.isEmpty(upUrl)) {
-                                    Toast.makeText(mContext, "下载地址有误", Toast.LENGTH_SHORT).show();
-                                    return;
-                                }
-                                updateApp(upUrl);
-                            }
-                        });
+                        if (versionCode >= vcodeServer){
+                            mBinding.point.setVisibility(View.GONE);
+                        }else {
+                            mBinding.point.setVisibility(View.VISIBLE);
+                        }
                     }
 
                     @Override
@@ -118,7 +114,20 @@ public class SysActivity extends BaseActivity<ActivitySettingBinding> {
         }
 
         public void checkVersion() {
-            getVersion();
+            if (versionCode >= vcodeServer){
+                toast("暂无新版本");
+                return;
+            }
+            DialogManager.getInstance().showTipDialog(SysActivity.this, "升级提示", "升级到最新版?", "确定", "取消", new DialogManager.Listener() {
+                @Override
+                public void onClickListener() {
+                    if (TextUtils.isEmpty(upUrl)) {
+                        Toast.makeText(mContext, "下载地址有误", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    updateApp(upUrl);
+                }
+            });
         }
 
         public void goProtocal() {
