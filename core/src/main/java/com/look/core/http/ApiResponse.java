@@ -24,10 +24,10 @@ public class ApiResponse<T> {
                 if (body.isSuccess()) {
                     return new ApiSuccessResponse(body.getData());
                 } else if (body.isAuthFail()){
-                    ARouter.getInstance()
-                            .build("/user/login")
-                            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                            .navigation();
+//                    ARouter.getInstance()
+//                            .build("/user/login")
+//                            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+//                            .navigation();
                     return new ApiErrorResponse(body.getCode(),body.getData(), body.getMsg());
                 } else {
                     return new ApiErrorResponse(body.getCode(),body.getData(), body.getMsg());

@@ -10,6 +10,7 @@ import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.look.core.manager.SpManager;
 
 import java.io.File;
 import java.io.IOException;
@@ -32,6 +33,7 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import rx.internal.util.unsafe.SpmcArrayQueue;
 
 public class HttpTools {
 
@@ -183,7 +185,7 @@ public class HttpTools {
                         case HTTP_PLUS_PLAY:
                             break;
                         case HTTP_GET_VIP_DATE:
-                            Contents.getInstance().getUserinfo().setVipexp(httpBean.getVipexp());
+                            SpManager.getInstance(context).putSP("date", httpBean.getVipexp());
                             httpCallBack.requestSuccess(HttpStatus.HTTP_GET_VIP_DATE_SUC, httpBean, null);
                             break;
                         case HTTP_GET_MY_ORDERS:
@@ -252,75 +254,6 @@ public class HttpTools {
         });
     }
 
-    /**
-     * 密码登录
-     *
-     * @param context
-     * @param loginname
-     * @param pwd
-     * @param httpCallBack
-     */
-    public static synchronized void login(Context context, String loginname, String pwd, HttpCallBack httpCallBack) {
-        String url = AppConfig.SERVER + "loginpwdApp" + "?loginname=" + loginname + "&pwd=" + pwd;
-        Contents.getInstance().setLoginname(loginname);
-        getHttp(context, url, HTTP_LOGIN, httpCallBack);
-    }
-
-    /**
-     * 获取验证码
-     *
-     * @param context
-     * @param loginname
-     * @param httpCallBack
-     */
-    public static synchronized void getSmsCode(Context context, String loginname, HttpCallBack httpCallBack) {
-        String url = AppConfig.SERVER + "getSmsCodeRegisterApp" + "?loginname=" + loginname;
-        getHttp(context, url, HTTP_GET_CODE, httpCallBack);
-    }
-
-    /**
-     * 老用户获取验证码
-     *
-     * @param context
-     * @param loginname
-     * @param httpCallBack
-     */
-    public static synchronized void getSmsCodeUser(Context context, String loginname, HttpCallBack httpCallBack) {
-        String url = AppConfig.SERVER + "getSmsCodeUserApp" + "?loginname=" + loginname;
-        getHttp(context, url, HTTP_GET_CODE_USER, httpCallBack);
-    }
-
-
-    /**
-     * 注册登录
-     *
-     * @param context
-     * @param loginname
-     * @param pwd
-     * @param smsCode
-     * @param httpCallBack
-     */
-    public static synchronized void registerLogin(Context context, String loginname, String pwd, String smsCode, HttpCallBack httpCallBack) {
-        String url = AppConfig.SERVER + "loginRegisterApp" + "?loginname=" + loginname + "&pwd=" + pwd + "&smscode=" + smsCode;
-        Contents.getInstance().setLoginname(loginname);
-        getHttp(context, url, HTTP_REGISTER_LOGIN, httpCallBack);
-    }
-
-    /**
-     * 新密码登录
-     *
-     * @param context
-     * @param loginname
-     * @param pwd
-     * @param smsCode
-     * @param httpCallBack
-     */
-    public static synchronized void loginNewPwd(Context context, String loginname, String pwd, String smsCode, HttpCallBack httpCallBack) {
-        String url = AppConfig.SERVER + "loginUserNewPwdApp" + "?loginname=" + loginname + "&pwd=" + pwd + "&smscode=" + smsCode;
-        Contents.getInstance().setLoginname(loginname);
-        getHttp(context, url, HTTP_LOGIN_USER, httpCallBack);
-    }
-
 
     /**
      * 激活
@@ -330,90 +263,14 @@ public class HttpTools {
      * @param httpCallBack
      */
     public static synchronized void activeApp(Context context, String qrcode, HttpCallBack httpCallBack) {
-        String url = AppConfig.SERVER + "activeApp" + "?loginname=" + Contents.getInstance().getLoginname() + "&acode=" + qrcode + "&token=" + Contents.getInstance().getToken();
+        String url = AppConfig.SERVER + "activeApp" + "?loginname=" + SpManager.getInstance(context).getSP("phone") + "&acode=" + qrcode + "&token=" + SpManager.getInstance(context).getSP("token");
         getHttp(context, url, HTTP_ACTIVE_APP, httpCallBack);
     }
 
-    /**
-     * 获取轮播图片
-     *
-     * @param context
-     * @param httpCallBack
-     */
-    public static synchronized void getLoopImgs(Context context, HttpCallBack httpCallBack) {
-        String url = AppConfig.SERVER + "getLoopImgsApp" + "?loginname=" + Contents.getInstance().getLoginname() + "&token=" + Contents.getInstance().getToken();
-        getHttp(context, url, HTTP_GET_LOOP_IMG, httpCallBack);
-    }
-
-    public static synchronized void getHotList(Context context, HttpCallBack httpCallBack) {
-        String url = AppConfig.SERVER + "getHotListApp" + "?loginname=" + Contents.getInstance().getLoginname() + "&token=" + Contents.getInstance().getToken();
-        getHttp(context, url, HTTP_GET_HOT_LIST, httpCallBack);
-
-    }
-
-    public static synchronized void getAllList(Context context, HttpCallBack httpCallBack) {
-        String url = AppConfig.SERVER + "queryVideosApp" + "?loginname=" + Contents.getInstance().getLoginname() + "&token=" + Contents.getInstance().getToken();
-        getHttp(context, url, HTTP_GET_ALL_LIST, httpCallBack);
-
-    }
-
-    /**
-     * 快乐学习
-     *
-     * @param context
-     * @param httpCallBack
-     */
-    public static synchronized void getKuaiList(Context context, HttpCallBack httpCallBack) {
-        String url = AppConfig.SERVER + "getHappyLearnApp" + "?loginname=" + Contents.getInstance().getLoginname() + "&token=" + Contents.getInstance().getToken();
-        getHttp(context, url, HTTP_GET_KUAI_LIST, httpCallBack);
-
-    }
-
-    /**
-     * 轻松一刻
-     *
-     * @param context
-     * @param httpCallBack
-     */
-    public static synchronized void getQsList(Context context, HttpCallBack httpCallBack) {
-        String url = AppConfig.SERVER + "getRelaxApp" + "?loginname=" + Contents.getInstance().getLoginname() + "&token=" + Contents.getInstance().getToken();
-        getHttp(context, url, HTTP_GET_QS_LIST, httpCallBack);
-
-    }
-
-    /**
-     * @param context
-     * @param httpCallBack
-     */
-    public static synchronized void getFreeList(Context context, HttpCallBack httpCallBack) {
-        String url = AppConfig.SERVER + "getFreeApp" + "?loginname=" + Contents.getInstance().getLoginname() + "&token=" + Contents.getInstance().getToken();
-        getHttp(context, url, HTTP_GET_MF_LIST, httpCallBack);
-
-    }
-
-
-    public static synchronized void getGyList(Context context, HttpCallBack httpCallBack) {
-        String url = AppConfig.SERVER + "getLovelyApp" + "?loginname=" + Contents.getInstance().getLoginname() + "&token=" + Contents.getInstance().getToken();
-        getHttp(context, url, HTTP_GET_GY_LIST, httpCallBack);
-
-    }
 
     public static synchronized void getPointList(Context context, HttpCallBack httpCallBack) {
         String url = AppConfig.SERVER + "queryPointsApp" + "?loginname=" + Contents.getInstance().getLoginname() + "&token=" + Contents.getInstance().getToken();
         getHttp(context, url, HTTP_GET_POINT_LIST, httpCallBack);
-
-    }
-
-    public static synchronized void getEyeList(Context context, HttpCallBack httpCallBack) {
-        String url = AppConfig.SERVER + "getEyeLogsApp" + "?loginname=" + Contents.getInstance().getLoginname() + "&token=" + Contents.getInstance().getToken();
-        getHttp(context, url, HTTP_GET_EYE_LIST, httpCallBack);
-
-    }
-
-    public static synchronized void upEyeLog(Context context, HttpCallBack httpCallBack, String lefte, String righte) {
-        String url = AppConfig.SERVER + "upEyeLogsApp" + "?loginname=" + Contents.getInstance().getLoginname() + "&token=" + Contents.getInstance().getToken()
-                + "&lefte=" + lefte + "&righte=" + righte;
-        getHttp(context, url, HTTP_UP_EYE_LOG, httpCallBack);
 
     }
 
@@ -426,15 +283,8 @@ public class HttpTools {
 
 
     public static synchronized void getViplist(Context context, HttpCallBack httpCallBack) {
-        String url = AppConfig.SERVER + "getVipListApp" + "?loginname=" + Contents.getInstance().getLoginname() + "&token=" + Contents.getInstance().getToken();
+        String url = AppConfig.SERVER + "getVipListApp" + "?loginname=" + SpManager.getInstance(context).getSP("phone") + "&token=" + SpManager.getInstance(context).getSP("token");
         getHttp(context, url, HTTP_GET_VIP_MENU, httpCallBack);
-
-    }
-
-
-    public static synchronized void getVersion(Context context, HttpCallBack httpCallBack) {
-        String url = AppConfig.SERVER + "versionApp" + "?loginname=" + Contents.getInstance().getLoginname() + "&token=" + Contents.getInstance().getToken();
-        getHttp(context, url, HTTP_GET_VERSION, httpCallBack);
 
     }
 
@@ -448,47 +298,9 @@ public class HttpTools {
      * @param menuid
      */
     public static synchronized void prePay(Context context, HttpCallBack httpCallBack, int price, int menuid) {
-        String url = AppConfig.SERVER + "wxpayApp" + "?loginname=" + Contents.getInstance().getLoginname() + "&token=" + Contents.getInstance().getToken()
+        String url = AppConfig.SERVER + "wxpayApp" + "?loginname=" + SpManager.getInstance(context).getSP("phone") + "&token=" + SpManager.getInstance(context).getSP("token")
                 + "&price=" + price + "&menuid=" + menuid;
         getHttp(context, url, HTTP_PRE_PAY, httpCallBack);
-
-    }
-
-    /**
-     * 提交意见
-     *
-     * @param context
-     * @param httpCallBack
-     * @param content
-     */
-    public static synchronized void suggest(Context context, HttpCallBack httpCallBack, String content) {
-        String url = AppConfig.SERVER + "suggestApp" + "?loginname=" + Contents.getInstance().getLoginname() + "&token=" + Contents.getInstance().getToken()
-                + "&content=" + content;
-        getHttp(context, url, HTTP_SUGGEST, httpCallBack);
-
-    }
-
-    /**
-     * @param context
-     * @param httpCallBack
-     * @param vid          根据主视频id获取整部视频信息
-     */
-    public static synchronized void getVideosByMainId(Context context, HttpCallBack httpCallBack, int vid) {
-        String url = AppConfig.SERVER + "getVideoByIdApp" + "?loginname=" + Contents.getInstance().getLoginname() + "&token=" + Contents.getInstance().getToken()
-                + "&vid=" + vid;
-        getHttp(context, url, HTTP_GET_VIDEOS_MAINID, httpCallBack);
-
-    }
-
-    /**
-     * @param context
-     * @param httpCallBack
-     * @param vid          播放次数增加
-     */
-    public static synchronized void plusPlayTimes(Context context, HttpCallBack httpCallBack, int vid) {
-        String url = AppConfig.SERVER + "playtimesApp" + "?loginname=" + Contents.getInstance().getLoginname() + "&token=" + Contents.getInstance().getToken()
-                + "&vid=" + vid;
-        getHttp(context, url, HTTP_PLUS_PLAY, httpCallBack);
 
     }
 
@@ -497,13 +309,13 @@ public class HttpTools {
      * @param httpCallBack
      */
     public static synchronized void getVipDate(Context context, HttpCallBack httpCallBack) {
-        String url = AppConfig.SERVER + "getVipDateApp" + "?loginname=" + Contents.getInstance().getLoginname() + "&token=" + Contents.getInstance().getToken();
+        String url = AppConfig.SERVER + "getVipDateApp" + "?loginname=" + SpManager.getInstance(context).getSP("phone") + "&token=" + SpManager.getInstance(context).getSP("token");
         getHttp(context, url, HTTP_GET_VIP_DATE, httpCallBack);
     }
 
 
     public static synchronized void getMyOrders(Context context, HttpCallBack httpCallBack) {
-        String url = AppConfig.SERVER + "queryMyOrdersApp" + "?loginname=" + Contents.getInstance().getLoginname() + "&token=" + Contents.getInstance().getToken();
+        String url = AppConfig.SERVER + "queryMyOrdersApp" + "?loginname=" + SpManager.getInstance(context).getSP("phone") + "&token=" + SpManager.getInstance(context).getSP("token");
         getHttp(context, url, HTTP_GET_MY_ORDERS, httpCallBack);
     }
 

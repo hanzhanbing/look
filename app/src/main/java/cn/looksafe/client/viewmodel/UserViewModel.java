@@ -8,6 +8,7 @@ import com.look.core.vo.Resource;
 
 import cn.looksafe.client.beans.HttpBean;
 import cn.looksafe.client.beans.LoopImgHttp;
+import cn.looksafe.client.beans.UserInfo;
 import cn.looksafe.client.repository.UserRepository;
 
 /**
@@ -22,6 +23,11 @@ public class UserViewModel extends BaseViewModel {
         mUserRepository = new UserRepository();
     }
 
+
+
+    public LiveData<Resource<UserInfo>> getUserInfo(String loginname) {
+        return mUserRepository.getUserInfo(loginname);
+    }
 
     public LiveData<Resource<HttpBean>> login(String phone, String password) {
         return mUserRepository.login(phone, password);

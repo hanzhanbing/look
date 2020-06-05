@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.look.core.manager.SpManager;
 import com.look.core.ui.BaseActivity;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
@@ -51,6 +52,7 @@ public class VipActivity extends BaseActivity<ActivityVipBinding> implements Htt
         mBinding.avMenu3Rel.setOnClickListener(this);
         mBinding.avPro.setOnClickListener(null);
         mBinding.avpSubPay.setOnClickListener(this);
+        vipMenuModel.setVipdate("会员有效期至:" + SpManager.getInstance(mContext).getSP("date"));
         api = WXAPIFactory.createWXAPI(mContext, null);
         mHandler = new Handler() {
             @Override
@@ -120,7 +122,7 @@ public class VipActivity extends BaseActivity<ActivityVipBinding> implements Htt
 
                 break;
             case HttpStatus.HTTP_GET_VIP_DATE_SUC:
-                vipMenuModel.setVipdate("会员有效期至" + Tools.date8toStr(Contents.getInstance().getUserinfo().getVipexp()));
+                vipMenuModel.setVipdate("会员有效期至" + SpManager.getInstance(mContext).getSP("date"));
                 break;
         }
     }

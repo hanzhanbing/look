@@ -67,7 +67,7 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding> {
             toast("密码长度不够");
             return;
         }
-        if (pwdAgain.equals(pwd)) {
+        if (!pwdAgain.equals(pwd)) {
             toast("密码不一致");
             return;
         }
@@ -94,9 +94,9 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding> {
             Toast.makeText(mContext, "请填写手机号", Toast.LENGTH_SHORT).show();
             return;
         }
-        mViewModel.getSmsCode(phone).observe(this, new Observer<Resource<BaseResponse>>() {
+        mViewModel.getSmsCode(phone).observe(this,resource->resource.work(new ResourceListener<BaseResponse>() {
             @Override
-            public void onChanged(Resource<BaseResponse> baseResponseResource) {
+            public void onSuccess(BaseResponse data) {
                 mDisposable = Flowable.intervalRange(0, 60, 0, 1, TimeUnit.SECONDS)
                         .observeOn(AndroidSchedulers.mainThread())
                         .doOnNext(new Consumer<Long>() {
@@ -117,7 +117,12 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding> {
                             }
                         }).subscribe();
             }
-        });
+
+            @Override
+            public void onError(String msg) {
+                toast(msg);
+            }
+        }));
     }
 
     @Override

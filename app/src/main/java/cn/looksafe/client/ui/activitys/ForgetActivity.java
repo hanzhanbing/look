@@ -74,7 +74,7 @@ public class ForgetActivity extends BaseActivity<ActivityForgetBinding> {
             toast("密码长度不够");
             return;
         }
-        if (pwdAgain.equals(pwd)){
+        if (!pwdAgain.equals(pwd)){
             toast("密码不一致");
             Toast.makeText(mContext, "密码不一致", Toast.LENGTH_SHORT).show();
             return;

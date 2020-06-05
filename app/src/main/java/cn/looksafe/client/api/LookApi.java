@@ -274,5 +274,9 @@ public interface LookApi {
                                                     @Field("vid") int vid);
 
 
+    @FormUrlEncoded
+    @POST("activeApp")
+    LiveData<ApiResponse<BaseResponse>> activeApp(@Field("loginname") String loginname,
+                                                  @Field("acode") String qrCode);
 
 }

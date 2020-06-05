@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="presenter"
+            type="cn.looksafe.client.ui.activitys.ActiveActivity.Presenter" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/_FDB232">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <com.ruffian.library.widget.RLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/qb_px_28"
+                android:layout_marginEnd="@dimen/qb_px_28"
+                android:orientation="vertical"
+                app:background_normal="@color/white"
+                app:corner_radius="@dimen/qb_px_16"
+                app:layout_constraintTop_toBottomOf="@id/line">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/qb_px_34"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="请输入激活码"
+                    android:textColor="@color/_1A1A1A"
+                    android:textSize="24sp" />
+
+
+                <com.ruffian.library.widget.RLinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/qb_px_44"
+                    android:layout_marginStart="@dimen/qb_px_24"
+                    android:layout_marginTop="@dimen/qb_px_15"
+                    android:layout_marginEnd="@dimen/qb_px_24"
+                    android:orientation="horizontal"
+                    app:border_color_normal="@color/_DCDCDC"
+                    app:border_width_normal="0.5dp"
+                    app:corner_radius="8dp">
+
+                    <EditText
+                        android:id="@+id/code"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:hint="请输入激活码"
+                        android:inputType="textPassword"
+                        android:paddingStart="@dimen/qb_px_12"
+                        android:textColor="@color/_606D7A"
+                        android:textSize="16sp"
+                        android:background="@null"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:src="@mipmap/ic_scan"
+                        android:layout_marginEnd="@dimen/qb_px_16"
+                        android:onClick="@{()->presenter.scan()}"/>
+
+                </com.ruffian.library.widget.RLinearLayout>
+
+
+                <com.ruffian.library.widget.RTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/qb_px_44"
+                    android:layout_marginStart="@dimen/qb_px_24"
+                    android:layout_marginTop="@dimen/qb_px_24"
+                    android:layout_marginEnd="@dimen/qb_px_24"
+                    android:layout_marginBottom="@dimen/qb_px_28"
+                    android:gravity="center"
+                    android:onClick="@{()->presenter.active()}"
+                    android:text="开启新视界"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:background_normal="@color/_FDB232"
+                    app:corner_radius="@dimen/qb_px_8" />
+
+            </com.ruffian.library.widget.RLinearLayout>
+
+
+            <ImageView
+                android:id="@+id/img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_active_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/line"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="@dimen/qb_px_30"
+                app:layout_constraintBottom_toBottomOf="@id/img" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

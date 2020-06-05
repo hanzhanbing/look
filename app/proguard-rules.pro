@@ -75,11 +75,18 @@ public static ** valueOf(java.lang.String);
 }
 
 
-# 对于带有回调函数的onXXEvent、**On*Listener的，不能被混淆
--keepclassmembers class * {
-    void *(**On*Event);
-    void *(**On*Listener);
+#EventBus
+-keepattributes *Annotation*
+-keepclassmembers class ** {
+    @org.greenrobot.eventbus.Subscribe <methods>;
 }
+-keep enum org.greenrobot.eventbus.ThreadMode { *; }
+
+# Only required if you use AsyncExecutor
+-keepclassmembers class * extends org.greenrobot.eventbus.util.ThrowableFailureEvent {
+    <init>(java.lang.Throwable);
+}
+
 
 -keepclassmembers class * extends android.webkit.webViewClient {
     public void *(android.webkit.WebView, java.lang.String, android.graphics.Bitmap);
@@ -231,7 +238,7 @@ public static ** valueOf(java.lang.String);
 -dontwarn com.baidu.**
 
 
--keep com.look.core.bean.** {*;}
--keep com.look.core.http.** {*;}
--keep com.looksafe.client.beans.** {*;}
+-keep class com.look.core.bean.** {*;}
+-keep class com.look.core.http.** {*;}
+-keep class com.looksafe.client.beans.** {*;}
 

@@ -64,7 +64,7 @@ public class UserInfo {
         private int sex;
         private String addrdetail;
         private String nickname;
-        private int vipexpdate;
+        private String vipexpdate;
         private int age;
         private String email;
         private int isvip;
@@ -127,11 +127,11 @@ public class UserInfo {
             this.nickname = nickname;
         }
 
-        public int getVipexpdate() {
+        public String getVipexpdate() {
             return vipexpdate;
         }
 
-        public void setVipexpdate(int vipexpdate) {
+        public void setVipexpdate(String vipexpdate) {
             this.vipexpdate = vipexpdate;
         }
 

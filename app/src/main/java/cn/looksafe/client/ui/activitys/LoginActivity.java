@@ -100,6 +100,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> {
                 SpManager.getInstance(mContext).putSP("token", data.getToken());
                 SpManager.getInstance(mContext).putSP("phone", mBinding.name.getText().toString());
                 SpManager.getInstance(mContext).putSP("vip", data.isIsvip());
+                SpManager.getInstance(mContext).putSP("active", data.isIsactive());
                 if (data.isIsactive()) { //被激活过
                     startActivity(new Intent(mContext, MainActivity.class));
                 } else {

@@ -68,6 +68,7 @@ public class UserCenterFragment extends BaseFragment<FragmentUserCenterBinding> 
                 mBinding.refresh.finishRefresh();
 
                 UserInfo.UserinfoBean userinfoBean = data.getUserinfo();
+                SpManager.getInstance(mContext).putSP("date",userinfoBean.getVipexpdate());
                 if (!TextUtils.isEmpty(userinfoBean.getNickname())) {
                     mBinding.realName.setText(userinfoBean.getNickname());
                 }

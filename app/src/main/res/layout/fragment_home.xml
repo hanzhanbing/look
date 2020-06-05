@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="presenter"
+            type="cn.looksafe.client.ui.fragments.HomeFragment.Presenter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -30,9 +32,9 @@
 
 
                 <ImageView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/avatar"
+                    android:layout_width="@dimen/qb_px_48"
+                    android:layout_height="@dimen/qb_px_48"
                     android:layout_marginStart="@dimen/qb_px_12"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
@@ -48,6 +50,7 @@
                     android:orientation="horizontal"
                     app:background_normal="@color/white"
                     app:corner_radius="60dp"
+                    android:onClick="@{()->presenter.clickSearch()}"
                     >
 
                     <ImageView
@@ -57,15 +60,17 @@
                         android:layout_marginStart="@dimen/qb_px_8"
                         android:src="@mipmap/ic_search" />
 
-                    <EditText
+                    <TextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginStart="@dimen/qb_px_6"
                         android:layout_weight="1"
                         android:background="@null"
+                        android:gravity="center_vertical"
                         android:hint="搜索你感兴趣的视频"
                         android:textColor="@color/_C7C7C7"
-                        android:textSize="12sp" />
+                        android:textSize="12sp"
+                        />
 
                 </com.ruffian.library.widget.RLinearLayout>
 

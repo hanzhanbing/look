@@ -139,24 +139,35 @@ public class UserRepository extends ApiRepository {
         }.asLiveData();
     }
 
-    public LiveData<Resource<BaseResponse>> modifyUserInfo(String loginname, String nickName,String headImg) {
+    public LiveData<Resource<BaseResponse>> modifyUserInfo(String loginname, String nickName, String headImg) {
         return new NetworkOnlyResource<BaseResponse>() {
 
             @NonNull
             @Override
             protected LiveData<ApiResponse<BaseResponse>> createCall() {
-                return apiInterface.modifyUserInfo(loginname, nickName,headImg);
+                return apiInterface.modifyUserInfo(loginname, nickName, headImg);
             }
         }.asLiveData();
     }
 
-    public LiveData<Resource<UploadFile>> upload(MultipartBody.Part file){
-        return new NetworkOnlyResource<UploadFile>(){
+    public LiveData<Resource<UploadFile>> upload(MultipartBody.Part file) {
+        return new NetworkOnlyResource<UploadFile>() {
 
             @NonNull
             @Override
             protected LiveData<ApiResponse<UploadFile>> createCall() {
                 return apiInterface.upload(file);
+            }
+        }.asLiveData();
+    }
+
+
+    public LiveData<Resource<BaseResponse>> activeApp(String loginname, String qrCode) {
+        return new NetworkOnlyResource<BaseResponse>() {
+            @NonNull
+            @Override
+            protected LiveData<ApiResponse<BaseResponse>> createCall() {
+                return apiInterface.activeApp(loginname, qrCode);
             }
         }.asLiveData();
     }
