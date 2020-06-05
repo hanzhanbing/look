@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
+    android:layout_height="wrap_content"
+    android:minHeight="@dimen/qb_px_80"
     android:orientation="horizontal"
     android:background="@color/white">
 
@@ -48,14 +49,14 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_gravity="center_vertical"
-        android:layout_marginStart="@dimen/qb_px_16">
+        android:layout_marginStart="@dimen/qb_px_8">
 
         <TextView
             android:id="@+id/item_video_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#FF344356"
-            android:textSize="20sp"
+            android:textSize="18sp"
             />
 
         <TextView

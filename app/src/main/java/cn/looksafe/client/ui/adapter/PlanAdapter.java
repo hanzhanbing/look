@@ -44,6 +44,5 @@ public class PlanAdapter extends BaseQuickAdapter<Action, BaseViewHolder> {
             builder.append("秒");
         }
         helper.setText(R.id.item_video_time, builder.toString());
-
     }
 }
