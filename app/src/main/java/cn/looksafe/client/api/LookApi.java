@@ -1,11 +1,9 @@
 package cn.looksafe.client.api;
 
-import androidx.annotation.FractionRes;
 import androidx.lifecycle.LiveData;
 
 import com.look.core.http.ApiResponse;
 import com.look.core.http.BaseResponse;
-import com.look.core.http.HttpResponse;
 
 import cn.looksafe.client.beans.EyeLogHttp;
 import cn.looksafe.client.beans.HttpBean;
@@ -13,18 +11,15 @@ import cn.looksafe.client.beans.LoopImgHttp;
 import cn.looksafe.client.beans.PointHttp;
 import cn.looksafe.client.beans.UploadFile;
 import cn.looksafe.client.beans.UserInfo;
+import cn.looksafe.client.beans.VideoType;
 import cn.looksafe.client.beans.VersionHttp;
 import cn.looksafe.client.beans.VideosBean;
-import io.reactivex.Observable;
 import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
-import retrofit2.http.Url;
 
 /**
  * Created by huyg on 2020-05-27.
@@ -279,4 +274,16 @@ public interface LookApi {
     LiveData<ApiResponse<BaseResponse>> activeApp(@Field("loginname") String loginname,
                                                   @Field("acode") String qrCode);
 
+
+    @FormUrlEncoded
+    @POST("getVideoTypesApp")
+    LiveData<ApiResponse<VideoType>> getVideoType(@Field("loginname") String loginname);
+
+
+
+    @FormUrlEncoded
+    @POST("getVideosByTypeApp")
+    LiveData<ApiResponse<VideosBean>> getVidoesByType(@Field("loginname") String loginname,
+                                                      @Field("tlv") int tlv,
+                                                      @Field("id") int id);
 }

@@ -60,4 +60,8 @@ public class VideoViewModel extends BaseViewModel {
     public LiveData<Resource<BaseResponse>> addPlayTime(String loginname, int vid) {
         return mVideoRepository.addPlayTime(loginname,vid);
     }
+
+    public LiveData<Resource<VideosBean>> getVidoesByType(String loginname, int tlv, int id) {
+        return mVideoRepository.getVidoesByType(loginname,tlv,id);
+    }
 }

@@ -1,7 +1,5 @@
 package cn.looksafe.client.ui.fragments;
 
-import android.text.TextUtils;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -17,8 +15,10 @@ import com.look.core.vo.ResourceListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.looksafe.client.MyApplication;
 import cn.looksafe.client.R;
 import cn.looksafe.client.beans.UserInfo;
+import cn.looksafe.client.beans.VideoType;
 import cn.looksafe.client.databinding.FragmentHomeBinding;
 import cn.looksafe.client.viewmodel.UserViewModel;
 
@@ -28,7 +28,7 @@ import cn.looksafe.client.viewmodel.UserViewModel;
 public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
 
 
-    private String[] tabs = {"推荐", "公益视训", "快乐学习", "轻松一刻", "教学广场"};
+    private List<String> tabs;
 
     private List<Fragment> mFragments;
     private UserViewModel mViewModel;
@@ -48,18 +48,24 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
         mViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
         mBinding.setPresenter(new Presenter());
         initFragment();
-        initTabLayout();
         initViewPager();
     }
 
 
     private void initFragment() {
+        List<VideoType.MainlistBean> mainlistBeans = MyApplication.getInstance().getTypeBeans();
         mFragments = new ArrayList<>();
-        mFragments.add(VideoFragment.newInstance(0));
-        mFragments.add(VideoFragment.newInstance(1));
-        mFragments.add(VideoFragment.newInstance(2));
-        mFragments.add(VideoFragment.newInstance(3));
-        mFragments.add(VideoFragment.newInstance(4));
+        tabs = new ArrayList<>();
+        mFragments.add(VideoFragment.newInstance(-1));
+        mBinding.tablayout.addTab(mBinding.tablayout.newTab().setText("推荐"));
+        tabs.add("推荐");
+        if (mainlistBeans != null && mainlistBeans.size() > 0) {
+            for (VideoType.MainlistBean mainlistBean : mainlistBeans) {
+                tabs.add(mainlistBean.getTmname());
+                mBinding.tablayout.addTab(mBinding.tablayout.newTab().setText(mainlistBean.getTmname()));
+                mFragments.add(VideoFragment.newInstance(mainlistBean.getTmid()));
+            }
+        }
     }
 
 
@@ -84,11 +90,6 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
         }));
     }
 
-    private void initTabLayout() {
-        for (int i = 0; i < tabs.length; i++) {
-            mBinding.tablayout.addTab(mBinding.tablayout.newTab().setText(tabs[i]));
-        }
-    }
 
     private void initViewPager() {
         mBinding.viewpager.setOffscreenPageLimit(3);
@@ -101,13 +102,13 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
 
             @Override
             public int getCount() {
-                return tabs.length;
+                return tabs.size();
             }
 
             @Nullable
             @Override
             public CharSequence getPageTitle(int position) {
-                return tabs[position];
+                return tabs.get(position);
             }
         });
 

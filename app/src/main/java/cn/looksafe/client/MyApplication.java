@@ -20,14 +20,17 @@ import com.tencent.bugly.beta.Beta;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.List;
 
+import cn.looksafe.client.beans.VideoType;
 import cn.looksafe.client.ui.activitys.MainActivity;
 
 
 public class MyApplication extends MultiDexApplication {
 
 
-
+    private List<VideoType.MainlistBean> mTypeBeans;
+    private static MyApplication mApp;
     static {
         //初始化上拉刷新及上拉加载
         //设置全局的Header构建器
@@ -40,6 +43,7 @@ public class MyApplication extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        mApp = this;
 //        Bugly.init(getApplicationContext(), "c4fa4ecd31", false);
         Bugly.init(getApplicationContext(), "f8c58598be", false);
 //        CrashReport.initCrashReport(getApplicationContext(), "f8c58598be", false);
@@ -57,6 +61,11 @@ public class MyApplication extends MultiDexApplication {
         closeAndroidPDialog();
 
     }
+
+    public static MyApplication getInstance() {
+        return mApp;
+    }
+
 
     private void initARouter() {
         if (BuildConfig.DEBUG) {
@@ -85,5 +94,13 @@ public class MyApplication extends MultiDexApplication {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void setTypeBeans(List<VideoType.MainlistBean> mTypeBeans) {
+        this.mTypeBeans = mTypeBeans;
+    }
+
+    public List<VideoType.MainlistBean> getTypeBeans() {
+        return mTypeBeans;
     }
 }

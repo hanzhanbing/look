@@ -40,11 +40,12 @@ public class VideoFragment extends BaseFragment<FragmentVideoBinding> implements
     private VideoViewModel mViewModel;
     private List<VideosBean.MainVideosListBean> mDatas;
     private List<String> mLoopImgs;
+    private int id;
 
-    public static VideoFragment newInstance(int type) {
+    public static VideoFragment newInstance(int id) {
         VideoFragment videoFragment = new VideoFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt("type", type);
+        bundle.putInt("id", id);
         videoFragment.setArguments(bundle);
         return videoFragment;
     }
@@ -63,7 +64,7 @@ public class VideoFragment extends BaseFragment<FragmentVideoBinding> implements
     }
 
     private void initData() {
-        if (type == 0) {
+        if (id == -1) {
             mViewModel.getLoopImgs(SpManager.getInstance(mContext).getSP("phone"))
                     .observe(this, resource -> resource.work(new ResourceListener<LoopImgHttp>() {
                         @Override
@@ -90,7 +91,7 @@ public class VideoFragment extends BaseFragment<FragmentVideoBinding> implements
     }
 
     private void initIntent() {
-        type = getArguments().getInt("type");
+        id = getArguments().getInt("id");
     }
 
     private void initView() {
@@ -101,7 +102,7 @@ public class VideoFragment extends BaseFragment<FragmentVideoBinding> implements
 
 
     private void initBanner() {
-        if (type == 0) {
+        if (id == -1) {
             mBinding.banner.setVisibility(View.VISIBLE);
             mBinding.banner.setOnBannerListener(new OnBannerListener() {
                 @Override
@@ -130,26 +131,49 @@ public class VideoFragment extends BaseFragment<FragmentVideoBinding> implements
         mBinding.refresh.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-                //0:推荐;1.公益视训;2:快乐学习;3:轻松一刻;;4:教学广场
-                switch (type) {
-                    case 0:
-                        getHotVideo();
-                        break;
-                    case 1:
-                        getFreeApp();
-                        break;
-                    case 2:
-                        getHappyLearnApp();
-                        break;
-                    case 3:
-                        getRelaxApp();
-                        break;
-                    case 4:
-                        getLovelyApp();
-                        break;
+//                //0:推荐;1.公益视训;2:快乐学习;3:轻松一刻;;4:教学广场
+//                switch (type) {
+//                    case 0:
+//                        getHotVideo();
+//                        break;
+//                    case 1:
+//                        getFreeApp();
+//                        break;
+//                    case 2:
+//                        getHappyLearnApp();
+//                        break;
+//                    case 3:
+//                        getRelaxApp();
+//                        break;
+//                    case 4:
+//                        getLovelyApp();
+//                        break;
+//                }
+                if (id == -1) {
+                    getHotVideo();
+                } else {
+                    getVideoByType();
                 }
+
             }
         });
+    }
+
+    private void getVideoByType() {
+        mViewModel.getVidoesByType(SpManager.getInstance(mContext).getSP("phone"), 1, id)
+                .observe(this, resource -> resource.work(new ResourceListener<VideosBean>() {
+                    @Override
+                    public void onSuccess(VideosBean data) {
+                        mBinding.refresh.finishRefresh();
+                        mAdapter.setNewData(data.getMainVideosList());
+                    }
+
+                    @Override
+                    public void onError(String msg) {
+                        ToastUtils.showShort(msg);
+                        mBinding.refresh.finishRefresh();
+                    }
+                }));
     }
 
     private void getHotVideo() {

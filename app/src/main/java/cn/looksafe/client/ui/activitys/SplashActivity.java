@@ -4,22 +4,33 @@ import android.os.Build;
 import android.text.Html;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.ToastUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.gson.Gson;
 import com.hjq.permissions.OnPermission;
 import com.hjq.permissions.Permission;
 import com.hjq.permissions.XXPermissions;
 import com.look.core.manager.SpManager;
+import com.look.core.ui.BaseActivity;
 import com.look.core.ui.SimpleActivity;
+import com.look.core.vo.ResourceListener;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import cn.looksafe.client.MyApplication;
 import cn.looksafe.client.R;
+import cn.looksafe.client.beans.VideoType;
 import cn.looksafe.client.databinding.ActivitySplashBinding;
+import cn.looksafe.client.viewmodel.SplashViewModel;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
@@ -28,8 +39,9 @@ import io.reactivex.schedulers.Schedulers;
 /**
  * Created by huyg on 2020-05-29.
  */
-public class SplashActivity extends SimpleActivity<ActivitySplashBinding> {
+public class SplashActivity extends BaseActivity<ActivitySplashBinding> {
 
+    private SplashViewModel mViewModel;
 
     @Override
     protected int getLayoutId() {
@@ -38,7 +50,35 @@ public class SplashActivity extends SimpleActivity<ActivitySplashBinding> {
 
     @Override
     protected void init() {
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        initData();
         initPermission();
+    }
+
+    private void initData() {
+        mViewModel = ViewModelProviders.of(this).get(SplashViewModel.class);
+        mViewModel.getVideoType().observe(this, resource -> {
+            resource.work(new ResourceListener<VideoType>() {
+                @Override
+                public void onSuccess(VideoType data) {
+                    if (data != null) {
+                        SpManager.getInstance(mContext).putSP("videoType", new Gson().toJson(data));
+                        MyApplication.getInstance().setTypeBeans(data.getMainlist());
+                    }
+                }
+
+                @Override
+                public void onError(String msg) {
+                    String typeStr = SpManager.getInstance(mContext).getSP("videoType");
+                    if (!TextUtils.isEmpty(typeStr)){
+                        VideoType videoType = new Gson().fromJson(typeStr, VideoType.class);
+                        MyApplication.getInstance().setTypeBeans(videoType.getMainlist());
+                    }
+
+                }
+            });
+        });
     }
 
 
