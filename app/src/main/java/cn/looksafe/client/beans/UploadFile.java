@@ -8,6 +8,7 @@ public class UploadFile {
     private String msg;
     private String url;
 
+
     public int getCode() {
         return code;
     }

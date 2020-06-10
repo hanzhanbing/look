@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <link rel="shortcut icon" href="./hospital/web/favicon.ico" type="image/x-icon"/>
+    <script type="text/javascript" src="./hospital/web/jweixin-1.2.0.js"></script>
+    <meta name="csrf-param" content="_csrf">
+    <meta name="csrf-token" content="X1R2RTgwM0cVAEB1WkVlLRctRX1NBgt3N2AkfFAFcTcbPUcwfUdxJA==">
+    <title>视力自测</title>
+    <link href="./hospital/web/assets/50193a3b/css/bootstrap.css" rel="stylesheet">
+    <link href="./hospital/web/css/site.css" rel="stylesheet">
+    <script src="./hospital/web/assets/c865340f/jquery.js"></script>
+    <script src="./hospital/web/assets/4985dab3/yii.js"></script>
+    <script src="./hospital/web/assets/50193a3b/js/bootstrap.js"></script>
+    <style>
+        @media screen and (min-width: 1201px) {
+            html, body {
+                width: 560px;margin: 0 auto;
+            }
+        }
+
+        /* css注释：设置了浏览器宽度不小于1201px时 显示1200px宽度 */
+
+        @media screen and (max-width: 1200px) {
+            html, body {
+                width: 560px;margin: 0 auto;
+            }
+        }
+
+        /* 设置了浏览器宽度不大于1200px时显示900px宽度 */
+
+        @media screen and (max-width: 901px) {
+            html, body {
+                width: 100%;
+            }
+        }
+
+        /* 设置了浏览器宽度不大于901px时  显示200px宽度 */
+
+
+
+
+    </style>
+</head>
+<body>
+
+<div style="height:100%;">
+    <style>
+    #canvas {
+        width: 100%;
+        height: 100%;
+        margin: 0 auto;
+        background: #EBEBEB;
+        padding: 30px 1%;
+    }
+
+    .tips{background: url(http://wx.ceshili.com./hospital/web/images/gzh/ysc/arrow.png) no-repeat 0 4px;color: #999;margin:0 0 5px 5px;background-size: 10px 10px;font-size: 14px;padding-left: 15px;text-align: justify;padding-right: 10px}
+
+
+
+
+    </style>
+    <div id="canvas">
+        <div style="background: url(http://wx.ceshili.com./hospital/web/images/gzh/ysc/resultBg.png) center no-repeat;background-size:100% 100%;width: 95%;margin: 0 auto;text-align: center">
+            <h3 style="text-align: center;padding: 13px 0 5px 22px;margin: 0 0 0 5%;float: left;font-size: 18px;background: url(http://wx.ceshili.com./hospital/web/images/gzh/ysc/huyanzai.png) 0 13px no-repeat;background-size: 19px 19px;color: #2DBE61">
+                视力自测结果</h3>
+            <a id="repeat"
+               style="display: block;color: #999;float: right;text-decoration:  underline;line-height: 30px;padding: 7px 5% 5px 0">重新测试</a>
+            <div style="border-top: 1px dashed #ddd;width: 90%;margin: 5px auto;clear: both"></div>
+            <div style="float: left;width: 50%;padding-top: 5px;margin-bottom: 5px;font-size: 16px;">
+                <p style="color: #666;text-align: center;padding-top: 5px;margin-bottom: 5px;font-size: 16px;">
+                    右眼</p>
+                <p id="rightEye"></p>
+            </div>
+            <div style="float: left;width: 50%;padding-top: 5px;margin-bottom: 5px;font-size: 16px;">
+                <p style="color: #666;text-align: center;padding-top: 5px;margin-bottom: 5px;font-size: 16px;">
+                    左眼</p>
+                <p id="leftEye"></p>
+            </div>
+            <div style="clear: both"></div>
+        </div>
+        <p style="margin: 20px 0 5px;font-size: 14px;padding-left: 20px">温馨提示：</p>
+        <p class="tips">视力和度数有关，8岁孩子理想度数为远视150度，视力应达到5.0，小学生视力低于5.0，可能有过早近视、散光或弱视风险。</p>
+        <p class="tips">以上测试受屏幕亮度、校准精度等因素限制，可能产生一定的误差，结果仅用于初级筛查。</p>
+
+        <div style="text-align: center;margin-top: 20px;">
+
+            <a id="saveData"
+               class="btn btn-large btn-success"
+               style="outline: none;width: 90%;padding-left: 0;padding-right: 0;font-size: 20px;height: 45px;background: #1CC975;color: #fff;border:none">保存测试数据</a>
+
+        </div>
+    </div>
+    <script>
+    var old = new Array('0.1', '0.12', '0.15', '0.2', '0.25', '0.3', '0.4', '0.5', '0.6', '0.8', '1.0', '1.2', '1.5', '2.0')//旧视力表标准
+    var templeft;
+    var tempright;
+    $(function () {
+        var right = getUrlParam('right');
+        var left = getUrlParam('left');
+        if (right == '<4.0') {
+            right = '4.0以下';
+        }
+        if (left == '<4.0') {
+            left = '4.0以下';
+        }
+        if (right == '>5.3') {
+            right = '5.3以上';
+        }
+        if (left == '>5.3') {
+            left = '5.3以上';
+        }
+        var fixleft = parseFloat(left.substr(0, 3));
+        templeft = left.split('/');
+        if (fixleft >= 5.0) {
+            $('#leftEye').html('<span style="color: #1CC975;font-size: 30px;line-height: 34px;font-weight: bold">' + templeft[0] +'</span>');
+        } else {
+            $('#leftEye').html('<span style="color: red;font-size: 30px;line-height: 34px;font-weight: bold">' + templeft[0] +'</span>');
+        }
+
+
+        var fixright = parseFloat(right.substr(0, 3));
+        tempright = right.split('/');
+        if (fixright >= 5.0) {
+            $('#rightEye').html('<span style="color: #1CC975;font-size: 30px;line-height: 34px;font-weight: bold">' + tempright[0] +'</span>');
+        } else {
+            $('#rightEye').html('<span style="color: red;font-size: 30px;line-height: 34px;font-weight: bold">' + tempright[0] +'</span>');
+        }
+
+
+        //获取url中的参数
+        function getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+            var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+            if (r != null) return unescape(r[2]); return null; //返回参数值
+        }
+    });
+
+
+    $(function () {
+        $('#saveData').click(function(){
+            bridge.saveData(templeft[0],tempright[0]);
+        });
+    })
+
+    $(function () {
+        $('#repeat').click(function(){
+            bridge.repeat();
+        });
+    })
+
+
+     function repeat(coin) {
+        window.location.href = "../csl/step3.html?coin=" + coin;
+    }
+
+
+
+
+
+
+    </script>
+</div>
+
+
+</body>
+</html>

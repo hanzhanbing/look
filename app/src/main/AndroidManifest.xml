@@ -112,6 +112,7 @@
 
         <activity android:name=".ui.activitys.UserInfoActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".ui.activitys.WebViewActivity"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"

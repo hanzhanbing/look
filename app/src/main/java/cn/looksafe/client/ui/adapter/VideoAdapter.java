@@ -25,7 +25,6 @@ public class VideoAdapter extends BaseQuickAdapter<VideosBean.MainVideosListBean
     @Override
     protected void convert(BaseViewHolder helper, VideosBean.MainVideosListBean item) {
         helper.setText(R.id.item_video_name, item.getVname())
-                .setText(R.id.item_video_time, String.valueOf(item.getPlaytimes()))
                 .setText(R.id.item_video_type, item.getVtypename());
         RImageView imageView = helper.getView(R.id.item_video_img);
         GlideManager.getInstance().displayNetImage(mContext, item.getVimg(), imageView);

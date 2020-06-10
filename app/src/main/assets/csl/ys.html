@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <link rel="shortcut icon" href="./hospital/web/favicon.ico" type="image/x-icon"/>
+    <script type="text/javascript" src="./hospital/web/jweixin-1.2.0.js"></script>
+    <meta name="csrf-param" content="_csrf">
+    <meta name="csrf-token" content="QXhlMEJ5eDILLFMAIAwuWAkBVgg3T0ACKUw3CSpMOkIFEVRFBw46UQ==">
+    <title>视力自测</title>
+    <link href="./hospital/web/assets/50193a3b/css/bootstrap.css" rel="stylesheet">
+    <link href="./hospital/web/css/site.css" rel="stylesheet">
+    <script src="./hospital/web/assets/c865340f/jquery.js"></script>
+    <script src="./hospital/web/assets/4985dab3/yii.js"></script>
+    <script src="./hospital/web/assets/50193a3b/js/bootstrap.js"></script>
+    <style>
+        @media screen and (min-width: 1201px) {
+            html, body {
+                width: 560px;margin: 0 auto;
+            }
+        }
+
+        /* css注释：设置了浏览器宽度不小于1201px时 显示1200px宽度 */
+
+        @media screen and (max-width: 1200px) {
+            html, body {
+                width: 560px;margin: 0 auto;
+            }
+        }
+
+        /* 设置了浏览器宽度不大于1200px时显示900px宽度 */
+
+        @media screen and (max-width: 901px) {
+            html, body {
+                width: 100%;
+            }
+        }
+
+        /* 设置了浏览器宽度不大于901px时  显示200px宽度 */
+
+    </style>
+</head>
+<body>
+
+<div style="height:100%;">
+    <style>
+    .tips{background: url(http://wx.ceshili.com./hospital/web/images/gzh/ysc/arrow.png) no-repeat 0 5px;padding-left:15px;padding-right:15px;color: #999;margin:0 0 5px 13px;background-size: 10px 10px;font-size: 14px}
+    .start{background: #1CC975;width: 90%;display: block;margin: 30px auto 10px;font-size: 20px;height: 45px;color: #fff}
+    p{text-align: justify}
+
+    </style>
+    <div style="background: url(http://wx.ceshili.com./hospital/web/images/gzh/ysc/zy-csl.png) center no-repeat;width: 178px;height: 193px;margin: 60px auto 20px;background-size: 178px 193px"></div>
+    <div>
+        <h1 style="text-align: center;font-weight: bold">视力自测</h1>
+        <p style="color: #333;margin: 20px 0 5px 27px;font-size: 14px">温馨提示：</p>
+        <p class="tips">6周岁以上儿童正常视力应达到<span style="color: #1CC975">5.0</span>。</p>
+        <p class="tips">测试原理：选用2.5米作为测试距离，参照国家标准GB 11533-2011在手机屏幕中央智能显示视标进行视力测试。</p>
+
+        <a id="start" class="btn start">开始测试</a>
+        <div style="text-align: center">
+            <!--    <a data-toggle="modal" data-target="#shuru" style="color: #bbb;text-decoration: underline;" href="">已知孩子的视力值，点此输入</a>-->
+        </div>
+        <div style="height: 20px;"></div>
+    </div>
+
+    <div class="modal fade" id="shuru" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content"
+                 style="margin-top: 0;border-top: 2px solid #1cc975;background: #fff">
+                <div class="modal-body">
+                    <h3 style="text-align: center;color: #1cc975;">请选择孩子视力值</h3>
+                    <select id="right"
+                            style="width: 44%;margin-left: 2%;height: 40px;line-height: 40px;border: 1px solid #999">
+                        <option value="0">右眼视力</option>
+                        <option value='<4.0'>低于4.0</option>
+                        <option value='4.0'>4.0</option>
+                        <option value='4.1'>4.1</option>
+                        <option value='4.2'>4.2</option>
+                        <option value='4.3'>4.3</option>
+                        <option value='4.4'>4.4</option>
+                        <option value='4.5'>4.5</option>
+                        <option value='4.6'>4.6</option>
+                        <option value='4.7'>4.7</option>
+                        <option value='4.8'>4.8</option>
+                        <option value='4.9'>4.9</option>
+                        <option value='5.0'>5.0</option>
+                        <option value='5.1'>5.1</option>
+                        <option value='5.2'>5.2</option>
+                        <option value='5.3'>5.3</option>
+                    </select>
+                    <select id="left"
+                            style="width: 44%;margin-left: 5%;height: 40px;line-height: 40px;border: 1px solid #999">
+                        <option value="0">左眼视力</option>
+                        <option value='<4.0'>低于4.0</option>
+                        <option value='4.0'>4.0</option>
+                        <option value='4.1'>4.1</option>
+                        <option value='4.2'>4.2</option>
+                        <option value='4.3'>4.3</option>
+                        <option value='4.4'>4.4</option>
+                        <option value='4.5'>4.5</option>
+                        <option value='4.6'>4.6</option>
+                        <option value='4.7'>4.7</option>
+                        <option value='4.8'>4.8</option>
+                        <option value='4.9'>4.9</option>
+                        <option value='5.0'>5.0</option>
+                        <option value='5.1'>5.1</option>
+                        <option value='5.2'>5.2</option>
+                        <option value='5.3'>5.3</option>
+                    </select>
+                    <p style="text-align: center;color: red;display: none;margin: 10px 0"
+                       id="etError">请正确选择孩子双眼视力值</p>
+                    <button class="btn" id="sure"
+                            style="background: #1cc975;width: 100%;display: block;margin: 20px auto 0;border-radius: 5px!important;color: #fff;font-size: 20px;height: 45px;">
+                        确定
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="tips" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content"
+                 style="margin-top: 0;border-top: 2px solid #1cc975;background: #fff">
+                <div class="modal-body">
+
+                    <h3 style="text-align: center;color: #1cc975">视力/近视/散光自测须知</h3>
+                    <p class="tips">视力/近视/散光自测环节需要家长和孩子互动完成，<span style="color: #1cc975">戴镜的青少年测试前请摘掉框架眼镜或隐形眼镜</span>。
+                    </p>
+                    <p class="tips">若你的孩子存在高度远视、高度散光等情况，则近视自测结果将可能存在较大的误差，相关内容仅供参考。</p>
+                    <p class="tips">若你的孩子日常配戴角膜塑形镜，则视力/近视/散光自测结果为干预后的结果，非原本视力或屈光度，相关内容仅供参考。</p>
+                    <button class="btn" id="iknow"
+                            style="background: #1cc975;width: 100%;display: block;margin: 20px auto 0;border-radius: 5px!important;color: #fff;font-size: 20px;height: 45px;">
+                        我知道了
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+
+    $(function(){
+        $('#tips').modal('show');
+
+        $('#iknow').click(function(){
+            $('#tips').modal('hide');
+        });
+
+        $('#sure').click(function(){
+            var left = $('#left').val();
+            var right = $('#right').val();
+            if(left==0 || right==0){
+                $('#etError').css('display','block');
+            }else{
+                location.href = './hospital/web/ys/step4?right=' + right + "&left=" + left;
+                $('#shuru').modal('hide');
+            }
+        });
+
+    });
+
+
+    $(function () {
+        $('#start').click(function(){
+            bridge.start();
+        });
+    })
+
+
+    function setCalibration(coin){
+        if(coin==null){
+               location.href="../csl/step2.html"
+           }else{
+               location.href = "../csl/step3.html?coin=" + coin;
+           }
+    }
+
+
+
+    </script>
+</div>
+
+
+</body>
+</html>

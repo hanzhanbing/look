@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <link rel="shortcut icon" href="./hospital/web/favicon.ico" type="image/x-icon"/>
+    <script type="text/javascript" src="./hospital/web/jweixin-1.2.0.js"></script>
+    <meta name="csrf-param" content="_csrf">
+    <meta name="csrf-token" content="OWNPdDZ3ZWpzN3lEVAIzAHEafExDQV1aUVcdTV5CJxp9Cn4BcwAnCQ==">
+    <title>近视自测</title>
+    <link href="./hospital/web/assets/50193a3b/css/bootstrap.css" rel="stylesheet">
+<link href="./hospital/web/css/site.css" rel="stylesheet">
+<script src="./hospital/web/assets/c865340f/jquery.js"></script>
+<script src="./hospital/web/assets/4985dab3/yii.js"></script>
+<script src="./hospital/web/assets/50193a3b/js/bootstrap.js"></script>    <style>
+        @media screen and (min-width: 1201px) {
+            html, body {
+                width: 560px;margin: 0 auto;
+            }
+        }
+
+        /* css注释：设置了浏览器宽度不小于1201px时 显示1200px宽度 */
+
+        @media screen and (max-width: 1200px) {
+            html, body {
+                width: 560px;margin: 0 auto;
+            }
+        }
+
+        /* 设置了浏览器宽度不大于1200px时显示900px宽度 */
+
+        @media screen and (max-width: 901px) {
+            html, body {
+                width: 100%;
+            }
+        }
+
+        /* 设置了浏览器宽度不大于901px时  显示200px宽度 */
+    </style>
+</head>
+<body>
+
+<div style="height:100%;">
+    <style>
+    .start{background: #1CC975;width: 90%;display: block;margin: 30px auto 10px;font-size: 20px;height: 45px;color: #fff}
+</style>
+<div>
+    <div id="one" style="margin-top: 40px;">
+        <h2 style="text-align: center"><span style="color: #1CC975">右眼</span>近视程度自测</h2>
+        <p style="font-size: 16px;text-align: center"><span style="color: #1CC975">遮盖左眼</span>，点击开始测试</p>
+        <p id="g3" style="margin: 30px auto 0;color: #999;text-align: center">测试方法说明</p>
+        <img src="http://wx.ceshili.com./hospital/web/images/gzh/ysc/jscdzc.gif" style="width: 90%;display: block;margin: 10px auto 0">
+        <button id="to2" class="btn start">开始测试</button>
+    </div>
+    <div id="two" style="display: none">
+        <p style="background: url(http://wx.ceshili.com./hospital/web/images/gzh/ysc/dengpao.png) no-repeat;background-size: 16px 18px;padding-left: 20px;color: #999;margin: 10px 10px 30px;">请记录孩子完全看清下方文字时离屏幕的距离</p>
+
+        <p id="zi1" style="margin-top: 45%;text-align: center;font-size: 2.5rem;">65987541365</p>
+        <a id="hzi1" style="background: url(http://wx.ceshili.com./hospital/web/images/gzh/ysc/change.png) no-repeat 0 2px;background-size: 13px 16px;padding-left: 20px;width:62px;color: #999;display: block;margin: 30px auto;">换一组</a>
+
+        <div style="text-align: center;width: 95%;margin:55% auto 0;font-size: 16px;">
+            <input type="tel" id="jl1" placeholder="屏幕距离（右眼）" style="width: 50%;height: 45px;border-radius: 5px!important;text-indent: 5px;font-size: 16px;margin-left: 3%;outline: none">厘米
+            <button id="to3" class="btn" style="background: #1CC975;width: 32%;margin-left:3%;color: #fff;font-size: 20px;height: 45px;border-radius: 5px!important;">下一步</button>
+            <p style="display: none;color: red;margin-bottom: 0;margin-top: 5px;" id="error1">请填写10-200之间的数字</p>
+            <div style="width: 100%;height: 20px"></div>
+        </div>
+
+    </div>
+    <div id="three" style="margin-top: 150px;display: none">
+        <h2 style="text-align: center"><span style="color: #f89d3a">左眼</span>近视程度自测</h2>
+        <p style="font-size: 16px;text-align: center"><span style="color: #f89d3a">遮盖右眼</span>，从2米处开始测试</p>
+        <button id="to4" class="btn start">开始测试</button>
+    </div>
+    <div id="four" style="display: none">
+        <p style="background: url(http://wx.ceshili.com./hospital/web/images/gzh/ysc/dengpao.png) no-repeat;background-size: 16px 18px;padding-left: 20px;color: #999;margin: 10px 10px 30px;">请记录孩子完全看清下方文字时离屏幕的距离</p>
+
+        <p id="zi2" style="margin-top: 45%;text-align: center;font-size:2.5rem;">26489583648</p>
+        <a id="hzi2" style="background: url(http://wx.ceshili.com./hospital/web/images/gzh/ysc/change.png) no-repeat 0 2px;background-size: 13px 16px;padding-left: 20px;width:62px;color: #999;display: block;margin: 30px auto;">换一组</a>
+
+        <div style="text-align: center;width: 95%;margin: 55% auto 0;font-size: 16px;">
+            <input type="tel" id="jl2" placeholder="屏幕距离（左眼）" style="width: 50%;height: 45px;border-radius: 5px!important;text-indent: 5px;font-size: 16px;margin-left: 3%;outline: none">厘米
+            <button id="sure" class="btn" style="background: #1CC975;width: 32%;margin-left:3%;color: #fff;font-size: 20px;height: 45px;border-radius: 5px!important;">确定</button>
+            <p style="display: none;color: red;margin-bottom: 0;margin-top: 5px;" id="error2">请填写10-200之间的数字</p>
+            <div style="width: 100%;height: 20px"></div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    $(function () {
+        var you = 0;
+        var zuo = 0;
+        var reg = new RegExp("^[0-9]*$")
+        $('#to2').click(function () {
+            $('#one').css('display', 'none');
+            $('#two').css('display', 'block');
+        });
+        $('#to3').click(function () {
+            you = $('#jl1').val();
+            if (you != null && $.trim(you).length != 0 && reg.test(you) && you<=200 && you >=10) {
+                $('#two').css('display', 'none');
+                $('#three').css('display', 'block');
+            } else {
+                $('#error1').css('display', 'block');
+            }
+        });
+        $('#to4').click(function () {
+            $('#three').css('display', 'none');
+            $('#four').css('display', 'block');
+        });
+
+        $('#hzi1').click(function () {
+            var result = Math.floor(Math.random() * 100000000000);
+            $('#zi1').text(result);
+        });
+
+        $('#hzi2').click(function () {
+            var result = Math.floor(Math.random() * 100000000000);
+            $('#zi2').text(result);
+        });
+
+        $('#sure').click(function () {
+            zuo = $('#jl2').val();
+            if (zuo != null && $.trim(zuo).length != 0 && reg.test(zuo) && zuo<=200 && zuo >=10) {
+                location.href = "../csl/jszc3.html"+"?you="+you+"&zuo="+zuo;
+            } else {
+                $('#error2').css('display', 'block');
+            }
+        });
+    })
+</script></div>
+
+
+</body>
+</html>

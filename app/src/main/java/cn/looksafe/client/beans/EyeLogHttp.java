@@ -7,6 +7,7 @@ public class EyeLogHttp {
     public int code;
     public ArrayList<Eye> list;
 
+
     public static class Eye {
         public String loginname;
         public String righte;

@@ -56,9 +56,7 @@ public class UnityPlayerActivity extends Activity implements IUnityPlayerLifecyc
         setContentView(R.layout.activity_player);
         mRoot = findViewById(R.id.root);
         initView();
-
     }
-
 
     private void initView() {
         mUnityPlayer = new UnityPlayer(this, this);
@@ -85,7 +83,6 @@ public class UnityPlayerActivity extends Activity implements IUnityPlayerLifecyc
     }
 
     protected void hideBottomUIMenu() {
-
         Window window = getWindow();
         WindowManager.LayoutParams params = window.getAttributes();
         params.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE;

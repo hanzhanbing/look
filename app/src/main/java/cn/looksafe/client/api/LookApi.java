@@ -286,4 +286,5 @@ public interface LookApi {
     LiveData<ApiResponse<VideosBean>> getVidoesByType(@Field("loginname") String loginname,
                                                       @Field("tlv") int tlv,
                                                       @Field("id") int id);
+
 }

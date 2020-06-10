@@ -1,10 +1,13 @@
 package cn.looksafe.client.ui.activitys;
 
+import android.content.Intent;
 import android.text.TextUtils;
 
+import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.LineData;
 import com.look.core.http.BaseResponse;
@@ -70,8 +73,6 @@ public class EyeLogActivity extends BaseActivity<ActivityEyeRecordBinding> {
     }
 
 
-
-
     private void initChart2(EyeLogHttp eyeLogHttp) {
         if (eyeLogHttp == null || eyeLogHttp.list == null || eyeLogHttp.list.size() == 0) return;
         ArrayList<String> dates = new ArrayList<>();
@@ -114,66 +115,59 @@ public class EyeLogActivity extends BaseActivity<ActivityEyeRecordBinding> {
 
     public class Presenter {
 
-        public void addRecord() {
-            String left = mBinding.left.getText().toString();
-            String right = mBinding.right.getText().toString();
-            mViewModel.addEyesRecord(SpManager.getInstance(mContext).getSP("phone"), left, right)
-                    .observe(EyeLogActivity.this, resource -> resource.work(new ResourceListener<BaseResponse>() {
-                        @Override
-                        public void onSuccess(BaseResponse data) {
-                            getEyeRecord();
-                            SpManager.getInstance(mContext).putSP("left", left);
-                            SpManager.getInstance(mContext).putSP("right", right);
-                            toast("提交成功");
-                        }
-
-                        @Override
-                        public void onError(String msg) {
-                            toast(msg);
-                        }
-                    }));
-        }
-
-        //4.0到5.3
-        public void leftUp() {
-            double left = Double.parseDouble(mBinding.left.getText().toString());
-            if (left >= 5.3) {
-                toast("最高视力为5.3");
-                return;
-            }
-            mBinding.left.setText(String.valueOf(new BigDecimal(left).add(new BigDecimal(0.1)).setScale(1, BigDecimal.ROUND_HALF_UP)));
-        }
-
-        public void leftDown() {
-            double left = Double.parseDouble(mBinding.left.getText().toString());
-            if (left <= 4.0) {
-                toast("最低视力为4.0");
-                return;
-            }
-            mBinding.right.setText(String.valueOf(new BigDecimal(left).subtract(new BigDecimal(0.1)).setScale(1, BigDecimal.ROUND_HALF_UP)));
-        }
-
-        public void rightUp() {
-            double right = Double.parseDouble(mBinding.right.getText().toString());
-            if (right >= 5.3) {
-                toast("最高视力为5.3");
-                return;
-            }
-            mBinding.right.setText(String.valueOf(new BigDecimal(right).add(new BigDecimal(0.1)).setScale(1, BigDecimal.ROUND_HALF_UP)));
-        }
-
-        public void rightDown() {
-            double right = Double.parseDouble(mBinding.right.getText().toString());
-            if (right <= 4.0) {
-                toast("最低视力为4.0");
-                return;
-            }
-            mBinding.left.setText(String.valueOf(new BigDecimal(right).subtract(new BigDecimal(0.1)).setScale(1, BigDecimal.ROUND_HALF_UP)));
+        public void testVision() {
+            ARouter.getInstance().build("/web/web")
+                    .withString("title", "视力测试")
+                    .withString("url", "file:///android_asset/csl/ys.html")
+                    .navigation(EyeLogActivity.this, 999);
         }
     }
 
     @Override
     public void setActionBar() {
         mTitle.setText("视力记录");
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 999) {
+            if (data != null) {
+                String left = data.getStringExtra("left");
+                String right = data.getStringExtra("right");
+                if (TextUtils.isEmpty(left)){
+                    return;
+                }
+                if (TextUtils.isEmpty(right)){
+                    return;
+                }
+                if (left.contains("以上")) {
+                    left = left.substring(0, left.length() - 2);
+                }
+                if (right.contains("以上")) {
+                    right = right.substring(0, right.length() - 2);
+                }
+
+
+                String finalLeft = left;
+                String finalRight = right;
+                mViewModel.addEyesRecord(SpManager.getInstance(mContext).getSP("phone"), left, right)
+                        .observe(EyeLogActivity.this, resource -> resource.work(new ResourceListener<BaseResponse>() {
+                            @Override
+                            public void onSuccess(BaseResponse data) {
+                                getEyeRecord();
+                                SpManager.getInstance(mContext).putSP("left", finalLeft);
+                                SpManager.getInstance(mContext).putSP("right", finalRight);
+                                mBinding.left.setText(finalLeft);
+                                mBinding.right.setText(finalRight);
+                            }
+
+                            @Override
+                            public void onError(String msg) {
+                                toast(msg);
+                            }
+                        }));
+            }
+        }
     }
 }

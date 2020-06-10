@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <link rel="shortcut icon" href="./hospital/web/favicon.ico" type="image/x-icon"/>
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+    <meta name="csrf-param" content="_csrf">
+    <meta name="csrf-token" content="dVU5c1pkSW4/AQ9DOBEfBD0sCksvUnFeHWFrSjJRCx4xPAgGHxMLDQ==">
+    <title>近视自测</title>
+    <link href="./hospital/web/assets/50193a3b/css/bootstrap.css" rel="stylesheet">
+<link href="./hospital/web/css/site.css" rel="stylesheet">
+<script src="./hospital/web/assets/c865340f/jquery.js"></script>
+<script src="./hospital/web/assets/4985dab3/yii.js"></script>
+<script src="./hospital/web/assets/50193a3b/js/bootstrap.js"></script>    <style>
+        @media screen and (min-width: 1201px) {
+            html, body {
+                width: 560px;margin: 0 auto;
+            }
+        }
+
+        /* css注释：设置了浏览器宽度不小于1201px时 显示1200px宽度 */
+
+        @media screen and (max-width: 1200px) {
+            html, body {
+                width: 560px;margin: 0 auto;
+            }
+        }
+
+        /* 设置了浏览器宽度不大于1200px时显示900px宽度 */
+
+        @media screen and (max-width: 901px) {
+            html, body {
+                width: 100%;
+            }
+        }
+
+        /* 设置了浏览器宽度不大于901px时  显示200px宽度 */
+    </style>
+</head>
+<body>
+
+<div style="height:100%;">
+    <style>
+    .tips{background: url(http://wx.ceshili.com./hospital/web/images/gzh/ysc/arrow.png) no-repeat 0 5px;padding-left:15px;padding-right:15px;color: #999;margin:0 0 5px 13px;background-size: 10px 10px;font-size: 14px}
+    .start{background: #1CC975;width: 90%;display: block;margin: 30px auto 10px;font-size: 20px;height: 45px;color: #fff}
+    p{text-align: justify}
+</style>
+<div style="background: url(http://wx.ceshili.com./hospital/web/images/gzh/ysc/jszc1.png) center no-repeat;width: 193px;height: 164px;margin: 60px auto 20px;background-size: 193px 164px"></div>
+<div>
+    <h1 style="text-align: center">近视自测</h1>
+    <p style="color: #333;margin: 20px 0 5px 27px;font-size: 14px">温馨提示：</p>
+    <p class="tips"><span style="color: #1CC975">27.5%高度近视</span>（超过600度）者会最终<span style="color: #1CC975">失明</span>，而多数青少年近视后年均加深<span style="color: #1CC975">50-100</span>度，因此，控制近视加深等于防盲。</p>
+    <p class="tips">该测试分为<span style="color: #1CC975">近视程度自测</span>和<span style="color: #1CC975">眼压自测</span>两部分，戴镜的小朋友测试前请摘掉框架眼镜或隐形眼镜。</p>
+
+        <a class="btn start" href="../csl/jszc2.html">开始测试</a>
+    <div style="height: 20px"></div>
+    <!--<div style="text-align: center">
+    <a data-toggle="modal" data-target="#shuru" style="color: #bbb;text-decoration: underline;">已知孩子的视力值，点此输入</a>
+    </div>-->
+</div>
+
+<div class="modal fade" id="shuru" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="margin-top: 0;border-top: 2px solid #1cc975;background: #fff">
+            <div class="modal-body">
+                <img src="http://wx.ceshili.com./hospital/web/images/gzh/user/success.png"
+                     style="display: block;margin: 20px auto;" width="70">
+
+                <p style="text-align: justify;color: #666;font-size: 18px;line-height: 24px">
+                    添加完成，请根据学校通知进行其他操作，或在“护眼服务-预约公益筛查”菜单中自行预约就近公益筛查点及时间段。</p>
+                <button class="btn" id="iknow"
+                        style="background: #1cc975;width: 100%;display: block;margin: 20px auto 0;border-radius: 5px!important;color: #fff;font-size: 20px;height: 45px;">
+                    我知道了
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+</body>
+</html>

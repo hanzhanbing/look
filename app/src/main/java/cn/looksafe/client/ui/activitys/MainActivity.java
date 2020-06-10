@@ -29,6 +29,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.liulishuo.filedownloader.BaseDownloadTask;
 import com.liulishuo.filedownloader.FileDownloadListener;
 import com.liulishuo.filedownloader.FileDownloader;
+import com.look.core.http.BaseResponse;
 import com.look.core.manager.AppManager;
 import com.look.core.manager.SpManager;
 import com.look.core.util.StatusBarUtils;
@@ -92,6 +93,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         initViewPager();
         initNV();
     }
+
 
     private void getVersion() {
         mViewModel = ViewModelProviders.of(this).get(SettingViewModel.class);

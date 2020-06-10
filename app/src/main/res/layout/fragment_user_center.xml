@@ -151,7 +151,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/qb_px_16"
                         android:layout_weight="1"
-                        android:text="视力记录"
+                        android:text="视力测试"
                         android:textColor="#FF22242A"
                         android:textSize="14sp" />
 

@@ -5,7 +5,6 @@ import androidx.lifecycle.LiveData;
 
 import com.look.core.http.ApiResponse;
 import com.look.core.http.BaseResponse;
-import com.look.core.http.HttpResponse;
 import com.look.core.repository.NetworkOnlyResource;
 import com.look.core.vo.Resource;
 
@@ -15,10 +14,7 @@ import cn.looksafe.client.beans.PointHttp;
 import cn.looksafe.client.beans.UploadFile;
 import cn.looksafe.client.beans.UserInfo;
 import cn.looksafe.client.beans.VersionHttp;
-import io.reactivex.Observable;
 import okhttp3.MultipartBody;
-import retrofit2.http.Field;
-import retrofit2.http.Part;
 
 /**
  * Created by huyg on 2020-02-11.
@@ -171,5 +167,7 @@ public class UserRepository extends ApiRepository {
             }
         }.asLiveData();
     }
+
+
 
 }

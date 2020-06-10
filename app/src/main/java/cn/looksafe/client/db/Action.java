@@ -11,10 +11,13 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "action")
 public class Action {
 
+    @PrimaryKey
+    @ColumnInfo(name = "id")
+    public int id;
+
     @ColumnInfo(name = "video_id")
     public int videoId;
 
-    @PrimaryKey
     @NonNull
     @ColumnInfo(name = "video_name")
     public String videoName;
@@ -31,4 +34,6 @@ public class Action {
         this.playTime = playTime;
         this.createTime = createTime;
     }
+
+
 }

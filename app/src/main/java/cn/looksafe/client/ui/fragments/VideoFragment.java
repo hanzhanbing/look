@@ -104,6 +104,7 @@ public class VideoFragment extends BaseFragment<FragmentVideoBinding> implements
     private void initBanner() {
         if (id == -1) {
             mBinding.banner.setVisibility(View.VISIBLE);
+            mBinding.banner.setDelayTime(5000);
             mBinding.banner.setOnBannerListener(new OnBannerListener() {
                 @Override
                 public void OnBannerClick(int position) {

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <link rel="shortcut icon" href="./hospital/web/favicon.ico" type="image/x-icon"/>
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+    <meta name="csrf-param" content="_csrf">
+    <meta name="csrf-token" content="bEVhVGM2NHcmEVdkAUNiHSQ8UmwWAAxHBHEzbQsDdgcoLFAhJkF2FA==">
+    <title>视力自测</title>
+    <link href="./hospital/web/assets/50193a3b/css/bootstrap.css" rel="stylesheet">
+<link href="./hospital/web/css/site.css" rel="stylesheet">
+<script src="./hospital/web/assets/c865340f/jquery.js"></script>
+<script src="./hospital/web/assets/4985dab3/yii.js"></script>
+<script src="./hospital/web/assets/50193a3b/js/bootstrap.js"></script>    <style>
+        @media screen and (min-width: 1201px) {
+            html, body {
+                width: 560px;margin: 0 auto;
+            }
+        }
+
+        /* css注释：设置了浏览器宽度不小于1201px时 显示1200px宽度 */
+
+        @media screen and (max-width: 1200px) {
+            html, body {
+                width: 560px;margin: 0 auto;
+            }
+        }
+
+        /* 设置了浏览器宽度不大于1200px时显示900px宽度 */
+
+        @media screen and (max-width: 901px) {
+            html, body {
+                width: 100%;
+            }
+        }
+
+        /* 设置了浏览器宽度不大于901px时  显示200px宽度 */
+    </style>
+</head>
+<body>
+
+<div style="height:100%;">
+    <style>
+    .shibiao_90 {
+        transform: rotate(90deg);
+        -ms-transform: rotate(90deg); /* IE 9 */
+        -moz-transform: rotate(90deg); /* Firefox */
+        -webkit-transform: rotate(90deg); /* Safari and Chrome */
+        -o-transform: rotate(90deg); /* Opera */
+    }
+
+    .shibiao_180 {
+        transform: rotate(180deg);
+        -ms-transform: rotate(180deg); /* IE 9 */
+        -moz-transform: rotate(180deg); /* Firefox */
+        -webkit-transform: rotate(180deg); /* Safari and Chrome */
+        -o-transform: rotate(180deg); /* Opera */
+    }
+
+    .shibiao_270 {
+        transform: rotate(270deg);
+        -ms-transform: rotate(270deg); /* IE 9 */
+        -moz-transform: rotate(270deg); /* Firefox */
+        -webkit-transform: rotate(270deg); /* Safari and Chrome */
+        -o-transform: rotate(270deg); /* Opera */
+    }
+    .start{background: #1CC975;width: 90%;display: block;margin:50px auto 10px;font-size: 20px;height: 45px;border-radius: 5px!important;outline: none;color: #fff}
+    .danger{background: #F49C44;width: 90%;display: block;margin: 10px auto;font-size: 20px;height: 45px;border-radius: 5px!important;outline: none;color: #fff}
+    .photo2{background: url(http://wx.ceshili.com./hospital/web/images/gzh/ysc/ceshili-cel.png) center no-repeat;width: 258px;height: 150px;margin: 40px auto 0;background-size: 258px 150px}
+</style>
+<div id="shibiao" style="text-align: center">
+    <div id="tips" style="min-height: 500px">
+        <h2 style="text-align: center;margin-top: 50px" id="topT"><span style="color: #1cc975">右眼</span>视力自测</h2>
+        <p style="padding: 0 5%;color: #666;font-size: 16px" id="text"><span style="color:#1cc975 ">遮盖左眼</span>，点击开始测试</p>
+        <p id="g3" style="margin: 30px auto 0px;color: #999">测试方法说明</p>
+        <img id="photo-ce" src="http://wx.ceshili.com./hospital/web/images/gzh/ysc/slzc.gif" style="width: 90%;display: block;margin: 10px auto 0">
+        <button class="btn start" id="start" style="border-radius: 5px!important;background: #1CC975">开始测试</button>
+        <button class="btn danger" id="reCorrect" style="border-radius: 5px!important;">重新校准</button>
+    </div>
+
+
+    <div id="ce" style="display: none">
+        <div style="min-height: 270px;display: table;vertical-align: middle;line-height: 270px;margin: 0 auto;">
+            <img src="./hospital/web/images/gzh/ysc/sb.png" id="sb">
+        </div>
+        <div style="color: #1cc975;font-size: 16px;" id="eyesight"></div>
+        <div style="color: #999">距离屏幕2.5米测试</div>
+
+        <div style="margin-top: 10px;">
+            <a class="btn btn-large  can" style="background: #1CC975;width: 90%;display: block;margin:50px auto 10px;font-size: 20px;height: 45px;border-radius: 5px!important;outline: none;color: #fff">看得清</a>
+            <audio src="./hospital/web/images/gzh/ysc/gang_ba_de.mp3"" id="jiayou">
+        </div>
+        <div style="margin-top: 10px;">
+            <a class="btn btn-large cant" style="background: #F49C44;width: 90%;display: block;margin: 10px auto;font-size: 20px;height: 45px;border-radius: 5px!important;outline: none;color: #fff">看不清</a>
+            <audio src="./hospital/web/images/gzh/ysc/u_are_great.mp3"" id="nihaobang">
+        </div>
+    </div>
+</div>
+
+<script>
+
+var et = 50;//当前视力
+var right = 0;//右眼视力
+var left = 0;//左眼视力
+var allRight = 0;//全对行
+var num = 0;//测眼个数
+var no = 0;//错误个数
+var yes = 0;//正确个数
+var bnum = [2, 2, 2, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4];//视标个数
+var old = ['0.1', '0.12', '0.15', '0.2', '0.25', '0.3', '0.4', '0.5', '0.6', '0.8', '1.0', '1.2', '1.5', '2.0'];//旧视力表标准
+
+$(function () {
+    $('#reCorrect').click(function () {
+        window.location.href = "../csl/step2.html";
+    });
+
+    $('#start').click(function () {
+        $('#tips').css('display', 'none');
+        yes = 0;
+        no = 0;
+        et = 50;
+        allRight = 0;
+        var coin = '210.54';
+        coin = parseFloat(coin);
+        var index = coin / 1.258925 / 1.258925 / 1.258925 / 1.258925 / 1.258925 / 1.258925 / 1.258925 / 1.258925 / 1.258925 / 1.258925;
+        $('#sb').width(Math.round(index));
+        var rotate = Math.floor(random(0, 4)) * 90;
+        $('#sb').addClass('shibiao_' + rotate);
+        if (num == 0) {
+            $('#eyesight').text('正在测试右眼：' + (et / 10).toFixed(1) + '/' + old[et - 40]);
+        } else {
+            $('#eyesight').text('正在测试左眼：' + (et / 10).toFixed(1) + '/' + old[et - 40]);
+        }
+
+        $('#ce').css('display', 'block');
+    });
+
+    $('.can').click(function () {
+        yes++;
+        /*$(this).append('<audio src="
+        ./hospital/web/images/gzh/ysc/u_are_great.mp3"" autoplay="autoplay">');*/
+        $('#nihaobang')[0].play();
+        var style = $('#sb').attr('class');
+        var rotate = Math.floor(random(0, 4)) * 90;
+        while (style.split('_')[1] == rotate) {
+            rotate = Math.floor(random(0, 4)) * 90;
+        }
+        $('#sb').removeClass();
+        $('#sb').addClass('shibiao_' + rotate);
+
+        if (yes >= bnum[et - 40]) {
+            var width = $('#sb').width();
+            $('#sb').width(Math.round(width / 1.258925));
+            yes = 0;
+            allRight = et;
+            et = et + 1;
+            if (et == 54) {
+                et = et - 1;
+                if (num == 0) {
+                    right = ">5.3";
+                    num++;
+                    showLeft();
+                } else {
+                    left = ">5.3";
+                    location.href = '../csl/step4.html?right=' + right + "&left=" + left;
+                }
+            }
+            if (num == 0) {
+                $('#eyesight').text('正在测试右眼：' + (et / 10).toFixed(1) + '/' + old[et - 40]);
+            } else {
+                $('#eyesight').text('正在测试左眼：' + (et / 10).toFixed(1) + '/' + old[et - 40]);
+            }
+        }
+    });
+
+    $('.cant').click(function () {
+        no++;
+        $('#jiayou')[0].play();
+        var style = $('#sb').attr('class');
+        var rotate = Math.floor(random(0, 4)) * 90;
+        while (style.split('_')[1] == rotate) {
+            rotate = Math.floor(random(0, 4)) * 90;
+        }
+        $('#sb').removeClass();
+        $('#sb').addClass('shibiao_' + rotate);
+        var width = $('#sb').width();
+        if (et > 40) {
+            if (et == 41) {
+                if (allRight == 0) {
+                    et -= 1;
+                    if (num == 0) {
+                        $('#eyesight').text('正在测试右眼：' + (et / 10).toFixed(1) + '/' + old[et - 40]);
+                    } else {
+                        $('#eyesight').text('正在测试左眼：' + (et / 10).toFixed(1) + '/' + old[et - 40]);
+                    }
+                    index = width * 1.258925;
+                    yes = 0;
+                } else {
+                    if (num == 0) {
+                        right = (allRight / 10).toFixed(1) + "/" + old[allRight - 40];
+                        num++;
+                        showLeft();
+                    } else {
+                        left = (allRight / 10).toFixed(1) + "/" + old[allRight - 40];
+                        location.href = '../csl/step4.html?right=' + right + "&left=" + left;
+                    }
+                }
+            }
+            else {
+                if (allRight == 0) {
+                    et -= 2;
+                    if (num == 0) {
+                        $('#eyesight').text('正在测试右眼：' + (et / 10).toFixed(1) + '/' + old[et - 40]);
+                    } else {
+                        $('#eyesight').text('正在测试左眼：' + (et / 10).toFixed(1) + '/' + old[et - 40]);
+                    }
+                    no = 0;
+                    index = width * 1.258925 * 1.258925;
+                    yes = 0;
+                } else {
+                    if (et < 46 && no > 0) {
+                        if (num == 0) {
+                            right = (allRight / 10).toFixed(1) + "/" + old[allRight - 40];
+                            num++;
+                            showLeft();
+                        } else {
+                            left = (allRight / 10).toFixed(1) + "/" + old[allRight - 40];
+                            location.href = '../csl/step4.html?right=' + right + "&left=" + left;
+                        }
+                    } else if (et >= 46 && no > 1) {
+                        if (num == 0) {
+                            right = ((et - 1) / 10).toFixed(1) + "/" + old[(et - 1) - 40];
+                            num++;
+                            showLeft();
+
+                        } else {
+                            left = ((et - 1) / 10).toFixed(1) + "/" + old[(et - 1) - 40];
+                            location.href = '../csl/step4.html?right=' + right + "&left=" + left;
+                        }
+                    } else if (et >= 46 && no < 2) {
+                        yes++;
+                        no++;
+                        if (yes >= bnum[et - 40]) {
+                            index = Math.round(width / 1.258925);
+                            yes = 0;
+                            et = et + 1;
+                            if (et == 54) {
+                                et = et - 1;
+                                if (num == 0) {
+                                    right = ">5.3";
+                                    num++;
+                                    showLeft();
+                                } else {
+                                    left = ">5.3";
+                                    location.href = '../csl/step4.html?right=' + right + "&left=" + left;
+                                }
+                            }
+                            if (num == 0) {
+                                $('#eyesight').text('正在测试右眼：' + (et / 10).toFixed(1) + '/' + old[et - 40]);
+                            } else {
+                                $('#eyesight').text('正在测试左眼：' + (et / 10).toFixed(1) + '/' + old[et - 40]);
+                            }
+                        } else {
+                            index = width;
+                        }
+                    }
+                }
+            }
+            $('#sb').width(Math.round(index));
+
+        } else {
+            if (num == 0) {
+                right = '<4.0';
+                num++;
+                showLeft();
+            } else {
+                left = '<4.0';
+                location.href = '../csl/step4.html?right=' + right + "&left=" + left;
+
+            }
+        }
+    });
+});
+
+
+function random(min, max) {
+    return Math.floor(min + Math.random() * (max - min));
+}
+
+function deleteCookie(name) {
+    var date = new Date();
+    date.setTime(date.getTime() - 10000);
+    document.cookie = name + "=v; expires=" + date.toGMTString();
+}
+
+function showLeft(){
+    $('#ce').css('display', 'none');
+    $('#topT').html('<span style="color: #f89d3a">左眼</span>视力自测')
+        .css({"margin-top":"150px"});
+    $('#text').html('<span style="color:#f89d3a ">遮盖右眼</span>，点击开始测试');
+    $('#photo-ce').remove();
+    $('#g3').remove();
+    $('#reCorrect').css('display', 'none');
+    $('#tips').css('display', 'block');
+}
+
+</script>
+</div>
+
+
+</body>
+</html>

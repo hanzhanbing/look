@@ -100,6 +100,7 @@ public class MyApplication extends MultiDexApplication {
         this.mTypeBeans = mTypeBeans;
     }
 
+
     public List<VideoType.MainlistBean> getTypeBeans() {
         return mTypeBeans;
     }

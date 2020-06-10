@@ -114,7 +114,10 @@ public abstract class NetworkBoundResource<ResultType, RequestType> {
     //网络获取失败
     @MainThread
     protected void onFetchFailed() {
+
     }
+
+
 
     public final LiveData<Resource<ResultType>> asLiveData() {
         return result;
