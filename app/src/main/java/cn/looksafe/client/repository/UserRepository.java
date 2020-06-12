@@ -15,6 +15,7 @@ import cn.looksafe.client.beans.UploadFile;
 import cn.looksafe.client.beans.UserInfo;
 import cn.looksafe.client.beans.VersionHttp;
 import okhttp3.MultipartBody;
+import retrofit2.http.Field;
 
 /**
  * Created by huyg on 2020-02-11.
@@ -168,6 +169,17 @@ public class UserRepository extends ApiRepository {
         }.asLiveData();
     }
 
+
+    public LiveData<Resource<BaseResponse>> loginUserNewPwd(String loginname,String pwd, String code){
+        return new NetworkOnlyResource<BaseResponse>(){
+
+            @NonNull
+            @Override
+            protected LiveData<ApiResponse<BaseResponse>> createCall() {
+                return apiInterface.loginUserNewPwd(loginname,pwd,code);
+            }
+        }.asLiveData();
+    }
 
 
 }

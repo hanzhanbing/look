@@ -40,6 +40,13 @@ public interface LookApi {
                                           @Field("pwd") String password);
 
 
+    @FormUrlEncoded
+    @POST("loginUserNewPwdApp")
+    LiveData<ApiResponse<BaseResponse>> loginUserNewPwd(@Field("loginname") String loginname,
+                                                        @Field("pwd") String pwd,
+                                                        @Field("smscode") String code);
+
+
     /**
      * 获取验证码
      *

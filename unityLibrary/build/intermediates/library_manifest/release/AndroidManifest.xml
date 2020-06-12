@@ -31,7 +31,8 @@
             android:hardwareAccelerated="false"
             android:launchMode="singleTask"
             android:process=".unityplayer"
-            android:screenOrientation="landscape" >
+            android:screenOrientation="landscape"
+            android:theme="@style/AcTheme" >
             <intent-filter>
                 <category android:name="com.google.intent.category.CARDBOARD" />
             </intent-filter>

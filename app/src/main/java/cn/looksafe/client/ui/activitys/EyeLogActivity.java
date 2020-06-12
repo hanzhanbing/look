@@ -53,7 +53,7 @@ public class EyeLogActivity extends BaseActivity<ActivityEyeRecordBinding> {
             mBinding.left.setText(left);
         }
         if (!TextUtils.isEmpty(right)) {
-            mBinding.left.setText(right);
+            mBinding.right.setText(right);
         }
     }
 
@@ -125,7 +125,7 @@ public class EyeLogActivity extends BaseActivity<ActivityEyeRecordBinding> {
 
     @Override
     public void setActionBar() {
-        mTitle.setText("视力记录");
+        mTitle.setText("视力管家");
     }
 
     @Override
@@ -145,6 +145,13 @@ public class EyeLogActivity extends BaseActivity<ActivityEyeRecordBinding> {
                     left = left.substring(0, left.length() - 2);
                 }
                 if (right.contains("以上")) {
+                    right = right.substring(0, right.length() - 2);
+                }
+
+                if (left.contains("以下")) {
+                    left = left.substring(0, left.length() - 2);
+                }
+                if (right.contains("以下")) {
                     right = right.substring(0, right.length() - 2);
                 }
 

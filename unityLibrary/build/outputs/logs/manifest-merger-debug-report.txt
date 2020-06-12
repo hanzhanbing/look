@@ -25,6 +25,8 @@ ADDED from /Users/huyg/outsource/Look/unityLibrary/src/main/AndroidManifest.xml:
 		ADDED from /Users/huyg/outsource/Look/unityLibrary/src/main/AndroidManifest.xml:7:261-296
 	android:configChanges
 		ADDED from /Users/huyg/outsource/Look/unityLibrary/src/main/AndroidManifest.xml:7:79-260
+	android:theme
+		ADDED from /Users/huyg/outsource/Look/unityLibrary/src/main/AndroidManifest.xml:6:9-39
 	android:name
 		ADDED from /Users/huyg/outsource/Look/unityLibrary/src/main/AndroidManifest.xml:5:15-68
 intent-filter#category:name:com.google.intent.category.CARDBOARD

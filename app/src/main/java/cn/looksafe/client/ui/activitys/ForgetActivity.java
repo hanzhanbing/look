@@ -1,16 +1,12 @@
 package cn.looksafe.client.ui.activitys;
 
-import android.os.Bundle;
-import android.os.SystemClock;
 import android.widget.Toast;
 
-import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.look.core.http.BaseResponse;
 import com.look.core.ui.BaseActivity;
-import com.look.core.util.StatusBarUtils;
 import com.look.core.vo.Resource;
 import com.look.core.vo.ResourceListener;
 
@@ -18,16 +14,12 @@ import java.util.concurrent.TimeUnit;
 
 import cn.looksafe.client.R;
 import cn.looksafe.client.databinding.ActivityForgetBinding;
-import cn.looksafe.client.tools.AppConfig;
-import cn.looksafe.client.tools.HttpTools;
-import cn.looksafe.client.utils.HttpStatus;
 import cn.looksafe.client.viewmodel.UserViewModel;
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
-import qiu.niorgai.StatusBarCompat;
 
 public class ForgetActivity extends BaseActivity<ActivityForgetBinding> {
 
@@ -79,7 +71,7 @@ public class ForgetActivity extends BaseActivity<ActivityForgetBinding> {
             Toast.makeText(mContext, "密码不一致", Toast.LENGTH_SHORT).show();
             return;
         }
-        mViewModel.resetPwd(phone, pwd, code)
+        mViewModel.loginUserNewPwd(phone, pwd, code)
                 .observe(this, resource -> resource.work(new ResourceListener<BaseResponse>() {
                     @Override
                     public void onSuccess(BaseResponse data) {

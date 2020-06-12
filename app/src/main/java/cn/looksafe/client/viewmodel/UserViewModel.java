@@ -50,4 +50,8 @@ public class UserViewModel extends BaseViewModel {
         return mUserRepository.getCode(phone);
     }
 
+    public LiveData<Resource<BaseResponse>> loginUserNewPwd(String loginname,String pwd, String code){
+
+        return mUserRepository.loginUserNewPwd(loginname,pwd,code);
+    }
 }
