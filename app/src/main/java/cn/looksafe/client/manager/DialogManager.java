@@ -1,4 +1,4 @@
-package cn.looksafe.client.manage;
+package cn.looksafe.client.manager;
 
 
 import android.app.Activity;

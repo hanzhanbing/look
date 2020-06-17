@@ -9,6 +9,10 @@ import android.view.WindowManager;
 
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.work.Constraints;
+import androidx.work.NetworkType;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.ToastUtils;
@@ -30,6 +34,7 @@ import cn.looksafe.client.MyApplication;
 import cn.looksafe.client.R;
 import cn.looksafe.client.beans.VideoType;
 import cn.looksafe.client.databinding.ActivitySplashBinding;
+import cn.looksafe.client.manager.IWorkManager;
 import cn.looksafe.client.viewmodel.SplashViewModel;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -52,8 +57,19 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding> {
     protected void init() {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        initTask();
         initData();
         initPermission();
+    }
+
+    private void initTask() {
+        PeriodicWorkRequest.Builder builder = new PeriodicWorkRequest.Builder(IWorkManager.class,20,TimeUnit.MINUTES);
+        Constraints.Builder constraints = new Constraints.Builder();
+        constraints.setRequiredNetworkType(NetworkType.CONNECTED);
+        builder.setConstraints(constraints.build());
+        WorkManager manager = WorkManager.getInstance(this);
+        manager.enqueue(builder.build());
+
     }
 
     private void initData() {

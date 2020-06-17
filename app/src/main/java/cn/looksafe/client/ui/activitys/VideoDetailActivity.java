@@ -19,7 +19,6 @@ import com.look.core.vo.Resource;
 import com.look.core.vo.ResourceListener;
 import com.unity3d.player.UnityPlayerActivity;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -30,9 +29,7 @@ import cn.looksafe.client.databinding.ActivityVideoDetailBinding;
 import cn.looksafe.client.db.Action;
 import cn.looksafe.client.db.ActionDao;
 import cn.looksafe.client.db.AppDatabase;
-import cn.looksafe.client.manage.DialogManager;
-import cn.looksafe.client.my.SysActivity;
-import cn.looksafe.client.tools.Tools;
+import cn.looksafe.client.manager.DialogManager;
 import cn.looksafe.client.ui.adapter.PartAdapter;
 import cn.looksafe.client.viewmodel.VideoViewModel;
 

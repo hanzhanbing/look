@@ -28,6 +28,10 @@ public class Action {
     @ColumnInfo(name = "create_time")
     public long createTime;
 
+
+    @ColumnInfo(name = "up_flg")
+    public int upFlg;//是否上传过
+
     public Action(int videoId, @NonNull String videoName, long playTime, long createTime) {
         this.videoId = videoId;
         this.videoName = videoName;

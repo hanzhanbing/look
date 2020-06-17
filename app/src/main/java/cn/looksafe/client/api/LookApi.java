@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData;
 import com.look.core.http.ApiResponse;
 import com.look.core.http.BaseResponse;
 
+import cn.looksafe.client.beans.ActionBean;
 import cn.looksafe.client.beans.EyeLogHttp;
 import cn.looksafe.client.beans.HttpBean;
 import cn.looksafe.client.beans.LoopImgHttp;
@@ -15,6 +16,7 @@ import cn.looksafe.client.beans.VideoType;
 import cn.looksafe.client.beans.VersionHttp;
 import cn.looksafe.client.beans.VideosBean;
 import okhttp3.MultipartBody;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Multipart;
@@ -77,6 +79,7 @@ public interface LookApi {
     @FormUrlEncoded
     @POST("getHotListApp")
     LiveData<ApiResponse<VideosBean>> getHotVideo(@Field("loginname") String phone);
+
 
     /**
      * 快乐学习
@@ -294,4 +297,8 @@ public interface LookApi {
                                                       @Field("tlv") int tlv,
                                                       @Field("id") int id);
 
+
+    @FormUrlEncoded
+    @POST("upLoadPlayLogApp")
+    LiveData<ApiResponse<BaseResponse>> upLoadPlayLog(@Body ActionBean actionBean);
 }

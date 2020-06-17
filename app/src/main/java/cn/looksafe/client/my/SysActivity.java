@@ -27,7 +27,7 @@ import java.io.File;
 import cn.looksafe.client.R;
 import cn.looksafe.client.beans.VersionHttp;
 import cn.looksafe.client.databinding.ActivitySettingBinding;
-import cn.looksafe.client.manage.DialogManager;
+import cn.looksafe.client.manager.DialogManager;
 import cn.looksafe.client.tools.Tools;
 import cn.looksafe.client.ui.activitys.ProtocalActivity;
 import cn.looksafe.client.viewmodel.SettingViewModel;
