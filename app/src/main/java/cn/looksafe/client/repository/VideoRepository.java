@@ -29,48 +29,6 @@ public class VideoRepository extends ApiRepository {
         }.asLiveData();
     }
 
-    public LiveData<Resource<VideosBean>> getHappyLearnApp(String phone) {
-        return new NetworkOnlyResource<VideosBean>() {
-            @NonNull
-            @Override
-            protected LiveData<ApiResponse<VideosBean>> createCall() {
-                return apiInterface.getHappyLearnApp(phone);
-            }
-        }.asLiveData();
-    }
-
-    public LiveData<Resource<VideosBean>> getRelaxApp(String loginName) {
-        return new NetworkOnlyResource<VideosBean>() {
-            @NonNull
-            @Override
-            protected LiveData<ApiResponse<VideosBean>> createCall() {
-                return apiInterface.getRelaxApp(loginName);
-            }
-        }.asLiveData();
-    }
-
-
-    public LiveData<Resource<VideosBean>> getLovelyApp(String loginName) {
-        return new NetworkOnlyResource<VideosBean>() {
-            @NonNull
-            @Override
-            protected LiveData<ApiResponse<VideosBean>> createCall() {
-                return apiInterface.getLovelyApp(loginName);
-            }
-        }.asLiveData();
-    }
-
-
-    public LiveData<Resource<VideosBean>> getFreeApp(String loginName) {
-        return new NetworkOnlyResource<VideosBean>() {
-            @NonNull
-            @Override
-            protected LiveData<ApiResponse<VideosBean>> createCall() {
-                return apiInterface.getFreeApp(loginName);
-            }
-        }.asLiveData();
-    }
-
 
     public LiveData<Resource<VideosBean>> getHotVideo(String phone) {
         return new NetworkOnlyResource<VideosBean>() {

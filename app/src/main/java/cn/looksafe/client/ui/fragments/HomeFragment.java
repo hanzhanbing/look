@@ -1,5 +1,9 @@
 package cn.looksafe.client.ui.fragments;
 
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -7,6 +11,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.blankj.utilcode.util.ToastUtils;
+import com.google.android.material.tabs.TabLayout;
 import com.look.core.manager.GlideManager;
 import com.look.core.manager.SpManager;
 import com.look.core.ui.BaseFragment;
@@ -15,6 +20,7 @@ import com.look.core.vo.ResourceListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.looksafe.client.BuildConfig;
 import cn.looksafe.client.MyApplication;
 import cn.looksafe.client.R;
 import cn.looksafe.client.beans.UserInfo;
@@ -47,8 +53,41 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
     protected void init() {
         mViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
         mBinding.setPresenter(new Presenter());
+        initView();
+
+    }
+
+
+    private void initView() {
         initFragment();
         initViewPager();
+        initTabLayout();
+    }
+
+
+    private void initTabLayout() {
+        mBinding.tablayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                View view = tab.getCustomView();
+                if (BuildConfig.branch == 1 && view instanceof TextView) {
+                    ((TextView) view).setTextSize(19);
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                View view = tab.getCustomView();
+                if (BuildConfig.branch == 1 && view instanceof TextView) {
+                    ((TextView) view).setTextSize(14);
+                }
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
     }
 
 
@@ -113,6 +152,15 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
         });
 
         mBinding.tablayout.setupWithViewPager(mBinding.viewpager);
+        if (BuildConfig.branch == 1) {
+            for (int i = 0; i < mBinding.tablayout.getTabCount(); i++) {
+                TabLayout.Tab tab = mBinding.tablayout.getTabAt(i);
+                if (tab != null) {
+                    tab.setCustomView(getTabView(i));
+                }
+            }
+        }
+
     }
 
     public class Presenter {
@@ -121,5 +169,12 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
         }
     }
 
+
+    private View getTabView(int currentPosition) {
+        View view = LayoutInflater.from(mContext).inflate(R.layout.layout_home_tab, null);
+        TextView textView = (TextView) view.findViewById(R.id.tab_item_textview);
+        textView.setText(tabs.get(currentPosition));
+        return view;
+    }
 
 }

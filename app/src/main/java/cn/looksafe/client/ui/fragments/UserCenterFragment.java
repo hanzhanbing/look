@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.blankj.utilcode.util.PhoneUtils;
 import com.look.core.manager.GlideManager;
 import com.look.core.manager.SpManager;
 import com.look.core.ui.BaseFragment;
@@ -13,6 +14,7 @@ import com.look.core.vo.ResourceListener;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
+import cn.looksafe.client.BuildConfig;
 import cn.looksafe.client.R;
 import cn.looksafe.client.beans.UserInfo;
 import cn.looksafe.client.databinding.FragmentUserCenterBinding;
@@ -109,6 +111,15 @@ public class UserCenterFragment extends BaseFragment<FragmentUserCenterBinding> 
         //视力记录
         public void goRecord() {
             ARouter.getInstance().build("/eye/log").navigation();
+        }
+
+        public void callPhone(){
+            if (BuildConfig.branch==0){
+                PhoneUtils.dial("15314601357");
+            }else {
+                PhoneUtils.dial("18268189918");
+            }
+
         }
 
         //vip购买

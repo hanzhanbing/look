@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#295174</color>
+    <color name="colorPrimaryDark">#295174</color>
+    <color name="home_bottom_text_select">#697A83</color>
+    <color name="home_bottom_text_un_select">#b5b5b5</color>
+    <color name="mine_user_name">#ffffff</color>
+    <color name="mine_user_phone">#ffffff</color>
+    <color name="eye_manager_vision">#3A79B1</color>
+    <color name="eye_manager_vision_test">#4979A7</color>
+</resources>

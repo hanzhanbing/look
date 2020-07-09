@@ -12,7 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/_FDB232">
+        android:background="@color/colorPrimary">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -91,7 +91,7 @@
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    app:background_normal="@color/_FDB232"
+                    app:background_normal="@color/colorPrimary"
                     app:corner_radius="@dimen/qb_px_8" />
 
             </com.ruffian.library.widget.RLinearLayout>

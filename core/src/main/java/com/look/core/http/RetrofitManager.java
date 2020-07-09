@@ -44,7 +44,7 @@ public class RetrofitManager {
                 .readTimeout(60, TimeUnit.SECONDS)
                 .connectTimeout(20, TimeUnit.SECONDS);
         mRetrofit = new Retrofit.Builder()
-                .baseUrl(ApiService.API_URL)
+                .baseUrl(ApiService.API_URL())
                 .addCallAdapterFactory(new LiveDataCallAdapterFactory())
                 .addConverterFactory(new NullOnEmptyConverterFactory())
                 .addConverterFactory(GsonFactory.create())

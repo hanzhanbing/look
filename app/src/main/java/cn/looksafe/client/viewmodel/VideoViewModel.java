@@ -26,23 +26,6 @@ public class VideoViewModel extends BaseViewModel {
 
 
 
-    public LiveData<Resource<VideosBean>> getHappyLearnApp(String loginName){
-        return mVideoRepository.getHappyLearnApp(loginName);
-    }
-
-    public LiveData<Resource<VideosBean>> getRelaxApp(String loginName){
-        return mVideoRepository.getRelaxApp(loginName);
-    }
-
-
-    public LiveData<Resource<VideosBean>> getLovelyApp(String loginName){
-        return mVideoRepository.getLovelyApp(loginName);
-    }
-
-    public LiveData<Resource<VideosBean>> getFreeApp(String loginName){
-        return mVideoRepository.getFreeApp(loginName);
-    }
-
 
     public LiveData<Resource<VideosBean>> getHotVideo(String phone){
         return mVideoRepository.getHotVideo(phone);

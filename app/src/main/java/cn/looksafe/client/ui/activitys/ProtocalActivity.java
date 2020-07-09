@@ -1,5 +1,6 @@
 package cn.looksafe.client.ui.activitys;
 
+import com.look.core.BuildConfig;
 import com.look.core.ui.SimpleActivity;
 import com.look.core.util.StatusBarUtils;
 
@@ -22,8 +23,13 @@ public class ProtocalActivity extends SimpleActivity<ActivityProtocalBinding> {
 
     @Override
     protected void init() {
-        StatusBarCompat.setStatusBarColor(this, getResources().getColor(com.look.core.R.color._FDB232));
+        StatusBarCompat.setStatusBarColor(this, getResources().getColor(com.look.core.R.color.colorPrimary));
         StatusBarUtils.setLightStatusBar(this, true, false);
-        mBinding.rWeb.loadUrl("file:///android_asset/web/register.html");
+        if (BuildConfig.branch == 0) {
+            mBinding.rWeb.loadUrl("file:///android_asset/web/register.html");
+        }else {
+            mBinding.rWeb.loadUrl("file:///android_asset/web/register_xincao.html");
+        }
+
     }
 }

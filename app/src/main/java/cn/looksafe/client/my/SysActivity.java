@@ -190,7 +190,7 @@ public class SysActivity extends BaseActivity<ActivitySettingBinding> {
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                                Uri uri = FileProvider.getUriForFile(SysActivity.this, "cn.looksafe.client.fileprovider", downloadFile);
+                                Uri uri = FileProvider.getUriForFile(SysActivity.this, getPackageName()+".fileprovider", downloadFile);
                                 intent.setDataAndType(uri, "application/vnd.android.package-archive");
                             } else {
                                 intent.setDataAndType(Uri.parse("file://" + downloadFile.getAbsolutePath()), "application/vnd.android.package-archive");

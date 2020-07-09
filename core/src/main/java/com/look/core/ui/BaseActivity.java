@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 
 import com.blankj.utilcode.util.ToastUtils;
+import com.look.core.BuildConfig;
 import com.look.core.R;
 import com.look.core.bean.ResourceStatus;
 import com.look.core.util.StatusBarUtils;
@@ -33,8 +34,13 @@ public abstract class BaseActivity<DB extends ViewDataBinding> extends ToolbarAc
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, getLayoutId());
-        StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color._FDB232));
-        StatusBarUtils.setLightStatusBar(this, true, false);
+        if (BuildConfig.branch == 0) {
+            StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.colorPrimary));
+            StatusBarUtils.setLightStatusBar(this, true, false);
+        } else {
+            StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.colorPrimary));
+            StatusBarUtils.setLightStatusBar(this, false, false);
+        }
         init();
     }
 

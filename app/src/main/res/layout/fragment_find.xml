@@ -43,7 +43,7 @@
                 app:tabGravity="fill"
                 app:tabIndicatorHeight="0dp"
                 app:tabMode="scrollable"
-                app:tabSelectedTextColor="@color/_FDB232"
+                app:tabSelectedTextColor="@color/colorPrimary"
                 app:tabTextColor="@color/_A8A8A8" />
 
 

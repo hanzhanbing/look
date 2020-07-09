@@ -160,7 +160,6 @@ public static ** valueOf(java.lang.String);
 -dontwarn com.dueeeke.videoplayer.**
 
 
--keep class com.huyg.luke.bean.** {*;}
 
 # IjkPlayer
 -keep class tv.danmaku.ijk.** { *; }
@@ -240,5 +239,20 @@ public static ** valueOf(java.lang.String);
 
 -keep class com.look.core.bean.** {*;}
 -keep class com.look.core.http.** {*;}
--keep class com.looksafe.client.beans.** {*;}
+
+-keep class cn.looksafe.client.db.** {*;}
+
+-keep class com.umeng.** {*;}
+
+-keep class com.uc.** {*;}
+
+-keepclassmembers class * {
+   public <init> (org.json.JSONObject);
+}
+
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
+
 

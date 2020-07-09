@@ -14,7 +14,7 @@ import androidx.sqlite.db.SupportSQLiteOpenHelper;
  * Created by huyg on 2019-11-12.
  */
 
-@Database(entities = {Action.class}, version = 2,exportSchema = false)
+@Database(entities = {Action.class}, version = 3,exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
 

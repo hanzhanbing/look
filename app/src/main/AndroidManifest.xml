@@ -40,7 +40,7 @@
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="yMcs86wO5XWWkMbGQZyjGhGOORmT5GM8"></meta-data>
+            android:value="${BAIDU_KEY}"></meta-data>
 
         <activity
             android:name=".ui.activitys.SplashActivity"
@@ -116,7 +116,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="cn.looksafe.client.fileprovider"
+            android:authorities="${applicationId}.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
 

@@ -20,7 +20,7 @@
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/qb_px_120"
-                android:background="@color/_FDB232"
+                android:background="@color/colorPrimary"
                 android:gravity="center_horizontal"
                 android:paddingTop="@dimen/qb_px_16"
                 android:text="我的计划"

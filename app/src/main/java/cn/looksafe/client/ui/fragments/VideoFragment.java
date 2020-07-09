@@ -132,24 +132,6 @@ public class VideoFragment extends BaseFragment<FragmentVideoBinding> implements
         mBinding.refresh.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-//                //0:推荐;1.公益视训;2:快乐学习;3:轻松一刻;;4:教学广场
-//                switch (type) {
-//                    case 0:
-//                        getHotVideo();
-//                        break;
-//                    case 1:
-//                        getFreeApp();
-//                        break;
-//                    case 2:
-//                        getHappyLearnApp();
-//                        break;
-//                    case 3:
-//                        getRelaxApp();
-//                        break;
-//                    case 4:
-//                        getLovelyApp();
-//                        break;
-//                }
                 if (id == -1) {
                     getHotVideo();
                 } else {
@@ -194,76 +176,6 @@ public class VideoFragment extends BaseFragment<FragmentVideoBinding> implements
                 }));
     }
 
-    private void getHappyLearnApp() {
-        mViewModel.getHappyLearnApp(SpManager.getInstance(mContext).getSP("phone"))
-                .observe(this, resource -> resource.work(new ResourceListener<VideosBean>() {
-                    @Override
-                    public void onSuccess(VideosBean data) {
-                        mBinding.refresh.finishRefresh();
-                        mAdapter.setNewData(data.getMainVideosList());
-
-                    }
-
-                    @Override
-                    public void onError(String msg) {
-                        ToastUtils.showShort(msg);
-                        mBinding.refresh.finishRefresh();
-                    }
-                }));
-    }
-
-    private void getRelaxApp() {
-        mViewModel.getRelaxApp(SpManager.getInstance(mContext).getSP("phone"))
-                .observe(this, resource -> resource.work(new ResourceListener<VideosBean>() {
-                    @Override
-                    public void onSuccess(VideosBean data) {
-                        mBinding.refresh.finishRefresh();
-                        mAdapter.setNewData(data.getMainVideosList());
-
-                    }
-
-                    @Override
-                    public void onError(String msg) {
-                        ToastUtils.showShort(msg);
-                        mBinding.refresh.finishRefresh();
-                    }
-                }));
-    }
-
-
-    private void getLovelyApp() {
-        mViewModel.getLovelyApp(SpManager.getInstance(mContext).getSP("phone"))
-                .observe(this, resource -> resource.work(new ResourceListener<VideosBean>() {
-                    @Override
-                    public void onSuccess(VideosBean data) {
-                        mBinding.refresh.finishRefresh();
-                        mAdapter.setNewData(data.getMainVideosList());
-                    }
-
-                    @Override
-                    public void onError(String msg) {
-                        ToastUtils.showShort(msg);
-                        mBinding.refresh.finishRefresh();
-                    }
-                }));
-    }
-
-    private void getFreeApp() {
-        mViewModel.getFreeApp(SpManager.getInstance(mContext).getSP("phone"))
-                .observe(this, resource -> resource.work(new ResourceListener<VideosBean>() {
-                    @Override
-                    public void onSuccess(VideosBean data) {
-                        mBinding.refresh.finishRefresh();
-                        mAdapter.setNewData(data.getMainVideosList());
-                    }
-
-                    @Override
-                    public void onError(String msg) {
-                        ToastUtils.showShort(msg);
-                        mBinding.refresh.finishRefresh();
-                    }
-                }));
-    }
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {

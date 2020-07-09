@@ -37,7 +37,7 @@
             android:text="提交"
             android:textColor="@color/white"
             android:textSize="23sp"
-            app:background_normal="@color/_FDB232"
+            app:background_normal="@color/colorPrimary"
             app:corner_radius="@dimen/qb_px_50"
             app:layout_constraintTop_toBottomOf="@id/edit"
             android:onClick="@{()->presenter.submit()}"

@@ -13,7 +13,7 @@ android {
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode rootProject.ext.android.versionCode
         versionName rootProject.ext.android.versionName
-
+        flavorDimensions "default"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         javaCompileOptions {
@@ -42,6 +42,24 @@ android {
 
     dataBinding {
         enabled true
+    }
+
+
+    productFlavors {
+
+        luke {
+            buildConfigField 'int', 'branch', "0"
+        }
+
+        xincao {
+            buildConfigField 'int', 'branch', "1"
+        }
+
+        sourceSets {
+            main {
+                jniLibs.srcDir 'libs'
+            }
+        }
     }
 
 }

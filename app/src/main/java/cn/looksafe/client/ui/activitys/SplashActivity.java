@@ -30,6 +30,7 @@ import com.look.core.vo.ResourceListener;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import cn.looksafe.client.BuildConfig;
 import cn.looksafe.client.MyApplication;
 import cn.looksafe.client.R;
 import cn.looksafe.client.beans.VideoType;
@@ -57,9 +58,14 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding> {
     protected void init() {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        initView();
         initTask();
         initData();
         initPermission();
+    }
+
+    private void initView() {
+
     }
 
     private void initTask() {
@@ -69,7 +75,6 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding> {
         builder.setConstraints(constraints.build());
         WorkManager manager = WorkManager.getInstance(this);
         manager.enqueue(builder.build());
-
     }
 
     private void initData() {

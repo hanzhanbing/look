@@ -11,7 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/_FDB232"
+        android:background="@color/colorPrimary"
         >
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -142,7 +142,7 @@
                     android:layout_marginStart="@dimen/qb_px_24"
                     android:layout_marginEnd="@dimen/qb_px_24"
                     android:layout_marginTop="@dimen/qb_px_24"
-                    app:background_normal="@color/_FDB232"
+                    app:background_normal="@color/colorPrimary"
                     app:corner_radius="@dimen/qb_px_8"
                     android:onClick="@{()->presenter.login()}"
                     />

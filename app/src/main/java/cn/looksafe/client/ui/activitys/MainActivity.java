@@ -38,6 +38,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.looksafe.client.BuildConfig;
 import cn.looksafe.client.R;
 import cn.looksafe.client.beans.VersionHttp;
 import cn.looksafe.client.databinding.ActivityMainBinding;
@@ -78,8 +79,14 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         super.onCreate(savedInstanceState);
         AppManager.getAppManager().addActivity(this);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color._FDB232));
-        StatusBarUtils.setLightStatusBar(this, true, false);
+        if (BuildConfig.branch == 0) {
+            StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.colorPrimary));
+            StatusBarUtils.setLightStatusBar(this, true, false);
+        } else {
+            StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.colorPrimary));
+            StatusBarUtils.setLightStatusBar(this, false, false);
+        }
+
         init();
     }
 
@@ -129,8 +136,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 new int[]{android.R.attr.state_checked}
         };
 
-        int[] colors = new int[]{getResources().getColor(R.color._787878),
-                getResources().getColor(R.color._FFE304)
+        int[] colors = new int[]{getResources().getColor(R.color.home_bottom_text_un_select),
+                getResources().getColor(R.color.home_bottom_text_select)
         };
         ColorStateList csl = new ColorStateList(states, colors);
         mNavigation.setItemTextColor(csl);
@@ -280,7 +287,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                                Uri uri = FileProvider.getUriForFile(MainActivity.this, "cn.looksafe.client.fileprovider", downloadFile);
+                                Uri uri = FileProvider.getUriForFile(MainActivity.this, getPackageName() + ".fileprovider", downloadFile);
                                 intent.setDataAndType(uri, "application/vnd.android.package-archive");
                             } else {
                                 intent.setDataAndType(Uri.parse("file://" + downloadFile.getAbsolutePath()), "application/vnd.android.package-archive");

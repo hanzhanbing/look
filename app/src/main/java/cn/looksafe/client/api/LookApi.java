@@ -77,51 +77,8 @@ public interface LookApi {
      * @return
      */
     @FormUrlEncoded
-    @POST("getHotListApp")
+    @POST("http://www.looksafe.cn/luke/getHotListApp")
     LiveData<ApiResponse<VideosBean>> getHotVideo(@Field("loginname") String phone);
-
-
-    /**
-     * 快乐学习
-     *
-     * @param phone
-     * @return
-     */
-    @FormUrlEncoded
-    @POST("getHappyLearnApp")
-    LiveData<ApiResponse<VideosBean>> getHappyLearnApp(@Field("loginname") String phone);
-
-
-    /**
-     * 轻松一刻
-     *
-     * @param loginName
-     * @return
-     */
-    @FormUrlEncoded
-    @POST("getRelaxApp")
-    LiveData<ApiResponse<VideosBean>> getRelaxApp(@Field("loginname") String loginName);
-
-
-    /**
-     * 教学广场
-     *
-     * @param loginName
-     * @return
-     */
-    @FormUrlEncoded
-    @POST("getLovelyApp")
-    LiveData<ApiResponse<VideosBean>> getLovelyApp(@Field("loginname") String loginName);
-
-    /**
-     * 公益广场
-     *
-     * @param loginName
-     * @return
-     */
-    @FormUrlEncoded
-    @POST("getFreeApp")
-    LiveData<ApiResponse<VideosBean>> getFreeApp(@Field("loginname") String loginName);
 
 
     /**
@@ -132,7 +89,7 @@ public interface LookApi {
      * @return
      */
     @FormUrlEncoded
-    @POST("getVideoByIdApp")
+    @POST("http://www.looksafe.cn/luke/getVideoByIdApp")
     LiveData<ApiResponse<VideosBean>> getVideoById(@Field("loginname") String loginName,
                                                    @Field("vid") int vid);
 
@@ -280,19 +237,19 @@ public interface LookApi {
 
 
     @FormUrlEncoded
-    @POST("activeApp")
+    @POST("http://www.looksafe.cn/luke/activeApp")
     LiveData<ApiResponse<BaseResponse>> activeApp(@Field("loginname") String loginname,
                                                   @Field("acode") String qrCode);
 
 
     @FormUrlEncoded
-    @POST("getVideoTypesApp")
+    @POST("http://www.looksafe.cn/luke/getVideoTypesApp")
     LiveData<ApiResponse<VideoType>> getVideoType(@Field("loginname") String loginname);
 
 
 
     @FormUrlEncoded
-    @POST("getVideosByTypeApp")
+    @POST("http://www.looksafe.cn/luke/getVideosByTypeApp")
     LiveData<ApiResponse<VideosBean>> getVidoesByType(@Field("loginname") String loginname,
                                                       @Field("tlv") int tlv,
                                                       @Field("id") int id);

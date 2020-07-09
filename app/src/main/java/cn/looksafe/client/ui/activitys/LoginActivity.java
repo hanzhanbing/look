@@ -49,7 +49,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> {
 
 
     private void initBar() {
-        StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color._FDB232));
+        StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.colorPrimary));
         StatusBarUtils.setLightStatusBar(this, true, false);
     }
 

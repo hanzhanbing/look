@@ -16,6 +16,8 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
+import com.umeng.analytics.MobclickAgent;
+import com.umeng.commonsdk.UMConfigure;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -24,6 +26,7 @@ import java.util.List;
 
 import cn.looksafe.client.beans.VideoType;
 import cn.looksafe.client.ui.activitys.MainActivity;
+import cn.looksafe.client.utils.Constant;
 
 
 public class MyApplication extends MultiDexApplication {
@@ -44,9 +47,7 @@ public class MyApplication extends MultiDexApplication {
     public void onCreate() {
         super.onCreate();
         mApp = this;
-//        Bugly.init(getApplicationContext(), "c4fa4ecd31", false);
-        Bugly.init(getApplicationContext(), "f8c58598be", false);
-//        CrashReport.initCrashReport(getApplicationContext(), "f8c58598be", false);
+        Bugly.init(getApplicationContext(), Constant.BUGLY_ID(), false);
         Beta.canShowUpgradeActs.add(MainActivity.class);
         MultiDex.install(this);
         //在使用SDK各组件之前初始化context信息，传入ApplicationContext
@@ -59,7 +60,8 @@ public class MyApplication extends MultiDexApplication {
         FileDownloader.init(getApplicationContext());
         initARouter();
         closeAndroidPDialog();
-
+        UMConfigure.init(this, Constant.UMENG_ID(), "Umeng", UMConfigure.DEVICE_TYPE_PHONE, "");
+        MobclickAgent.setPageCollectionMode(MobclickAgent.PageMode.AUTO);
     }
 
     public static MyApplication getInstance() {
